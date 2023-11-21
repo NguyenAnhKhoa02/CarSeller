@@ -1,0 +1,35 @@
+.bg-body-tertiary {
+  --bs-bg-opacity: 1;
+  background-color: black !important;
+}
+.navbar {
+  --bs-navbar-color: white;
+  --bs-navbar-hover-color: red;
+  --bs-navbar-active-color: red;
+}
+.dropdown-menu {
+  --bs-dropdown-bg: white;
+  --bs-dropdown-border-color: white;
+  --bs-dropdown-link-color: gray;
+  --bs-dropdown-link-hover-color: black;
+  --bs-dropdown-link-hover-bg: white;
+  --bs-dropdown-link-active-color: black;
+  --bs-dropdown-link-active-bg: white;
+  text-decoration: none !important;
+}
+.top {
+  padding-bottom: 60px;
+}
+.toptext {
+  text-decoration: none;
+  color: white !important;
+  transition: 0.3s;
+}
+.toptext:hover {
+  color: red !important;
+  transition: 0.3s;
+}
+.navbar-toggler {
+  color: black;
+  background-color: white;
+}
