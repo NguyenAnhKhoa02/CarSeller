@@ -1,0 +1,8 @@
+.footertext{
+    text-decoration: none;
+    text-indent: 50px;
+    color: white !important;
+}
+.footertext:hover{
+    text-decoration: underline;
+}
