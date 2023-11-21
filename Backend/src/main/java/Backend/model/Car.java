@@ -26,6 +26,7 @@ public class Car {
     private Long carId;
 
     private int numCarSeat;
+    private String info;
     private String gasCap;
     private String frontBrakes;
     private String rearBrakes;
