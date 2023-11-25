@@ -4,6 +4,8 @@ import Navbar from "../Components/Navbar/Navbar";
 import Footer from "../Components/Footer/Footer";
 import Home from "./FrontPage/Home";
 import BookATestDrive from "./FrontPage/Cars/BookATestDrive";
+import AllProduct from "./FrontPage/Cars/AllProduct";
+import Product from "./FrontPage/Cars/Product";
 import FleetSales from "./FrontPage/Offers/Fleetsales";
 import Promotion from "./FrontPage/Offers/Promotion";
 import GenuineUsedCarProgram from "./FrontPage/Offers/GenuineUsedCarProgram";
@@ -33,6 +35,8 @@ return (
                 <Route element={<MainLayout />}>
                     <Route index element={<Home />} />
                     <Route path="SanPham/DangKyLaiThu" element={<BookATestDrive />} />
+                    <Route path="SanPham/TatCaDongXe" element={<AllProduct />} />
+                    <Route path="SanPham/Xe" element={<Product />} />
                     <Route path="MuaXe/BanHangDuAn" element={<FleetSales />} />
                     <Route path="MuaXe/XeDaQuaSuDungChinhHang" element={<GenuineUsedCarProgram />} />
                     <Route path="MuaXe/ChuongTrinhKhuyenMai" element={<Promotion />} />
