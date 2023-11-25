@@ -11,7 +11,7 @@ import car1 from "../../../Components/Assets/Cars/car1.png";
 import car2 from "../../../Components/Assets/car2.png";
 import car3 from "../../../Components/Assets/car3.png";
 import car4 from "../../../Components/Assets/car4.png";
-import "./Offers.css"
+
 function FleetSales() {
     const settings = {
         className: "center",
@@ -29,9 +29,9 @@ function FleetSales() {
             <h1 style={{fontWeight:"bold", fontSize:"3rem",marginBottom:"550px",color:"black"}}>BÁN HÀNG DỰ ÁN</h1>
         </div>
     </Row>
-    <Row style={{maxWidth:"50%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <Row>
-            <p style={{textAlign:"justify"}}>Công ty TNHH Ô tô Mitsubishi Việt Nam (MMV) cam kết mang đến cho Khách hàng giá trị cao nhất từ sản phẩm chất lượng đến dịch vụ tận tâm, phục vụ tốt nhất nhu cầu mua xe của quý khách. Với các sản phẩm góp mặt ở hầu hết các phân khúc, chúng tôi đáp ứng nhu cầu đa dạng của nhiều nhóm khách hàng:</p>
+            <p>Công ty TNHH Ô tô Mitsubishi Việt Nam (MMV) cam kết mang đến cho Khách hàng giá trị cao nhất từ sản phẩm chất lượng đến dịch vụ tận tâm, phục vụ tốt nhất nhu cầu mua xe của quý khách. Với các sản phẩm góp mặt ở hầu hết các phân khúc, chúng tôi đáp ứng nhu cầu đa dạng của nhiều nhóm khách hàng:</p>
             <Row style={{fontWeight:"bold"}}>
                 <Col style={{display:"flex",alignContent:"center"}}>
                 <img src={icon1} style={{width:"30px",height:"30px",marginRight: "10px"}}/>
@@ -46,7 +46,7 @@ function FleetSales() {
                 <p>Khách hàng nhà nước và các dự án</p>
                 </Col>
             </Row>
-            <p style={{textAlign:"justify"}}>Chúng tôi cam kết mang đến những gói sản phẩm phù hợp với những lợi ích dành riêng cho Quý khách:</p>
+            <p>Chúng tôi cam kết mang đến những gói sản phẩm phù hợp với những lợi ích dành riêng cho Quý khách:</p>
             <Row style={{fontWeight:"bold"}}>
                 <Col style={{display:"flex",alignContent:"center"}}>
                     <img src={icon4} style={{width:"30px",height:"30px",marginRight: "10px"}}/>                
@@ -61,7 +61,7 @@ function FleetSales() {
                     <p>Dịch vụ giao xe và chăm sóc rộng khắp toàn quốc</p>
                 </Col>
             </Row>
-            <p style={{textAlign:"justify"}}>Quý khách có nhu cầu tư vấn mua xe ô tô cho dự án của mình và mong muốn nhận báo giá ưu đãi theo số lượng, vui lòng nhập thông tin bảng bên dưới</p>
+            <p>Quý khách có nhu cầu tư vấn mua xe ô tô cho dự án của mình và mong muốn nhận báo giá ưu đãi theo số lượng, vui lòng nhập thông tin bảng bên dưới</p>
         </Row>
         <Form action="/action_page.php">
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>

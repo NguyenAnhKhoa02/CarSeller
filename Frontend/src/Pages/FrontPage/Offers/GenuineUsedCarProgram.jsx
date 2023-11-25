@@ -3,11 +3,11 @@ import {Link} from "react-router-dom"
 import banner from "../../../Components/Assets/banneroffers2.png"
 import MUC1 from "../../../Components/Assets/MUC1.png"
 import MUC2 from "../../../Components/Assets/MUC2.png"
-import "./Offers.css"
+
 function GenuineUsedCarProgram() {
     return (<>
     <Row><img src={banner} height="875"/></Row>
-    <Row style={{maxWidth:"50%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <p>Với sự phát triển không ngừng của thị trường ô tô nói chung và thương hiệu Mitsubishi nói riêng, nhu cầu mua bán, trao đổi xe Mitsubishi đã qua sử dụng ngày càng tăng lên; Chất lượng sản phẩm, giá bán lại, địa điểm cung ứng dịch vụ uy tín là những quan tâm hàng đầu của người tiêu dùng. Để bắt kịp với nhu cầu đó của khách hàng, Mitsubishi Motors Việt Nam (MMV) chính thức ra mắt chương trình <b>Xe đã qua sử dụng chính hãng Mitsubishi</b> mang tên <b>“MMV UCAR “, gọi tắt là “MUC”,</b> triển khai thí điểm tại Nhà phân phối ủy quyền Savico Đà Nẵng từ ngày 21/3/2022.</p>
         <p>Khách hàng khi có nhu cầu mua bán xe qua sử dụng hoàn toàn có thể an tâm đến NPP được ủy quyền của MMV để được hỗ trợ đầy đủ các thủ tục mua bán minh bạch, rõ ràng cùng quy trình kiểm định chất lượng chính hãng. Xe sẽ được đội ngũ kỹ thuật viên chuyên nghiệp kiểm tra và đánh giá 160 hạng mục kỹ thuật theo tiêu chuẩn MMV và cấp giấy chứng nhận đạt tiêu chuẩn an toàn vận hành, đảm bảo chất lượng sử dụng cho quý khách hàng.</p>
         <img src={MUC1}/>
@@ -33,7 +33,7 @@ function GenuineUsedCarProgram() {
             <li><b>Đạt kiểm tra chất lượng:</b> xe cần phải đạt bài kiểm tra chất lượng 160 điểm dành cho xe đã qua sử dụng do kỹ thuật viên đã qua đào tạo của NPP ủy quyền thực hiện.</li>
         </ul>
         <p style={{fontStyle:"italic"}}>(*) các trường hợp phát hiện xe có dấu hiệu đã bị thay đổi, tác động hay điều chỉnh đồng hồ công-tơ-mét thì MMV sẽ không chịu trách nhiệm cấp bảo hành CPO.</p>
-        <div style={{paddingBottom:"100px", borderTopStyle:"solid", paddingTop:"25px"}}>
+        <div style={{borderTopStyle:"solid", paddingTop:"25px", marginTop:"25px"}}>
             <Row style={{color:"#5A646E"}}>
                 <h5 style={{fontWeight:"bold"}}>BẠN MUỐN LÀM GÌ TIẾP THEO?</h5><br/>
                 <p>Bạn có thể tìm kiếm thêm thông tin liên quan từ menu bên dưới</p>

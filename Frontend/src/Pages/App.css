@@ -1,3 +1,79 @@
+/*===================================App==============================*/
 .MyContainer{
     padding: 0px;
+}
+/*===================================Home==============================*/
+.banner{
+    height: 875px;
+}
+.image-resize{
+    width: 200px;
+    height: auto;
+}  
+.Title{
+    text-align: center;
+    background-color: rgb(0, 0, 0); 
+    color: rgb(255, 255, 255);
+    margin-left:auto;
+    margin-right:auto;
+    padding: 25px 0;
+}
+.MyCard{
+    border-width: 0px;
+}
+/*===================================Cars==============================*/
+.ProductImg {
+    width: inherit;
+    height: auto;
+}
+.imageButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+.imageButtons button {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  outline: 1px;
+}
+.accordion {
+  --bs-accordion-btn-focus-border-color: white;
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0;
+  --bs-accordion-active-bg: white;
+}
+/*===================================Offers==============================*/
+/*===================================Services==============================*/
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.textcontain{
+    align-self: center;
+}
+.MyBorder{
+    border-width: 2px;
+    border-radius: 0px;
+    font-weight: bold;
+    font-size: medium;
+}
+.MyBorder2{
+    border-width: 2px;
+    border-radius: 0px;
+    font-weight: bold;
+    font-size: medium;
+    color: white;
+    border-color: red;
+    background-color: red;
+}
+.form-floating{
+    color: gray;
+    font-size: smaller;
+}
+label.form-check-label{
+    font-weight: bold;
 }
