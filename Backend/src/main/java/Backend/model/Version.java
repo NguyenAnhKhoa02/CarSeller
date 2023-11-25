@@ -25,7 +25,7 @@ public class Version {
     @OneToOne(
             cascade = CascadeType.ALL
     )
-    private Car car;
+        private Car car;
 
     @Column(
             name = "model_id",
