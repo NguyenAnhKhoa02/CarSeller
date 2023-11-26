@@ -14,7 +14,6 @@ import dv1 from "../../Components/Assets/dv1.png";
 import dv2 from "../../Components/Assets/dv2.png";
 import dv3 from "../../Components/Assets/dv3.png";
 import dv4 from "../../Components/Assets/dv4.png";
-import "./Home.css"
 
 function Home() {
   const settings = {
@@ -25,46 +24,46 @@ function Home() {
     slidesToShow: 3,
     arrows: false,
     speed: 500
-  };
-return (<>
-        <Carousel fade indicators={false} prevIcon={false} nextIcon={false}>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 banner"
-              src={banner1}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 banner"
-              src={banner2}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 banner"
-              src={banner3}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 banner"
-              src={banner4}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 banner"
-              src={banner5}
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 banner"
-              src={banner6}
-            />
-          </Carousel.Item>
-        </Carousel>
+  }; return (<>
+      <Carousel fade indicators={false} prevIcon={false} nextIcon={false}>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 banner"
+            src={banner1}
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 banner"
+            src={banner2}
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 banner"
+            src={banner3}
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 banner"
+            src={banner4}
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 banner"
+            src={banner5}
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 banner"
+            src={banner6}
+          />
+        </Carousel.Item>
+      </Carousel>
+      <Row style={{maxWidth:"100%",margin:"0 auto", textAlign:"justify"}}>
         <Row className="Title">
           <h3>DANH MỤC XE</h3>
         </Row>
@@ -152,7 +151,8 @@ return (<>
             </Card.Body>
           </Card>
         </CardGroup>
-        </>
+      </Row>
+      </>
   );
 }
 

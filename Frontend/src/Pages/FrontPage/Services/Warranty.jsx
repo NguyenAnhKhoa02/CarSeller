@@ -1,6 +1,5 @@
 import {Row} from "react-bootstrap"
 import banner from "../../../Components/Assets/bannerservice1.png"
-import "./Services.css"
 
 function Warranty() {
     return (<>
@@ -8,7 +7,7 @@ function Warranty() {
         <img src={banner} height="316"/>
         <div className="centered"><h1 style={{fontWeight:"bold", fontSize:"3rem"}}>CHÍNH SÁCH BẢO HÀNH</h1></div>
     </Row>
-    <Row style={{paddingLeft:"200px", paddingRight:"200px", paddingBottom:"50px", paddingTop:"25px", textAlign:"justify"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <p>Ghi chú: Chính sách bảo hành này có hiệu lực cho các xe Mitsubishi phân phối bởi Công ty Ôtô Mitsubishi Việt Nam (MMV) từ ngày 11/04/2016 trở về sau.</p>
         <h4>1. CHÍNH SÁCH BẢO HÀNH Ô TÔ MỚI</h4><br/>
         <p>MMV bảo đảm rằng tất cả các chi tiết thuộc CHI TIẾT BẢO HÀNH CHUNG và CHI TIẾT ĐẶC BIỆT (Vui lòng tham khảo CÁC CHI TIẾT ĐƯỢC BẢO HÀNH) của xe ô tô mới do MMV sản xuất hoặc phân phối (sau đây gọi là “xe ô tô MMV mới”) mà được xác định là hư hỏng trong điều kiện sử dụng và bảo dưỡng bình thường và còn trong thời gian bảo hành sẽ được sửa chữa hoặc thay thế miễn phí tại bất kỳ Nhà phân phối ủy quyền của MMV.</p>

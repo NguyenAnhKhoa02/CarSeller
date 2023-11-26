@@ -2,7 +2,7 @@ import {Row, Col, Button, Modal} from "react-bootstrap";
 import banner from "../../../Components/Assets/bannerservice1.png"
 import promotion1 from "../../../Components/Assets/promotion1.png"
 import promotion2 from "../../../Components/Assets/promotion2.png"
-import "./Offers.css"
+
 function Promotion() {
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
@@ -12,7 +12,7 @@ function Promotion() {
             <p style={{fontSize:"1.5rem"}}>Ngập tràn ưu đãi khi mua xe Mitsubishi ngay trong tháng này. Tìm hiểu ngay!</p>
         </div>
     </Row>
-    <Row style={{maxWidth:"80%",margin:"0 auto", paddingTop:"50px"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", textAlign:"justify"}}>
         <Row style={{paddingBottom:"50px"}}>
             <Col>
                 <img src={promotion2} style={{maxWidth:"80%"}}/>

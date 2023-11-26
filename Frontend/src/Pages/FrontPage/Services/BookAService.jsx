@@ -1,15 +1,15 @@
 import {Row, Button, Form, FloatingLabel} from "react-bootstrap"
 import banner from "../../../Components/Assets/bannerservice1.png"
-import "./Services.css"
+
 function BookAService () {
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
         <div className="centered"><h1 style={{fontWeight:"bold", fontSize:"3rem"}}>ĐẶT LỊCH DỊCH VỤ</h1></div>
     </Row>
-    <Row style={{maxWidth:"50%",margin:"0 auto", paddingBottom:"50px"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <Form>
-            <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
+            <div style={{textAlign:"center", paddingBottom:"50px"}}>
                 <h3 style={{fontWeight:"bold"}}>1. Nhập thông tin cá nhân</h3>
             </div>
             <FloatingLabel controlId="name" label="HỌ VÀ TÊN *" className="mb-3">

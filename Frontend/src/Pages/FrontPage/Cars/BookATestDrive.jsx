@@ -1,11 +1,11 @@
 import {Row, Col, Button, Form, FloatingLabel, Card} from "react-bootstrap"
+import Slider from "react-slick";
 import banner from "../../../Components/Assets/bannerservice1.png"
 import car1 from "../../../Components/Assets/Cars/car1.png";
 import car2 from "../../../Components/Assets/car2.png";
 import car3 from "../../../Components/Assets/car3.png";
 import car4 from "../../../Components/Assets/car4.png";
-import Slider from "react-slick";
-import "./Cars.css"
+
 function BookATestDrive () {
     const settings = {
       className: "center",
@@ -24,7 +24,7 @@ function BookATestDrive () {
             <p style={{fontSize:"1.5rem"}}>Trải nghiệm ngay các mẫu xe của Mitsubishi và nhận những phần quà hấp dẫn!</p>
         </div>
     </Row>
-    <Row style={{maxWidth:"50%",margin:"0 auto", paddingBottom:"50px"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <Form>
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
                 <h3 style={{fontWeight:"bold"}}>1. Chọn mẫu xe của bạn</h3>
