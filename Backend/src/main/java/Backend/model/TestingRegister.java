@@ -25,8 +25,8 @@ public class TestingRegister {
     private String status;
     @OneToOne
     @JoinColumn(
-            name = "car_Id",
-            referencedColumnName = "id"
+            name = "version_Id",
+            referencedColumnName = "versionId"
     )
-    private Car car;
+    private Version version;
 }
