@@ -5,6 +5,7 @@ import car2 from "../../../Components/Assets/Cars/car2.png"
 import car3 from "../../../Components/Assets/Cars/car3.png"
 import car4 from "../../../Components/Assets/Cars/car4.png"
 import "./Cars.css";
+
 function Price () {
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
