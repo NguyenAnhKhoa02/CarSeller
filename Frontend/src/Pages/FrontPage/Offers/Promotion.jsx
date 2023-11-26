@@ -12,21 +12,21 @@ function Promotion() {
             <p style={{fontSize:"1.5rem"}}>Ngập tràn ưu đãi khi mua xe Mitsubishi ngay trong tháng này. Tìm hiểu ngay!</p>
         </div>
     </Row>
-    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", textAlign:"justify"}}>
+    <Row style={{maxWidth:"80%",margin:"0 auto", paddingTop:"50px"}}>
         <Row style={{paddingBottom:"50px"}}>
             <Col>
                 <img src={promotion2} style={{maxWidth:"80%"}}/>
             </Col>
             <Col style={{alignSelf:"center"}}>
-                <p>THỨ 3, 07 THÁNG MƯỜI MỘT 2023</p>
+                <p style={{fontSize:"32px", fontWeight:"bold"}}>GIẢM GIÁ 100% KHUYẾN MÃI PHÍ NHIỀU MẪU XE TẠI ĐẠI LÝ THÁNG 11/2023</p>
             </Col>
         </Row>
         <Row style={{paddingBottom:"50px"}}>
             <Col>
                 <img src={promotion1} style={{maxWidth:"80%"}}/>
             </Col>
-            <Col>
-            
+            <Col style={{alignSelf:"center"}}>
+                <p style={{fontSize:"32px", fontWeight:"bold"}}>ƯU ĐÃI ĐỘC QUYỀN THÁNG 10/2023 CHO TẤT CẢ CÁC MẪU XE TẠI HỆ THỐNG ĐẠI LÝ ỦY QUYỀN MITSUBISHI MOTORS VIỆT NAM</p>
             </Col>
         </Row>
     </Row>
