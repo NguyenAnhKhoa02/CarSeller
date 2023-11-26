@@ -7,6 +7,31 @@
 .textcontain{
     align-self: center;
 }
+
+.Border{
+    border: solid 1px black;
+    width: 25%;
+    margin: 0 0 30px 12px;
+}
+
+.fontWeight-700{
+    font-weight: 700;
+}
+
+.fontWeight-750{
+    font-weight: 750;
+}
+
+.description{
+    font-weight: 750;
+    font-size: 16px;
+    text-align: center;
+}
+
+.fontS-16{
+    font-size: 16px;
+}
+
 .MyBorder{
     border-width: 2px;
     border-radius: 0px;

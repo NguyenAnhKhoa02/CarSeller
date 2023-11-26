@@ -13,7 +13,7 @@ function BookATestDrive () {
       infinite: true,
       centerPadding: "60px",
       slidesToShow: 3,
-      arrows: false,
+      arrows: true,
       speed: 500
     };
     return (<>
