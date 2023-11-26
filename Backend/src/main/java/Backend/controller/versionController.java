@@ -30,7 +30,7 @@ public class versionController {
     @PostMapping("/save")
     public boolean saveVersion(@RequestBody Version version){
         if(version.getModelId() == null) return false;
-        if(!modelReposity.existsById(version.getModelId())) return false;
+        if(!modelReposity.existsById(version.getModelId().getId())) return false;
         versionReposity.save(version);
 
         return true;
@@ -44,7 +44,7 @@ public class versionController {
         if(versionReposity.checkVersionName(version.getNameVersion()) == 1) return  false;
         if(!carReposity.existsById(version.getCar().getCarId())) return  false;
         if(!versionReposity.existsById(version.getId())) return false;
-        if(!modelReposity.existsById(version.getModelId())) return false;
+        if(!modelReposity.existsById(version.getModelId().getId())) return false;
 
         List<Color> colors = versionReposity.findById(version.getId()).get().getCar().getColors();
         for (Color color:

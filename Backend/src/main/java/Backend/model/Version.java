@@ -27,9 +27,13 @@ public class Version {
     )
         private Car car;
 
-    @Column(
-            name = "model_id",
-            nullable = false
+
+    @OneToOne(
+            cascade = CascadeType.ALL
     )
-    private Long modelId;
+    @JoinColumn(
+            name = "modelId",
+            referencedColumnName = "modelId"
+    )
+    private Model modelId;
 }
