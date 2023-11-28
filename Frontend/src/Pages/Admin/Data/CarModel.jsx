@@ -10,24 +10,10 @@ const CarModelFilters = [
 ];
 
 export const CarModelList = () => (
-    <List /* filter={CarModelFilters} */>
+    <List>
         <Datagrid>
-            <TextField source="Mã" />
-            <TextField source="Phiên bản xe" />
+            <TextField source="id" />
+            <TextField source="nameModel" />
         </Datagrid>
     </List>
-);
-
-/* export const CarModelEdit = () => (
-    <Edit title={<CarModelTitle />}>
-        <SimpleForm>
-        </SimpleForm>
-    </Edit>
-);
-
-export const CarModelCreate = () => (
-    <Create>
-        <SimpleForm>
-        </SimpleForm>
-    </Create>
-); */
+)

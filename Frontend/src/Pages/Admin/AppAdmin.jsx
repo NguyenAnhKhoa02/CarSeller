@@ -17,12 +17,9 @@ const darkTheme = { ...defaultTheme, palette: { mode: "dark" } };
 function App () {
     return (
         <Admin basename="/admin" authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard} theme={lightTheme} darkTheme={darkTheme}>
-          <Resource name="posts" icon={CarIcon} list={CarList} /*show={} edit={} create={}*/ />
-          <Resource name="comments" icon={CarModelIcon} list={CarModelList} /*show={} edit={} create={}*/ />
-          <Resource name="photos" icon={TestingRegissterIcon} list={TestingRegisterList} /*show={} edit={} create={}*/ />
-          <Resource name="albums" icon={ServiceScheduleIcon} list={ServiceScheduleList} /*show={} edit={} create={}*/ />
-          <Resource name="todos" icon={CarIcon} list={ListGuesser} /*show={} edit={} create={}*/ />
-          <Resource name="users" icon={CarIcon} list={ListGuesser} /*show={} edit={} create={}*/ />
+
+
+          <Resource name="model/all" icon={CarIcon} list={ListGuesser} /*show={} edit={} create={}*/ />
         </Admin>
       );
 } 
