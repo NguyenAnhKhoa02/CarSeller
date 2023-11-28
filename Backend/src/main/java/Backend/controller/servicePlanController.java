@@ -3,6 +3,7 @@ package Backend.controller;
 import Backend.model.ServicePlan;
 import Backend.reposity.ServicePlanReposity;
 import Backend.services.GmailService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,13 @@ public class servicePlanController {
         return true;
     }
     @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
-    public List<ServicePlan> getAllServiceName(){
+    public List<ServicePlan> getAllServiceName(HttpServletResponse response){
+        List<ServicePlan> servicePlans = servicePlanReposity.findAll();
 
+        response.setHeader("Access-Control-Expose-Headers", "X-Total-Count");
+        response.addDateHeader("X-Total-Count", servicePlans.size());
         return servicePlanReposity.findAll();
     }
 
