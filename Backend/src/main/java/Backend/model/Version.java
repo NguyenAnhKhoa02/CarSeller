@@ -28,12 +28,11 @@ public class Version {
         private Car car;
 
 
-    @OneToOne(
-            cascade = CascadeType.ALL
+    @ManyToOne(
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
-            name = "modelId",
-            referencedColumnName = "modelId"
+            name = "model_id"
     )
     private Model modelId;
 }

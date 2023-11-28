@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 25, 2023 at 06:02 PM
+-- Generation Time: Nov 28, 2023 at 04:56 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -47,6 +47,13 @@ CREATE TABLE IF NOT EXISTS `car` (
   `wswandgl` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `car`
+--
+
+INSERT INTO `car` (`id`, `air_bag`, `anti_theft`, `auto_lock`, `back_camera`, `door_handle`, `front_brakes`, `front_fog_light`, `gas_cap`, `info`, `num_car_seat`, `price`, `rear_brakes`, `seat_material`, `wiper_blade`, `wswandgl`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 0, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -72,6 +79,13 @@ CREATE TABLE IF NOT EXISTS `model` (
   `model_id` bigint(20) NOT NULL,
   `name_model` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `model`
+--
+
+INSERT INTO `model` (`model_id`, `name_model`) VALUES
+(1, 'model1');
 
 -- --------------------------------------------------------
 
@@ -121,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `testing_register` (
   `full_name` varchar(255) DEFAULT NULL,
   `number_phone` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `car_id` bigint(20) DEFAULT NULL
+  `version_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -133,10 +147,17 @@ CREATE TABLE IF NOT EXISTS `testing_register` (
 DROP TABLE IF EXISTS `version`;
 CREATE TABLE IF NOT EXISTS `version` (
   `version_id` bigint(20) NOT NULL,
-  `model_id` bigint(20) NOT NULL,
   `name_version` varchar(255) DEFAULT NULL,
-  `car_id` bigint(20) DEFAULT NULL
+  `car_id` bigint(20) DEFAULT NULL,
+  `model_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `version`
+--
+
+INSERT INTO `version` (`version_id`, `name_version`, `car_id`, `model_id`) VALUES
+(1, 'version name', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -180,14 +201,15 @@ ALTER TABLE `service_plan`
 --
 ALTER TABLE `testing_register`
   ADD PRIMARY KEY (`testing_register_id`),
-  ADD UNIQUE KEY `UK_19csw5pdiqurmah64iyh8xkau` (`car_id`);
+  ADD UNIQUE KEY `UK_a2ks3ngm0lg79rmv4ep6wbhvj` (`version_id`);
 
 --
 -- Indexes for table `version`
 --
 ALTER TABLE `version`
   ADD PRIMARY KEY (`version_id`),
-  ADD UNIQUE KEY `UK_rg7rjjb9i2oemnxvrrphwcq01` (`car_id`);
+  ADD UNIQUE KEY `UK_rg7rjjb9i2oemnxvrrphwcq01` (`car_id`),
+  ADD KEY `FKwu0dfb5kwp3o83seid89ao0r` (`model_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -197,7 +219,7 @@ ALTER TABLE `version`
 -- AUTO_INCREMENT for table `car`
 --
 ALTER TABLE `car`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `color`
@@ -209,7 +231,7 @@ ALTER TABLE `color`
 -- AUTO_INCREMENT for table `model`
 --
 ALTER TABLE `model`
-  MODIFY `model_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `model_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `service`
@@ -233,7 +255,7 @@ ALTER TABLE `testing_register`
 -- AUTO_INCREMENT for table `version`
 --
 ALTER TABLE `version`
-  MODIFY `version_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `version_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -256,13 +278,14 @@ ALTER TABLE `service_plan`
 -- Constraints for table `testing_register`
 --
 ALTER TABLE `testing_register`
-  ADD CONSTRAINT `FKb8t7vlvxdlg1r320s4j7tc6j2` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
+  ADD CONSTRAINT `FK33gtm6ddv00sy6vr7wy93fa96` FOREIGN KEY (`version_id`) REFERENCES `version` (`version_id`);
 
 --
 -- Constraints for table `version`
 --
 ALTER TABLE `version`
-  ADD CONSTRAINT `FKe4g1l9cqd5nmff1n6tlmsqfcc` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
+  ADD CONSTRAINT `FKe4g1l9cqd5nmff1n6tlmsqfcc` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`),
+  ADD CONSTRAINT `FKwu0dfb5kwp3o83seid89ao0r` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
