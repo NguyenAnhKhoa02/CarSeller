@@ -1,5 +1,3 @@
 import jsonServerProvider from 'ra-data-json-server';
 
-export const dataProvider = jsonServerProvider(
-    "http://localhost:8080"
-);
+export const dataProvider = jsonServerProvider('http://localhost:8080');
