@@ -1,3 +1,3 @@
-import jsonServerProvider from 'ra-data-json-server';
+import ServerProvider from './ra-data-springboot-rest.js';
 
-export const dataProvider = jsonServerProvider('http://localhost:8080');
+export const dataProvider = ServerProvider('http://localhost:8080');

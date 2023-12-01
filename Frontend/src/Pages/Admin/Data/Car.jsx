@@ -1,19 +1,14 @@
-import { List,Datagrid,TextField,ReferenceField,EditButton,Edit,Create,SimpleForm,ReferenceInput,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout} from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout} from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const CarTitle = () => {
     const record = useRecordContext();
     return <span>Car ID {record ? `"${record.id}"` : ''}</span>;
   };
-  
-// Tạo các bộ lọc cho danh sách
-const CarFilters = [
-    <TextInput source="q" label="Search" alwaysOn />,
-];
-  
+
 // Component cho trang danh sách
 export const CarList = (props) => (
-<List {...props} filters={CarFilters}>
+<List {...props}>
     <Datagrid rowClick="show">
         <TextField source="id" />
         <TextField source="air_bag" />
