@@ -1,11 +1,9 @@
-package Backend.reposity;
+package Backend.repository;
 
 import Backend.model.Color;
-import org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapProperties;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

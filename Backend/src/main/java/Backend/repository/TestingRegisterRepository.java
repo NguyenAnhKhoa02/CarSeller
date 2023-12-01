@@ -1,8 +1,7 @@
-package Backend.reposity;
+package Backend.repository;
 
 import Backend.model.TestingRegister;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
