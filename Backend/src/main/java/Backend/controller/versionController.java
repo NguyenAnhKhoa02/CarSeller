@@ -2,10 +2,10 @@ package Backend.controller;
 
 import Backend.model.Color;
 import Backend.model.Version;
-import Backend.reposity.CarReposity;
-import Backend.reposity.ColorResposity;
-import Backend.reposity.ModelReposity;
-import Backend.reposity.VersionReposity;
+import Backend.repository.CarRepository;
+import Backend.repository.ColorRepository;
+import Backend.repository.ModelRepository;
+import Backend.repository.VersionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,22 +16,22 @@ import java.util.List;
 public class versionController {
 
     @Autowired
-    private VersionReposity versionReposity;
+    private VersionRepository versionRepository;
 
     @Autowired
-    private ModelReposity modelReposity;
+    private ModelRepository modelRepository;
 
     @Autowired
-    private CarReposity carReposity;
+    private CarRepository carRepository;
 
     @Autowired
-    private ColorResposity colorResposity;
+    private ColorRepository colorRepository;
 
     @PostMapping("/save")
     public boolean saveVersion(@RequestBody Version version){
         if(version.getModelId() == null) return false;
-        if(!modelReposity.existsById(version.getModelId().getId())) return false;
-        versionReposity.save(version);
+        if(!modelRepository.existsById(version.getModelId().getId())) return false;
+        versionRepository.save(version);
 
         return true;
     }
@@ -41,23 +41,23 @@ public class versionController {
         if(version.getId() == null) return false;
         if(version.getCar() == null) return false;
         if(version.getCar().getCarId() == null) return false;
-        if(versionReposity.checkVersionName(version.getNameVersion()) == 1) return  false;
-        if(!carReposity.existsById(version.getCar().getCarId())) return  false;
-        if(!versionReposity.existsById(version.getId())) return false;
-        if(!modelReposity.existsById(version.getModelId().getId())) return false;
+        if(versionRepository.checkVersionName(version.getNameVersion()) == 1) return  false;
+        if(!carRepository.existsById(version.getCar().getCarId())) return  false;
+        if(!versionRepository.existsById(version.getId())) return false;
+        if(!modelRepository.existsById(version.getModelId().getId())) return false;
 
-        List<Color> colors = versionReposity.findById(version.getId()).get().getCar().getColors();
+        List<Color> colors = versionRepository.findById(version.getId()).get().getCar().getColors();
         for (Color color:
              colors) {
-            colorResposity.deleteFromId(color.getId());
+            colorRepository.deleteFromId(color.getId());
         }
 
         for (Color color:
              version.getCar().getColors()) {
-            colorResposity.updateColor(color.getColor(),color.getUrl(),version.getCar().getCarId());
+            colorRepository.updateColor(color.getColor(),color.getUrl(),version.getCar().getCarId());
         }
 
-        versionReposity.updateVersion(version);
+        versionRepository.updateVersion(version);
 
         return true;
     }
@@ -65,15 +65,15 @@ public class versionController {
     @GetMapping("/{modelName}/{versionName}")
     @ResponseBody
     public Version getVersion(@PathVariable String modelName, @PathVariable String versionName){
-        if(versionReposity.checkVersionName(versionName) == 0) return null;
-        if(modelReposity.checkNameModel(modelName) == 0) return  null;
+        if(versionRepository.checkVersionName(versionName) == 0) return null;
+        if(modelRepository.checkNameModel(modelName) == 0) return  null;
 
-        return versionReposity.getVersionByModelAndNameVersion(modelName,versionName);
+        return versionRepository.getVersionByModelAndNameVersion(modelName,versionName);
     }
 
     @GetMapping("/{modelName}")
     @ResponseBody
     public List<Version>  getAllVersionsFromModelName(@PathVariable(required = false) String modelName){
-        return versionReposity.getAllVersionsFromModelName(modelName);
+        return versionRepository.getAllVersionsFromModelName(modelName);
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface VersionReposity extends JpaRepository<Version,Long> {
+public interface VersionRepository extends JpaRepository<Version,Long> {
 
     @Query(
            value = "SELECT version.* " +

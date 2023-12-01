@@ -1,13 +1,12 @@
 package Backend.controller;
 
 import Backend.model.Model;
-import Backend.reposity.ModelReposity;
+import Backend.repository.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class modelController {
 
     @Autowired
-    private ModelReposity modelRepository;
+    private ModelRepository modelRepository;
 
     @PostMapping("/save")
     public ResponseEntity<Model> saveModel(@RequestBody Model model) {

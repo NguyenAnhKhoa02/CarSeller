@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ServiceReposity extends JpaRepository<Service,Long> {
+public interface ServiceRepository extends JpaRepository<Service,Long> {
     @Query(
             value = "SELECT COUNT(*) = 1 " +
                     "FROM service " +

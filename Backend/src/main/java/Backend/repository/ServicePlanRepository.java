@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface ServicePlanReposity  extends JpaRepository<ServicePlan,Long> {
+public interface ServicePlanRepository extends JpaRepository<ServicePlan,Long> {
 
     @Transactional
     @Query(

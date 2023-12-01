@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface ColorResposity extends JpaRepository<Color,Long> {
+public interface ColorRepository extends JpaRepository<Color,Long> {
 
     @Modifying
     @Transactional

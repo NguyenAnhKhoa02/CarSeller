@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TestingRegisterReposity extends JpaRepository<TestingRegister,Long> {
+public interface TestingRegisterRepository extends JpaRepository<TestingRegister,Long> {
 
      TestingRegister getTestingRegisterByFullNameAndEmail(String fullName, String email);
 }
