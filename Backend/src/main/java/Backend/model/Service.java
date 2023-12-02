@@ -1,10 +1,7 @@
 package Backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
@@ -19,5 +16,6 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceId;
     private String nameService;
+    public String getNameService() { return nameService; }
+    public void setNameService(String nameService) { this.nameService = nameService; }
 }
-

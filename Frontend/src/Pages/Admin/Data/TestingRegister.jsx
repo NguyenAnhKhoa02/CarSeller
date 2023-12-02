@@ -11,10 +11,10 @@ export const TestingRegisterList = (props) => (
 <List {...props}>
     <Datagrid rowClick="show">
         <TextField source="id" />
-        <TextField source="full_name" />
+        <TextField source="fullName" />
         <TextField source="email" />
-        <TextField source="number_phone" />
-        <TextField source="version_id" />
+        <TextField source="numberPhone" />
+        <TextField source="versionId" />
         <TextField source="status" />
         <EditButton />
         <DeleteButton />
@@ -38,12 +38,12 @@ export const TestingRegisterShow = (props) => (
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="carpd" />
-        <TextField source="distribution_center" />
+        <TextField source="distributionCenter" />
         <TextField source="email" />
-        <TextField source="full_name" />
-        <TextField source="number_phone" />
+        <TextField source="fullName" />
+        <TextField source="numberPhone" />
         <TextField source="status" />
-        <TextField source="version_id" />
+        <TextField source="versionId" />
     </SimpleShowLayout>
 </Show>
 );

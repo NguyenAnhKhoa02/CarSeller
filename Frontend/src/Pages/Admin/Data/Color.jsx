@@ -1,9 +1,9 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout} from "react-admin";
+import { List,Datagrid,TextField,Create,SimpleForm,TextInput,useRecordContext, Show, SimpleShowLayout, ReferenceField, ReferenceInput} from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const ColorTitle = () => {
     const record = useRecordContext();
-    return <span>ID {record ? `"${record.id}"` : ''}</span>;
+    return <span>ID Color {record ? `"${record.id}"` : ''}</span>;
   };
   
 // Component cho trang danh sách
@@ -12,7 +12,7 @@ export const ColorList = (props) => (
     <Datagrid rowClick="show">
         <TextField source="id" />
         <TextField source="color" />
-        <TextField source="version_id" />
+        <ReferenceField label="Version" source="versionId" reference="versions" />
     </Datagrid>
 </List>
 );
@@ -23,7 +23,7 @@ export const ColorCreate = (props) => (
     <SimpleForm>
         <TextInput source="color" />
         <TextInput source="url" />
-        <TextInput source="version_id" />
+        <ReferenceInput label="Version" source="versionId" reference="versions" />
     </SimpleForm>
 </Create>
 );
@@ -35,7 +35,7 @@ export const ColorShow = (props) => (
         <TextField source="id" />
         <TextField source="color" />
         <TextField source="url" />
-        <TextField source="version_id" />
+        <ReferenceField label="Version" source="versionId" reference="versions" />
     </SimpleShowLayout>
 </Show>
 );

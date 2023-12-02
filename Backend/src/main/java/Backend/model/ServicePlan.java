@@ -6,7 +6,6 @@ import lombok.*;
 import java.sql.Date;
 import java.sql.Time;
 
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -26,20 +25,15 @@ public class ServicePlan {
     private String distributionCenter;
     private Date date;
     private Time time;
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    @Getter
     private String status;
-
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
     @OneToOne
     @JoinColumn(
-        name = "service_id",
+            name = "service_id",
             referencedColumnName = "serviceId"
     )
-    private  Service service;
-
+    private Service service;
     @OneToOne
     @JoinColumn(
             name = "model_id",

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("service_Plan")
+@RequestMapping("/service_Plans")
 public class servicePlanController {
     @Autowired
     private ServicePlanRepository servicePlanRepository;

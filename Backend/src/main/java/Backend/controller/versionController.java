@@ -110,6 +110,7 @@ public class versionController {
             existingVersion.setWrappedSteeringWheelAndGearLever(updatedVersion.getWrappedSteeringWheelAndGearLever());
             existingVersion.setSeatMaterial(updatedVersion.getSeatMaterial());
             existingVersion.setAirBag(updatedVersion.getAirBag());
+            existingVersion.setBackCamera(updatedVersion.getBackCamera());
             existingVersion.setAntiTheft(updatedVersion.getAntiTheft());
             existingVersion.setAutoLock(updatedVersion.getAutoLock());
             existingVersion.setPrice(updatedVersion.getPrice());

@@ -1,4 +1,4 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout, ReferenceInput} from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout, ReferenceField, ReferenceInput} from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const VersionTitle = () => {
@@ -12,21 +12,22 @@ export const VersionList = (props) => (
     <Datagrid rowClick="show">
         <TextField source="id" />
         <TextField source="nameVersion" />
+        <ReferenceField source="modelId" reference="models" />
         <TextField source="modelId" />
-        <TextField source="air_bag" />
-        <TextField source="anti_theft" />
-        <TextField source="auto_lock" />
-        <TextField source="back_camera" />
-        <TextField source="door_handle" />
-        <TextField source="front_brakes" />
-        <TextField source="front_fog_light" />
-        <TextField source="gas_cap" />
+        <TextField source="airBag" />
+        <TextField source="antiTheft" />
+        <TextField source="autoLock" />
+        <TextField source="backCamera" />
+        <TextField source="doorHandle" />
+        <TextField source="frontBrakes" />
+        <TextField source="frontFogLight" />
+        <TextField source="gasCap" />
         <TextField source="info" />
-        <TextField source="num_car_seat" />
+        <TextField source="numCarSeat" />
         <TextField source="price" />
-        <TextField source="rear_brakes" />
-        <TextField source="seat_material" />
-        <TextField source="wiper_blade" />
+        <TextField source="rearBrakes" />
+        <TextField source="seatMaterial" />
+        <TextField source="wiperBlade" />
         <TextField source="wswandgl" />
         <EditButton />
         <DeleteButton />
@@ -41,20 +42,20 @@ export const VersionEdit = (props) => (
         <TextInput disabled source="id" />
         <TextInput source="nameVersion" />
         <ReferenceInput source="modelId" reference="models" />
-        <TextInput source="air_bag" />
-        <TextInput source="anti_theft" />
-        <TextInput source="auto_lock" />
-        <TextInput source="back_camera" />
-        <TextInput source="door_handle" />
-        <TextInput source="front_brakes" />
-        <TextInput source="front_fog_light" />
-        <TextInput source="gas_cap" />
+        <TextInput source="airBag" />
+        <TextInput source="antiTheft" />
+        <TextInput source="autoLock" />
+        <TextInput source="backCamera" />
+        <TextInput source="doorHandle" />
+        <TextInput source="frontBrakes" />
+        <TextInput source="frontFogLight" />
+        <TextInput source="gasCap" />
         <TextInput source="info" />
-        <TextInput source="num_car_seat" />
+        <TextInput source="numCarSeat" />
         <TextInput source="price" />
-        <TextInput source="rear_brakes" />
-        <TextInput source="seat_material" />
-        <TextInput source="wiper_blade" />
+        <TextInput source="rearBrakes" />
+        <TextInput source="seatMaterial" />
+        <TextInput source="wiperBlade" />
         <TextInput source="wswandgl" />
     </SimpleForm>
 </Edit>
@@ -91,7 +92,7 @@ export const VersionShow = (props) => (
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="nameVersion" />
-        <TextField source="modelId" />
+        <ReferenceField source="modelId" reference="models" />
         <TextField source="air_bag" />
         <TextField source="anti_theft" />
         <TextField source="auto_lock" />

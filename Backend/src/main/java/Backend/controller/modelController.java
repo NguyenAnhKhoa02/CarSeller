@@ -7,13 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/models")
@@ -57,11 +55,6 @@ public class modelController {
         ArrayList<Model> arrayList = new ArrayList<>();
         arrayList.add(model);
         return arrayList;
-//        if (model != null) {
-//            return arrayList;
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
     }
 
     @PutMapping("/{id}")
@@ -70,7 +63,6 @@ public class modelController {
 
         if (existingModel != null) {
             existingModel.setNameModel(updatedModel.getNameModel());
-            // Cập nhật các trường khác nếu cần
             modelRepository.save(existingModel);
             return new ResponseEntity<>(existingModel, HttpStatus.OK);
         } else {

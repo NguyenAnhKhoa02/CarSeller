@@ -1,26 +1,26 @@
 import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout} from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
-const ServiceScheduleTitle = () => {
+const ServicePlanTitle = () => {
     const record = useRecordContext();
-    return <span>ID {record ? `"${record.id}"` : ''}</span>;
+    return <span>ID Service Plan {record ? `"${record.id}"` : ''}</span>;
   };
 
 // Component cho trang danh sách
-export const ServiceScheduleList = (props) => (
+export const ServicePlanList = (props) => (
 <List {...props}>
     <Datagrid rowClick="show">
         <TextField source="id" />
         <TextField source="date" />
-        <TextField source="distribution_center" />
+        <TextField source="distributionCenter" />
         <TextField source="email" />
-        <TextField source="full_name" />
-        <TextField source="license_plate" />
-        <TextField source="number_phone" />
+        <TextField source="fullName" />
+        <TextField source="licensePlate" />
+        <TextField source="numberPhone" />
         <TextField source="status" />
         <TextField source="time" />
-        <TextField source="model_id" />
-        <TextField source="service_id" />
+        <TextField source="modelId" />
+        <TextField source="serviceId" />
         <EditButton />
         <DeleteButton />
     </Datagrid>
@@ -28,8 +28,8 @@ export const ServiceScheduleList = (props) => (
 );
 
 // Component cho trang chỉnh sửa
-export const ServiceScheduleEdit = (props) => (
-<Edit title={<ServiceScheduleTitle />} {...props}>
+export const ServicePlanEdit = (props) => (
+<Edit title={<ServicePlanTitle />} {...props}>
     <SimpleForm>
         <TextInput disabled source="id" />
         <TextInput source="status" />
@@ -38,20 +38,20 @@ export const ServiceScheduleEdit = (props) => (
 );
 
 // Component cho trang hiển thị chi tiết
-export const ServiceScheduleShow = (props) => (
-<Show title={<ServiceScheduleTitle />} {...props}>
+export const ServicePlanShow = (props) => (
+<Show title={<ServicePlanTitle />} {...props}>
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="date" />
-        <TextField source="distribution_center" />
+        <TextField source="distributionCenter" />
         <TextField source="email" />
-        <TextField source="full_name" />
-        <TextField source="license_plate" />
-        <TextField source="number_phone" />
+        <TextField source="fullName" />
+        <TextField source="licensePlate" />
+        <TextField source="numberPhone" />
         <TextField source="status" />
         <TextField source="time" />
-        <TextField source="model_id" />
-        <TextField source="service_id" />
+        <TextField source="modelId" />
+        <TextField source="serviceId" />
     </SimpleShowLayout>
 </Show>
 );

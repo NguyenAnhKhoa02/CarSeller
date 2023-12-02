@@ -17,16 +17,14 @@ public class Color {
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     public void setColor(String color) {
         this.color = color;
     }
-
     public void setUrl(String url) {
         this.url = url;
     }
-    @Getter
+    public String getColor() { return color; }
+    public String getUrl() { return url; }
     private String color;
-    @Getter
     private String url;
 }
