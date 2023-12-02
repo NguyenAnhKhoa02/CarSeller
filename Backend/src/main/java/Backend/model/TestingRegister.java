@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TestingRegister {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
-            name = "TestingRegister_Id"
+            name = "testingRegisterId"
     )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
     private String email;

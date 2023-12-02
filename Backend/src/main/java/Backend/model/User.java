@@ -1,10 +1,7 @@
 package Backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
@@ -14,12 +11,10 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @Column(
-            name = "Id"
+            name = "userId"
     )
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public void setUsername(String username) {
         this.username = username;
@@ -29,14 +24,8 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
+    @Getter
     private String username;
+    @Getter
     private String password;
 }

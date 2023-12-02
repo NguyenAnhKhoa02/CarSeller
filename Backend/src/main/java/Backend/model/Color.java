@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class Color {
     @Id
+    @Column(
+            name = "colorId"
+    )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String color;
