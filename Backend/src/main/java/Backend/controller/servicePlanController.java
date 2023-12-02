@@ -3,14 +3,19 @@ package Backend.controller;
 import Backend.model.ServicePlan;
 import Backend.repository.ServicePlanRepository;
 import Backend.services.GmailService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @RestController
-@RequestMapping("servicePlan")
+@RequestMapping("service_Plan")
 public class servicePlanController {
     @Autowired
     private ServicePlanRepository servicePlanRepository;
@@ -28,15 +33,53 @@ public class servicePlanController {
         servicePlanRepository.checkServicePlanName(fullName);
         return true;
     }
-    @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:3000")
-    @ResponseBody
-    public List<ServicePlan> getAllServiceName(HttpServletResponse response){
-        List<ServicePlan> servicePlans = servicePlanRepository.findAll();
-
-        response.setHeader("Access-Control-Expose-Headers", "X-Total-Count");
-        response.addDateHeader("X-Total-Count", servicePlans.size());
-        return servicePlanRepository.findAll();
+    @GetMapping
+    public ResponseEntity<Page<ServicePlan>>  getAllServicePlans(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+            @RequestParam(value = "sortField", defaultValue = "id") String sortField,
+            @RequestParam(value = "sortOrder", defaultValue = "ASC") String sortOrder
+    ) {
+        Sort.Direction direction = sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(direction, sortField));
+        Page<ServicePlan> servicePlanPage = servicePlanRepository.findAll(pageable);
+        return new ResponseEntity<>(servicePlanPage, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ServicePlan> getOneServicePlan(@PathVariable Long id) {
+        ServicePlan servicePlan = servicePlanRepository.findById(id).orElse(null);
+        if (servicePlan != null) {
+            return new ResponseEntity<>(servicePlan, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/id={id}")
+    public ArrayList<ServicePlan> getServicePlanFromUrlId(@PathVariable Long id) {
+        ServicePlan servicePlan = servicePlanRepository.findById(id).orElse(null);
+        ArrayList<ServicePlan> arrayList = new ArrayList<>();
+        arrayList.add(servicePlan);
+        return arrayList;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ServicePlan> updateServicePlan(@PathVariable Long id, @RequestBody ServicePlan updatedServicePlan) {
+        ServicePlan existingServicePlan = servicePlanRepository.findById(id).orElse(null);
+
+        if (existingServicePlan != null) {
+            existingServicePlan.setStatus(updatedServicePlan.getStatus());
+            servicePlanRepository.save(existingServicePlan);
+            return new ResponseEntity<>(existingServicePlan, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteServicePlan(@PathVariable Long id) {
+        servicePlanRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

@@ -1,10 +1,7 @@
 package Backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -29,6 +26,11 @@ public class ServicePlan {
     private String distributionCenter;
     private Date date;
     private Time time;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    @Getter
     private String status;
 
     @OneToOne

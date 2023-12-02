@@ -50,11 +50,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
       case GET_MANY: {
         const query = {
-          filter: JSON.stringify({ id: params.ids })
+            id: params.ids,
         };
-        let idStr = "";
-        const queryString = params.ids.map(id => idStr + `id=${id}`);
-        url = `${apiUrl}/${resource}?${idStr}}`;
+        url = `${apiUrl}/${resource}\\${stringify(query)}`;
         break;
       }
       case GET_MANY_REFERENCE: {

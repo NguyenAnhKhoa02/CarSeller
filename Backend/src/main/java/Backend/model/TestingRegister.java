@@ -1,10 +1,8 @@
 package Backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,11 +15,17 @@ public class TestingRegister {
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     private String fullName;
     private String email;
     private String numberPhone;
     private String distributionCenter;
     private String carPD;
+    @Getter
     private String status;
     @OneToOne
     @JoinColumn(

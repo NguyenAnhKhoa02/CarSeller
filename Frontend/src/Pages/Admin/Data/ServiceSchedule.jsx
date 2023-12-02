@@ -11,6 +11,16 @@ export const ServiceScheduleList = (props) => (
 <List {...props}>
     <Datagrid rowClick="show">
         <TextField source="id" />
+        <TextField source="date" />
+        <TextField source="distribution_center" />
+        <TextField source="email" />
+        <TextField source="full_name" />
+        <TextField source="license_plate" />
+        <TextField source="number_phone" />
+        <TextField source="status" />
+        <TextField source="time" />
+        <TextField source="model_id" />
+        <TextField source="service_id" />
         <EditButton />
         <DeleteButton />
     </Datagrid>
@@ -22,16 +32,9 @@ export const ServiceScheduleEdit = (props) => (
 <Edit title={<ServiceScheduleTitle />} {...props}>
     <SimpleForm>
         <TextInput disabled source="id" />
+        <TextInput source="status" />
     </SimpleForm>
 </Edit>
-);
-
-// Component cho trang tạo mới
-export const ServiceScheduleCreate = (props) => (
-<Create {...props}>
-    <SimpleForm>
-    </SimpleForm>
-</Create>
 );
 
 // Component cho trang hiển thị chi tiết
@@ -39,6 +42,16 @@ export const ServiceScheduleShow = (props) => (
 <Show title={<ServiceScheduleTitle />} {...props}>
     <SimpleShowLayout>
         <TextField source="id" />
+        <TextField source="date" />
+        <TextField source="distribution_center" />
+        <TextField source="email" />
+        <TextField source="full_name" />
+        <TextField source="license_plate" />
+        <TextField source="number_phone" />
+        <TextField source="status" />
+        <TextField source="time" />
+        <TextField source="model_id" />
+        <TextField source="service_id" />
     </SimpleShowLayout>
 </Show>
 );

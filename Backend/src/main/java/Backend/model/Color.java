@@ -1,10 +1,7 @@
 package Backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
 @Entity
@@ -20,6 +17,16 @@ public class Color {
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    @Getter
     private String color;
+    @Getter
     private String url;
 }

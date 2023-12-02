@@ -83,7 +83,13 @@ public class Version {
     @Getter
     private String nameVersion;
     private Long modelId;
-    @OneToMany
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(
+            name = "version_id"
+    )
     private List<Color> colors;
     @Getter
     private int numCarSeat;

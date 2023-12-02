@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +72,6 @@ public class versionController {
 //    }
 
     @GetMapping
-    @CrossOrigin("http://localhost:3000")
     public ResponseEntity<Page<Version>> getAllVersions(
             @RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
@@ -86,7 +84,6 @@ public class versionController {
         return new ResponseEntity<>(versionPage, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    @CrossOrigin("http://localhost:3000")
     public ResponseEntity<Version> getOneVersion(@PathVariable Long id) {
         Version version = versionRepository.findById(id).orElse(null);
         if (version != null) {
@@ -97,7 +94,6 @@ public class versionController {
     }
 
     @PutMapping("/{id}")
-    @CrossOrigin("http://localhost:3000")
     public ResponseEntity<Version> updatedVersion(@PathVariable Long id, @RequestBody Version updatedVersion) {
         Version existingVersion = versionRepository.findById(id).orElse(null);
 
@@ -125,7 +121,6 @@ public class versionController {
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin("http://localhost:3000")
     public ResponseEntity<Void> deleteVersion(@PathVariable Long id) {
         versionRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
