@@ -1,4 +1,5 @@
 import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField } from "react-admin";
+import { Box,Typography } from "@mui/material";
 
 const status = [
     { id:"waiting for contract", name:"Waiting For Contract"}, 
@@ -31,9 +32,18 @@ export const ServicePlanList = (props) => (
 // Component cho trang chỉnh sửa
 export const ServicePlanEdit = (props) => (
 <Edit title={<ServicePlanTitle />} {...props}>
-    <SimpleForm>
-        <TextInput disabled source="id" />
-        <SelectInput source="status" choices={status} />
+    <SimpleForm sx={{ maxWidth: 800 }}>
+        <Typography variant="h5" gutterBottom> 
+            Change Status
+        </Typography>
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <TextInput disabled fullWidth source="id" />
+            </Box>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <SelectInput fullWidth required source="status" choices={status} />
+            </Box>
+        </Box>
     </SimpleForm>
 </Edit>
 );

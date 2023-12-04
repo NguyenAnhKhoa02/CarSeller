@@ -1,5 +1,6 @@
 package Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,10 +26,23 @@ public class TestingRegister {
     public void setStatus(String status) {
         this.status = status;
     }
-    @OneToOne
-    @JoinColumn(
-            name = "version_id",
-            referencedColumnName = "versionId"
+    @Column(name = "versionId")
+    private Long versionId;
+    public Long getVersionId() {
+        return versionId;
+    }
+    public void setVersionId(Long versionId) {
+        this.versionId = versionId;
+    }
+    @ManyToOne(
+            cascade = CascadeType.ALL
     )
-    private Version version;
+    @JoinColumn(
+            name = "versionId",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
+    @JsonIgnore
+    private Version versions;
 }

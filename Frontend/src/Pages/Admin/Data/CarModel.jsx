@@ -1,4 +1,5 @@
 import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout } from "react-admin";
+import { Box,Typography } from "@mui/material";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const CarModelTitle = () => {
@@ -9,10 +10,9 @@ const CarModelTitle = () => {
 // Component cho trang danh sách
 export const CarModelList = (props) => (
 <List {...props}>
-    <Datagrid rowClick="show">
+    <Datagrid rowClick="edit">
         <TextField source="id" />
         <TextField source="nameModel" />
-        <EditButton />
         <DeleteButton />
     </Datagrid>
 </List>
@@ -21,9 +21,18 @@ export const CarModelList = (props) => (
 // Component cho trang chỉnh sửa
 export const CarModelEdit = (props) => (
 <Edit title={<CarModelTitle />} {...props}>
-    <SimpleForm>
-        <TextInput disabled source="id" />
-        <TextInput source="nameModel" />
+    <SimpleForm sx={{ maxWidth: 800 }}>
+        <Typography variant="h5" gutterBottom> 
+            Summary
+        </Typography>
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <TextInput disabled fullWidth source="id" />
+            </Box>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <TextInput fullWidth required source="nameModel" />
+            </Box>
+        </Box>
     </SimpleForm>
 </Edit>
 );
@@ -31,18 +40,11 @@ export const CarModelEdit = (props) => (
 // Component cho trang tạo mới
 export const CarModelCreate = (props) => (
 <Create {...props}>
-    <SimpleForm>
-        <TextInput source="nameModel" />
+    <SimpleForm sx={{ maxWidth: 800 }}>
+        <Typography variant="h5" gutterBottom> 
+            Create Car Model
+        </Typography>
+        <TextInput fullWidth required source="nameModel" />
     </SimpleForm>
 </Create>
-);
-
-// Component cho trang hiển thị chi tiết
-export const CarModelShow = (props) => (
-<Show title={<CarModelTitle />} {...props}>
-    <SimpleShowLayout>
-        <TextField source="id" />
-        <TextField source="nameModel" />
-    </SimpleShowLayout>
-</Show>
 );

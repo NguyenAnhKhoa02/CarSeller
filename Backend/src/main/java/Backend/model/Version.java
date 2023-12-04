@@ -20,11 +20,8 @@ public class Version {
     private Long id;
     @OneToMany(
             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(
-            name = "versionId",
-            nullable = false
+            orphanRemoval = true,
+            mappedBy = "versions"
     )
     private List<Color> colors;
     @Column(name = "modelId")
@@ -45,7 +42,13 @@ public class Version {
             updatable = false
     )
     @JsonIgnore
-    private Model models;
+    private Model versionModels;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "versions"
+    )
+    private List<TestingRegister> testingRegisters;
     private String nameVersion;
     private int numCarSeat;
     private String info;

@@ -1,5 +1,6 @@
 package Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,16 +29,38 @@ public class ServicePlan {
     private String status;
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-    @OneToOne
-    @JoinColumn(
-            name = "service_id",
-            referencedColumnName = "serviceId"
+    @Column(name = "serviceId")
+    private Long serviceId;
+    public Long getServiceId() { return serviceId; }
+    public void setServiceId(Long serviceId) { this.serviceId = serviceId; }
+    @ManyToOne(
+            cascade = CascadeType.ALL
     )
-    private Service service;
-    @OneToOne
     @JoinColumn(
-            name = "model_id",
-            referencedColumnName = "modelId"
+            name = "serviceId",
+            nullable = false,
+            insertable = false,
+            updatable = false
     )
-    private Model model;
+    @JsonIgnore
+    private Service services;
+    @Column(name = "modelId")
+    private Long modelId;
+    public Long getModelId() {
+        return modelId;
+    }
+    public void setModelId(Long modelId) {
+        this.modelId = modelId;
+    }
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "modelId",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
+    @JsonIgnore
+    private Model servicePlanModels;
 }

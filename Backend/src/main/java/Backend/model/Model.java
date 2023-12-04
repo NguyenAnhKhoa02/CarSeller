@@ -23,9 +23,15 @@ public class Model {
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            mappedBy = "models"
+            mappedBy = "versionModels"
     )
     private List<Version> versions;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "servicePlanModels"
+    )
+    private List<ServicePlan> servicePlans;
     public Long getId() { return id; }
     public void setId(Long id) {
         this.id = id;

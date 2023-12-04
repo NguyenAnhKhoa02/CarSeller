@@ -1,4 +1,5 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout } from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,PasswordInput } from "react-admin";
+import { Box,Typography } from "@mui/material";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const UserTitle = () => {
@@ -9,10 +10,9 @@ const UserTitle = () => {
 // Component cho trang danh sách
 export const UserList = (props) => (
 <List {...props}>
-    <Datagrid rowClick="show">
+    <Datagrid rowClick="edit">
         <TextField source="id" />
         <TextField source="username" />
-        <EditButton />
         <DeleteButton />
     </Datagrid>
 </List>
@@ -21,10 +21,19 @@ export const UserList = (props) => (
 // Component cho trang chỉnh sửa
 export const UserEdit = (props) => (
 <Edit title={<UserTitle />} {...props}>
-    <SimpleForm>
-        <TextInput disabled source="id" />
-        <TextInput source="username" />
-        <TextInput source="password" />
+    <SimpleForm sx={{ maxWidth: 800 }}>
+        <Typography variant="h5" gutterBottom> 
+            Summary
+        </Typography>
+                <TextInput disabled fullWidth source="id" />
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <TextInput fullWidth required source="username" />
+            </Box>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <PasswordInput fullWidth required source="password" />
+            </Box>
+        </Box>
     </SimpleForm>
 </Edit>
 );
@@ -32,20 +41,18 @@ export const UserEdit = (props) => (
 // Component cho trang tạo mới
 export const UserCreate = (props) => (
 <Create {...props}>
-    <SimpleForm>
-        <TextInput source="username" />
-        <TextInput source="password" />
+    <SimpleForm sx={{ maxWidth: 800 }}>
+        <Typography variant="h5" gutterBottom> 
+            Create User
+        </Typography>
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <TextInput fullWidth required source="username" />
+            </Box>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <PasswordInput fullWidth required source="password" />
+            </Box>
+        </Box>
     </SimpleForm>
 </Create>
-);
-
-// Component cho trang hiển thị chi tiết
-export const UserShow = (props) => (
-<Show title={<UserTitle />} {...props}>
-    <SimpleShowLayout>
-        <TextField source="id" />
-        <TextField source="username" />
-        <TextField source="password" />
-    </SimpleShowLayout>
-</Show>
 );

@@ -30,7 +30,7 @@ export const VersionEdit = (props) => (
         <TextInput fullWidth source="id" disabled required/>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <TextInput fullWidth source="nameVersion" disabled required/>
+                <TextInput fullWidth source="nameVersion" required/>
             </Box>
             <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                 <ReferenceInput source="modelId" reference="models">
