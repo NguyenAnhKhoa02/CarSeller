@@ -19,20 +19,20 @@ import java.util.ArrayList;
 public class servicePlanController {
     @Autowired
     private ServicePlanRepository servicePlanRepository;
-    @Autowired
-    private GmailService gmailService;
-    @PostMapping("/save")
-    public boolean saveServicePlan(@RequestBody ServicePlan servicePlan){
-        servicePlanRepository.save(servicePlan);
-        gmailService.sendingGmailServicePlan(servicePlan);
-        return true;
-    }
-    @GetMapping("/{fullName}")
-    @ResponseBody
-    public boolean saveServicePlan(@PathVariable String fullName){
-        servicePlanRepository.checkServicePlanName(fullName);
-        return true;
-    }
+//    @Autowired
+//    private GmailService gmailService;
+//    @PostMapping("/save")
+//    public boolean saveServicePlan(@RequestBody ServicePlan servicePlan){
+//        servicePlanRepository.save(servicePlan);
+//        gmailService.sendingGmailServicePlan(servicePlan);
+//        return true;
+//    }
+//    @GetMapping("/{fullName}")
+//    @ResponseBody
+//    public boolean saveServicePlan(@PathVariable String fullName){
+//        servicePlanRepository.checkServicePlanName(fullName);
+//        return true;
+//    }
     @GetMapping
     public ResponseEntity<Page<ServicePlan>>  getAllServicePlans(
             @RequestParam(value = "page", defaultValue = "1") int page,

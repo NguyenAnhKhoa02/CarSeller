@@ -6,9 +6,9 @@ import lombok.*;
 import java.util.List;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
 public class Model {
     @Id
@@ -22,10 +22,8 @@ public class Model {
     private String nameModel;
     @OneToMany(
             cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JoinColumn(
-            name = "modelId"
+            orphanRemoval = true,
+            mappedBy = "models"
     )
     private List<Version> versions;
     public Long getId() { return id; }

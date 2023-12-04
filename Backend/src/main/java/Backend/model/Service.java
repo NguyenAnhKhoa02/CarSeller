@@ -14,7 +14,7 @@ public class Service {
             name = "serviceId"
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceId;
+    private Long id;
     private String nameService;
     public String getNameService() { return nameService; }
     public void setNameService(String nameService) { this.nameService = nameService; }

@@ -1,4 +1,10 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout} from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField } from "react-admin";
+
+const status = [
+    { id:"waiting for contract", name:"Waiting For Contract"}, 
+    { id:"contracted", name:"Contracted"}, 
+    { id:"completed", name:"Completed"}
+];
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const ServicePlanTitle = () => {
@@ -12,15 +18,10 @@ export const ServicePlanList = (props) => (
     <Datagrid rowClick="show">
         <TextField source="id" />
         <TextField source="date" />
-        <TextField source="distributionCenter" />
-        <TextField source="email" />
         <TextField source="fullName" />
-        <TextField source="licensePlate" />
-        <TextField source="numberPhone" />
-        <TextField source="status" />
-        <TextField source="time" />
-        <TextField source="modelId" />
-        <TextField source="serviceId" />
+        <ReferenceField label="Model" source="modelId" reference="models" />
+        <ReferenceField label="Service" source="serviceId" reference="services" />
+        <ChipField source="status" />
         <EditButton />
         <DeleteButton />
     </Datagrid>
@@ -32,7 +33,7 @@ export const ServicePlanEdit = (props) => (
 <Edit title={<ServicePlanTitle />} {...props}>
     <SimpleForm>
         <TextInput disabled source="id" />
-        <TextInput source="status" />
+        <SelectInput source="status" choices={status} />
     </SimpleForm>
 </Edit>
 );
@@ -43,15 +44,15 @@ export const ServicePlanShow = (props) => (
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="date" />
-        <TextField source="distributionCenter" />
-        <TextField source="email" />
-        <TextField source="fullName" />
+        <ReferenceField label="Model" source="modelId" reference="models" />
         <TextField source="licensePlate" />
+        <ReferenceField label="Service" source="serviceId" reference="services" />
+        <TextField source="distributionCenter" />
+        <TextField source="fullName" />
+        <TextField source="email" />
         <TextField source="numberPhone" />
-        <TextField source="status" />
         <TextField source="time" />
-        <TextField source="modelId" />
-        <TextField source="serviceId" />
+        <TextField source="status" />
     </SimpleShowLayout>
 </Show>
 );

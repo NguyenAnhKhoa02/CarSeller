@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/versions")
 public class versionController {
@@ -92,7 +94,13 @@ public class versionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    @GetMapping("/id={id}")
+    public ArrayList<Version> getVersionFromUrlId(@PathVariable Long id) {
+        Version version = versionRepository.findById(id).orElse(null);
+        ArrayList<Version> arrayList = new ArrayList<>();
+        arrayList.add(version);
+        return arrayList;
+    }
     @PutMapping("/{id}")
     public ResponseEntity<Version> updatedVersion(@PathVariable Long id, @RequestBody Version updatedVersion) {
         Version existingVersion = versionRepository.findById(id).orElse(null);

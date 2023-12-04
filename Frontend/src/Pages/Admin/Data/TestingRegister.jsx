@@ -1,4 +1,10 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext, DeleteButton, Show, SimpleShowLayout} from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField } from "react-admin";
+
+const status = [
+    { id:"saiting for contract", name:"Waiting For Contract"}, 
+    { id:"contracted", name:"Contracted"}, 
+    { id:"completed", name:"Completed"}
+];
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const TestingRegisterTitle = () => {
@@ -12,10 +18,8 @@ export const TestingRegisterList = (props) => (
     <Datagrid rowClick="show">
         <TextField source="id" />
         <TextField source="fullName" />
-        <TextField source="email" />
-        <TextField source="numberPhone" />
-        <TextField source="versionId" />
-        <TextField source="status" />
+        <ReferenceField label="Version" source="versionId" reference="versions" />
+        <ChipField source="status" />
         <EditButton />
         <DeleteButton />
     </Datagrid>
@@ -27,7 +31,7 @@ export const TestingRegisterEdit = (props) => (
 <Edit title={<TestingRegisterTitle />} {...props}>
     <SimpleForm>
         <TextInput disabled source="id" />
-        <TextInput source="status" />
+        <SelectInput source="status" choices={status} />
     </SimpleForm>
 </Edit>
 );
@@ -39,11 +43,11 @@ export const TestingRegisterShow = (props) => (
         <TextField source="id" />
         <TextField source="carpd" />
         <TextField source="distributionCenter" />
-        <TextField source="email" />
         <TextField source="fullName" />
+        <TextField source="email" />
         <TextField source="numberPhone" />
+        <ReferenceField label="Version" source="versionId" reference="versions" />
         <TextField source="status" />
-        <TextField source="versionId" />
     </SimpleShowLayout>
 </Show>
 );

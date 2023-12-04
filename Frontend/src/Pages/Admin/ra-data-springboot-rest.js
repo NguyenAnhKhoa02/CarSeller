@@ -52,7 +52,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         const query = {
             id: params.ids,
         };
-        url = `${apiUrl}/${resource}\\${stringify(query)}`;
+        url = `${apiUrl}/${resource}/${stringify(query)}`;
         break;
       }
       case GET_MANY_REFERENCE: {

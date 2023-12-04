@@ -1,5 +1,6 @@
 package Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +23,29 @@ public class Version {
             orphanRemoval = true
     )
     @JoinColumn(
-            name = "versionId"
+            name = "versionId",
+            nullable = false
     )
     private List<Color> colors;
+    @Column(name = "modelId")
+    private Long modelId;
+    public Long getModelId() {
+        return modelId;
+    }
+    public void setModelId(Long modelId) {
+        this.modelId = modelId;
+    }
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "modelId",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
+    @JsonIgnore
+    private Model models;
     private String nameVersion;
     private int numCarSeat;
     private String info;
@@ -35,7 +56,7 @@ public class Version {
     private String doorHandle;
     private String wiperBlade;
     @Column(
-            name = "wSWandGL"
+            name = "wswandgl"
     )
     private String wrappedSteeringWheelAndGearLever;
     private String seatMaterial;

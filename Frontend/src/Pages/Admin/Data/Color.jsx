@@ -1,4 +1,4 @@
-import { List,Datagrid,TextField,Create,SimpleForm,TextInput,useRecordContext, Show, SimpleShowLayout, ReferenceField, ReferenceInput} from "react-admin";
+import { List,Datagrid,TextField,Create,SimpleForm,TextInput,useRecordContext,Show,SimpleShowLayout,ReferenceField,ReferenceInput } from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const ColorTitle = () => {
