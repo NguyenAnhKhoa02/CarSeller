@@ -73,6 +73,8 @@ public class userController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if(id == 1)
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         userRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
