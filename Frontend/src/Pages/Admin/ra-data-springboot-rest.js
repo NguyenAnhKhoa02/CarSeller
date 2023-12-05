@@ -33,6 +33,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
   const convertDataRequestToHTTP = (type, resource, params) => {
     let url = "";
     const options = {};
+    // let formdata = new FormData()
+    // // console.log(resource)
+    // if(resource == "models"){
+    //   formdata.append("model",params.data)
+    //   formdata.append("file",params.data.pictures)
+    // }
+
     switch (type) {
       case GET_LIST: {
         const { page, perPage } = params.pagination;
@@ -143,7 +150,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
     return httpClient(url, options).then(response =>
-      convertHTTPResponse(response, type, resource, params)
+      convertHTTPResponse(response, type, resource, params),
+      headers = new Headers({"Accept":"multipart/form-data"})
     );
   };
 };

@@ -10,7 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +24,11 @@ public class modelController {
     private ModelRepository modelRepository;
 
     @PostMapping
-    public ResponseEntity<Model> saveModel(@RequestBody Model model) {
-        Model savedModel = modelRepository.save(model);
-        return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
+    public ResponseEntity<Model> saveModel(@RequestBody Model model,@RequestPart("file") MultipartFile image) {
+        System.out.println(model);
+//        Model savedModel = modelRepository.save(model);
+        System.out.println(image);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @GetMapping

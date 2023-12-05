@@ -20,6 +20,7 @@ public class Model {
     )
     private Long id;
     private String nameModel;
+    private String url;
     private String info;
     @OneToMany(
             cascade = CascadeType.ALL,
