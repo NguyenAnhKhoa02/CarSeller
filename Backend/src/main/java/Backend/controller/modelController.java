@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/models")
@@ -74,5 +75,12 @@ public class modelController {
     public ResponseEntity<Void> deleteModel(@PathVariable Long id) {
         modelRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /*for fetch*/
+    @GetMapping("/all")
+    @CrossOrigin("http://localhost:3000/SanPham/TatCaDongXe")
+    public List<Model> getAll(){
+        return modelRepository.findAll();
     }
 }

@@ -5,8 +5,25 @@ import icon1 from "../../../Components/Assets/allproducticon1.png"
 import icon2 from "../../../Components/Assets/allproducticon2.png"
 import model1 from "../../../Components/Assets/Models/all-new-xforce-all-product.png"
 import model2 from "../../../Components/Assets/Models/xpander-cross-all-product.png"
+import { useEffect,useState } from "react"
 
 function AllProduct () {
+    const [models, setModels] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:8080/models/all")
+                setModels(await response.json())
+            } catch (error) {
+                console.log("Error fetch data" , error);   
+            }
+        };
+        fetchData()
+    },[])
+
+    console.log(models)
+
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
@@ -16,6 +33,13 @@ function AllProduct () {
         </div>
     </Row>
     <Row style={{maxWidth:"85%",margin:"0 auto", paddingTop:"25px",paddingBottom:"50px"}}>
+        {models.map((item, index) => (
+            <li key={index}>
+                <p>{item.id}</p>
+                <p>{item.nameModel}</p>
+                <p>cách dòng</p>
+            </li>
+        ))}
         <Col style={{paddingBottom:"50px"}}>
             <img src={model1}/>
             <div style={{paddingLeft:"50px", textAlign:"justify"}}>
