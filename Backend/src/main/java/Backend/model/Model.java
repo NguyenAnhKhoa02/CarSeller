@@ -20,6 +20,7 @@ public class Model {
     )
     private Long id;
     private String nameModel;
+    private String info;
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
