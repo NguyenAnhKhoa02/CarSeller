@@ -1,5 +1,6 @@
 import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ImageInput,ImageField,FileInput,FormDataConsumer } from "react-admin";
 import { Box,Typography } from "@mui/material";
+import { useState,useEffect } from "react";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const CarModelTitle = () => {
@@ -17,18 +18,42 @@ export const CarModelList = (props) => (
     </Datagrid>
 </List>
 );
-const MyImageField = ({ url }) => {
-    // Lấy giá trị của trường hình ảnh từ bản ghi
-    const imageUrl = url && url.src; // Thay 'imageField' bằng tên trường hình ảnh thực tế của bạn
-    
-    // Kiểm tra nếu hình ảnh tồn tại, sau đó trả về URL
-    return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
+const ImageFieldCus = ({ url }) => {
+    if(!url){
+        return null;
+    }
+
+    if(url instanceof Object){
+        const imageUrl = url && url.src;
+        return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
+    }else{
+        const [imageUrl, setImageUrl] = useState([]);
+
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/image/${url}`)
+                    if(response.ok){
+                        const blob = await response.blob()
+                        const imageURL = URL.createObjectURL(blob)
+                        setImageUrl(imageURL)
+                    }
+                } catch (error) {
+                    console.log("Error fetch data" , error);     
+                }
+            };
+            fetchData()
+        },[])
+
+        return imageUrl ? <img style={{width:"100%", height:"100%"}} src={imageUrl} alt="Image" id="image"/> : null;
+    }
   };
   
 // Component cho trang chỉnh sửa
 export const CarModelEdit = (props) => (
 <Edit title={<CarModelTitle />} {...props}>
     <SimpleForm sx={{ maxWidth: 800 }}>
+        
         <Typography variant="h5" gutterBottom> 
             Summary
         </Typography>
@@ -38,6 +63,23 @@ export const CarModelEdit = (props) => (
             </Box>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                 <TextInput fullWidth required source="nameModel" />
+            </Box>
+        </Box>
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <TextInput fullWidth source="info" />
+            </Box>
+        </Box>
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <ImageInput source="imageName" label="Related pictures" accept="image/*" id="image">
+                    {<FormDataConsumer>
+                        {({formData,...rest}) => (
+                        <ImageFieldCus url={formData.imageName}></ImageFieldCus>
+                    )}
+                    </FormDataConsumer> }
+
+                </ImageInput>
             </Box>
         </Box>
     </SimpleForm>
@@ -53,11 +95,10 @@ export const CarModelCreate = (props) => (
         </Typography>
         <TextInput fullWidth required source="nameModel" />
         <TextInput fullWidth source="info" />
-        <ImageInput source="pictures" label="Related pictures" accept="image/*" id="image">
+        <ImageInput source="imageFile" label="Related pictures" accept="image/*" id="image">
             {<FormDataConsumer>
                 {({formData,...rest}) => (
-                    // console.log(formData),
-                    <MyImageField url={formData.pictures} {...rest} />
+                    <MyImageField url={formData.imageFile} {...rest} />
                 )}
             </FormDataConsumer> }
             {/* <ImageField source="src"></ImageField> */}

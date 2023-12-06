@@ -30,6 +30,7 @@ public class testingRegisterController {
         Sort.Direction direction = sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(direction, sortField));
         Page<TestingRegister> testingRegisterPage = testingRegisterRepository.findAll(pageable);
+
         return new ResponseEntity<>(testingRegisterPage, HttpStatus.OK);
     }
 

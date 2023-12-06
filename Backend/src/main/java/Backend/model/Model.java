@@ -1,8 +1,12 @@
 package Backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 
+import java.sql.Blob;
 import java.util.List;
 
 @Entity
@@ -20,7 +24,7 @@ public class Model {
     )
     private Long id;
     private String nameModel;
-    private String url;
+    private String imageName;
     private String info;
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -39,6 +43,7 @@ public class Model {
         this.id = id;
     }
     public String getNameModel() { return nameModel; }
+    public String getUrl() {return imageName;}
     public void setNameModel(String name) {
         this.nameModel = name;
     }

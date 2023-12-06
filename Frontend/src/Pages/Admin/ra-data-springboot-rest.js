@@ -1,4 +1,5 @@
 import { stringify } from "query-string";
+
 import {
   fetchUtils,
   GET_LIST,
@@ -23,6 +24,7 @@ import {
  * CREATE       => POST http://my.api.url/posts
  * DELETE       => DELETE http://my.api.url/posts/123
  */
+
 export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
   /**
      * @param {String} type One of the constants appearing at the top if this file, e.g. 'UPDATE'
@@ -32,13 +34,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
      */
   const convertDataRequestToHTTP = (type, resource, params) => {
     let url = "";
-    const options = {};
-    // let formdata = new FormData()
-    // // console.log(resource)
-    // if(resource == "models"){
-    //   formdata.append("model",params.data)
-    //   formdata.append("file",params.data.pictures)
-    // }
+    const options = {};  
 
     switch (type) {
       case GET_LIST: {
@@ -68,14 +64,42 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
       }
       case UPDATE:
-        url = `${apiUrl}/${resource}/${params.id}`;
+        url = `${apiUrl}/${resource}/edit/${params.id}`;
+
+        if(resource == 'models' && params.data.imageName.rawFile != undefined){
+          const formData = new FormData()
+          formData.append('id',params.data.id)
+          formData.append('nameModel',params.data.nameModel)
+          formData.append('info',params.data.info)
+          formData.append('imageFile',params.data.imageName.rawFile)
+          options.body=formData
+        }
+        else{
+          console.log(params.data)
+          const formData = new FormData()
+          formData.append('id',params.data.id)
+          formData.append('nameModel',params.data.nameModel)
+          formData.append('info',params.data.info)
+          formData.append('nameImage',params.data.imageName)
+          options.body=formData
+        }
         options.method = "PUT";
-        options.body = JSON.stringify(params.data);
         break;
       case CREATE:
         url = `${apiUrl}/${resource}`;
+
+        if(resource == 'models' && params.data.imageFile != undefined){
+          const formData = new FormData()
+          formData.append('nameModel',params.data.nameModel)
+          formData.append('info',params.data.info)
+          formData.append('imageFile',params.data.imageFile.rawFile)
+          options.body=formData
+        }
+        else
+         options.body = JSON.stringify(params.data);
+        
         options.method = "POST";
-        options.body = JSON.stringify(params.data);
+      
         break;
       case DELETE:
         url = `${apiUrl}/${resource}/${params.id}`;
@@ -150,8 +174,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
     return httpClient(url, options).then(response =>
-      convertHTTPResponse(response, type, resource, params),
-      headers = new Headers({"Accept":"multipart/form-data"})
+      convertHTTPResponse(response, type, resource, params)
     );
   };
 };
