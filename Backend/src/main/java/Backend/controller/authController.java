@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.Map;
 
 @RestController
@@ -24,7 +25,9 @@ public class authController {
         try {
             // Check if the provided username and password match the expected values
             if (isValidUser(username, password)) {
-                return ResponseEntity.ok("Login successful");
+                User storedUser = userRepository.findByUsername(username).orElse(null);
+                String role = (storedUser != null) ? storedUser.getRole() : null;
+                return ResponseEntity.ok(Collections.singletonMap("role", role));
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
             }

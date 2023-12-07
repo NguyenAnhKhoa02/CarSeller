@@ -4,26 +4,28 @@ import Backend.model.Color;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface ColorRepository extends JpaRepository<Color,Long> {
+    @Modifying
+    @Transactional
+    @Query(
+            value = "DELETE FROM `color` WHERE color.fk_version_color = :idColor",
+            nativeQuery = true
+    )
+    void deleteAllColor(@Param("idColor") Long idVersion);
 
     @Modifying
     @Transactional
     @Query(
-            value = "INSERT INTO `color`(`color`, `url`, `car_id`) " +
-                    "VALUES (?1,?2,?3)",
+            value = "INSERT INTO `color`(`color`, `image_name`, `fk_version_color`) \n" +
+                    "VALUES (:#{#color.getColor()},:#{#color.getImageName()},:idVersion)",
             nativeQuery = true
     )
-    void updateColor(String color, String url, Long car_id);
-
-    @Modifying
-    @Transactional
-    @Query(
-            value = "DELETE FROM color WHERE color.id = ?1",
-            nativeQuery = true
-    )
-    void deleteFromId(Long id);
+    void saveColor(@Param("color")Color color, @Param("idVersion") Long idVersion);
 }

@@ -16,9 +16,6 @@ import java.util.List;
 @Builder
 public class Model {
     @Id
-    @Column(
-            name = "modelId"
-    )
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )

@@ -19,7 +19,7 @@ export const CarModelList = (props) => (
 </List>
 );
 const ImageFieldCus = ({ url }) => {
-    if(!url){
+    if(url == 'empty'){
         return null;
     }
 
@@ -67,7 +67,7 @@ export const CarModelEdit = (props) => (
         </Box>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <TextInput fullWidth source="info" />
+                <TextInput fullWidth source="info" multiline rows={5}/>
             </Box>
         </Box>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
@@ -94,14 +94,13 @@ export const CarModelCreate = (props) => (
             Create Car Model
         </Typography>
         <TextInput fullWidth required source="nameModel" />
-        <TextInput fullWidth source="info" />
+        <TextInput fullWidth multiline rows={5} source="info" />
         <ImageInput source="imageFile" label="Related pictures" accept="image/*" id="image">
             {<FormDataConsumer>
                 {({formData,...rest}) => (
-                    <MyImageField url={formData.imageFile} {...rest} />
+                    <ImageFieldCus url={formData.imageFile} {...rest} />
                 )}
             </FormDataConsumer> }
-            {/* <ImageField source="src"></ImageField> */}
         </ImageInput>
     </SimpleForm>
 </Create>

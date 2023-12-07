@@ -64,7 +64,7 @@ public class servicePlanController {
         return arrayList;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<ServicePlan> updateServicePlan(@PathVariable Long id, @RequestBody ServicePlan updatedServicePlan) {
         ServicePlan existingServicePlan = servicePlanRepository.findById(id).orElse(null);
 

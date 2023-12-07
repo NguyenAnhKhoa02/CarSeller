@@ -35,7 +35,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
   const convertDataRequestToHTTP = (type, resource, params) => {
     let url = "";
     const options = {};  
-
     switch (type) {
       case GET_LIST: {
         const { page, perPage } = params.pagination;
@@ -64,8 +63,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
       }
       case UPDATE:
-        url = `${apiUrl}/${resource}/edit/${params.id}`;
+<<<<<<< HEAD
+        url = `${apiUrl}/${resource}/${params.id}`;
 
+        if(resource == 'models'){
+=======
+        url = `${apiUrl}/${resource}/edit/${params.id}`;
         if(resource == 'models' && params.data.imageName.rawFile != undefined){
           const formData = new FormData()
           formData.append('id',params.data.id)
@@ -74,25 +77,102 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
         }
-        else{
+        else if(resource == 'models' && params.data.imageName.rawFile == undefined){
+>>>>>>> ee9452c7f5877694ee185e63aa8a35d45c4eca27
           console.log(params.data)
           const formData = new FormData()
           formData.append('id',params.data.id)
           formData.append('nameModel',params.data.nameModel)
           formData.append('info',params.data.info)
-          formData.append('nameImage',params.data.imageName)
+          if(params.data.imageName != null)
+            formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
+        }
+        else if(resource == 'versions'){
+          const formData = new FormData()
+          formData.append('id',params.data.id)
+          formData.append('airBag',params.data.airBag)
+          formData.append('antiTheft',params.data.antiTheft)
+          formData.append('autoLock',params.data.autoLock)
+          formData.append('backCamera',params.data.backCamera)
+          formData.append('doorHandle',params.data.doorHandle)
+          formData.append('frontBrakes',params.data.frontBrakes)
+          formData.append('frontFogLight',params.data.frontFogLight)
+          formData.append('gasCap',params.data.gasCap)
+          formData.append('info',params.data.info)
+          formData.append('modelId',params.data.modelId)
+          formData.append('nameVersion',params.data.nameVersion)
+          formData.append('numCarSeat',params.data.numCarSeat)
+          formData.append('price',params.data.price)
+          formData.append('rearBrakes',params.data.rearBrakes)
+          formData.append('seatMaterial',params.data.seatMaterial)
+          formData.append('wiperBlade',params.data.wiperBlade)
+          formData.append('wrappedSteeringWheelAndGearLever',params.data.wswandgl)
+          params.data.colors.forEach((color,index) => {
+            const colorObject = new Object()
+            colorObject.color = color.color
+            
+            console.log(color)
+            if(color.imageName != null)
+              colorObject.imageName = color.imageName
+            else
+              if(color.imageFile != undefined)
+                colorObject.imageName = color.imageFile.title
+              else
+                colorObject.imageName = "empty"
+
+            formData.append('colors',JSON.stringify(colorObject))
+            
+            if(color.imageFile != undefined)
+              formData.append('colorFiles',color.imageFile.rawFile)
+          });
+          options.body=formData
+        } 
+        else {
+          options.body = JSON.stringify(params.data);
         }
         options.method = "PUT";
         break;
       case CREATE:
         url = `${apiUrl}/${resource}`;
-
         if(resource == 'models' && params.data.imageFile != undefined){
           const formData = new FormData()
           formData.append('nameModel',params.data.nameModel)
           formData.append('info',params.data.info)
           formData.append('imageFile',params.data.imageFile.rawFile)
+          options.body=formData
+        }
+        else if(resource == 'versions'){
+          const formData = new FormData()
+          formData.append('airBag',params.data.airBag)
+          formData.append('antiTheft',params.data.antiTheft)
+          formData.append('autoLock',params.data.autoLock)
+          formData.append('backCamera',params.data.backCamera)
+          formData.append('doorHandle',params.data.doorHandle)
+          formData.append('frontBrakes',params.data.frontBrakes)
+          formData.append('frontFogLight',params.data.frontFogLight)
+          formData.append('gasCap',params.data.gasCap)
+          formData.append('info',params.data.info)
+          formData.append('modelId',params.data.modelId)
+          formData.append('nameVersion',params.data.nameVersion)
+          formData.append('numCarSeat',params.data.numCarSeat)
+          formData.append('price',params.data.price)
+          formData.append('rearBrakes',params.data.rearBrakes)
+          formData.append('seatMaterial',params.data.seatMaterial)
+          formData.append('wiperBlade',params.data.wiperBlade)
+          formData.append('wrappedSteeringWheelAndGearLever',params.data.wswandgl)
+          params.data.colors.forEach((color,index) => {
+            formData.append('colorNames',color.color)
+            if(color.imageFile != null){
+              formData.append('colorFiles',color.imageFile[0].rawFile)
+              formData.append('isImages',true)
+            }
+            else{
+              formData.append('colorFiles',color.imageFile)
+              formData.append('isImages',false)
+            }
+          });
+
           options.body=formData
         }
         else

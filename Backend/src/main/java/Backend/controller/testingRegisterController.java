@@ -52,7 +52,7 @@ public class testingRegisterController {
         return arrayList;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<TestingRegister> updateTestingRegister(@PathVariable Long id, @RequestBody TestingRegister updatedTestingRegister) {
         TestingRegister existingTestingRegister = testingRegisterRepository.findById(id).orElse(null);
 

@@ -1,5 +1,10 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,PasswordInput } from "react-admin";
+import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,PasswordInput,SelectInput } from "react-admin";
 import { Box,Typography } from "@mui/material";
+
+const roles = [
+    { id:"admin", name:"Admin"}, 
+    { id:"staff", name:"Staff"}
+];
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const UserTitle = () => {
@@ -25,7 +30,7 @@ export const UserEdit = (props) => (
         <Typography variant="h5" gutterBottom> 
             Summary
         </Typography>
-                <TextInput disabled fullWidth source="id" />
+        <TextInput disabled fullWidth source="id" />
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                 <TextInput fullWidth required source="username" />
@@ -34,6 +39,7 @@ export const UserEdit = (props) => (
                 <PasswordInput fullWidth required source="password" />
             </Box>
         </Box>
+        <SelectInput fullWidth required source="role" choices={roles} />
     </SimpleForm>
 </Edit>
 );
@@ -53,6 +59,7 @@ export const UserCreate = (props) => (
                 <PasswordInput fullWidth required source="password" />
             </Box>
         </Box>
+        <SelectInput fullWidth required source="role" choices={roles} />
     </SimpleForm>
 </Create>
 );

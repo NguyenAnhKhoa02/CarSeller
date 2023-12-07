@@ -57,13 +57,19 @@ public class userController {
         return arrayList;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         User existingUser = userRepository.findById(id).orElse(null);
-
         if (existingUser != null) {
+            if(id == 1) {
+                existingUser.setUsername(updatedUser.getUsername());
+                existingUser.setPassword(updatedUser.getPassword());
+                userRepository.save(existingUser);
+                return new ResponseEntity<>(existingUser, HttpStatus.OK);
+            }
             existingUser.setUsername(updatedUser.getUsername());
             existingUser.setPassword(updatedUser.getPassword());
+            existingUser.setRole(updatedUser.getRole());
             userRepository.save(existingUser);
             return new ResponseEntity<>(existingUser, HttpStatus.OK);
         } else {

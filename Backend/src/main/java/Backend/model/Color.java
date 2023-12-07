@@ -18,9 +18,9 @@ public class Color {
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(
-            name= "versionId"
-    )
+<<<<<<< HEAD
+=======
+    @Column( name= "versionId",nullable = false )
     private Long versionId;
     public Long getVersionId() { return versionId; }
     public void setVersionId(Long versionId) { this.versionId = versionId; }
@@ -35,14 +35,17 @@ public class Color {
     )
     @JsonIgnore
     private Version versions;
+>>>>>>> ee9452c7f5877694ee185e63aa8a35d45c4eca27
     private String color;
-    private String url;
+    private String imageName;
     public void setColor(String color) {
         this.color = color;
     }
-    public void setUrl(String url) {
-        this.url = url;
-    }
     public String getColor() { return color; }
-    public String getUrl() { return url; }
+    public String getImageName() {
+        return imageName;
+    }
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 }

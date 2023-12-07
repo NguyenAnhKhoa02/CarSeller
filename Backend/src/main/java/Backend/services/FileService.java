@@ -28,7 +28,6 @@ public class FileService {
         try {
             File fileToSave = new File(pathFile + multipartFile.getOriginalFilename());
             pathSavedFile = fileToSave.getName();
-            System.out.println(fileToSave.getPath());
             multipartFile.transferTo(fileToSave);
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,8 +1,16 @@
 package Backend.controller;
 
+import Backend.ModelDTO.ColorDTO;
+import Backend.ModelDTO.VersionDTO;
+import Backend.model.Color;
 import Backend.model.Version;
 import Backend.repository.ColorRepository;
 import Backend.repository.VersionRepository;
+import Backend.services.FileService;
+import org.apache.tomcat.util.json.JSONParser;
+import org.apache.tomcat.util.json.ParseException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,8 +19,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/versions")
@@ -24,54 +34,34 @@ public class versionController {
     @Autowired
     private ColorRepository colorRepository;
 
+    @Autowired
+    private FileService fileService;
+
     @PostMapping
-    @CrossOrigin("http://localhost:3000")
-    public ResponseEntity<Version> saveVersion(@RequestBody Version version) {
-        Version savedVersion = versionRepository.save(version);
-        return new ResponseEntity<>(savedVersion, HttpStatus.CREATED);
+    public ResponseEntity<Version> saveVersion(@ModelAttribute VersionDTO versionDTO) throws ParseException {
+//        Version savedVersion = versionRepository.save(version);
+        Version version = new Version();
+        version = versionDTO.mappedVersion();
+
+        fileService = new FileService();
+        List<Color> colorList = new ArrayList<>();
+        int countFile = 0;
+//        for (int i = 0; i < versionDTO.getColorNames().size(); i++) {
+//            Color color = new Color();
+//            color.setColor(versionDTO.getColorNames().get(i));
+//            if (versionDTO.getIsImages().get(i)) {
+//                fileService.copyFileFromMultiFile(versionDTO.getColorFiles().get(countFile));
+//                color.setImageName(fileService.getNameFile());
+//                countFile++;
+//            }
+//            colorList.add(color);
+//        }
+
+        version.setColors(colorList);
+        versionRepository.save(version);
+
+        return new ResponseEntity<>(version, HttpStatus.CREATED);
     }
-
-
-//    @PostMapping("/update")
-//    public boolean updateVersion(@RequestBody Version version){
-//        if(version.getId() == null) return false;
-//        if(version.getCar() == null) return false;
-//        if(version.getCar().getCarId() == null) return false;
-//        if(versionRepository.checkVersionName(version.getNameVersion()) == 1) return  false;
-//        if(!carRepository.existsById(version.getCar().getCarId())) return  false;
-//        if(!versionRepository.existsById(version.getId())) return false;
-//        if(!modelRepository.existsById(version.getModelId())) return false;
-//
-//        List<Color> colors = versionRepository.findById(version.getId()).get().getCar().getColors();
-//        for (Color color:
-//             colors) {
-//            colorRepository.deleteFromId(color.getId());
-//        }
-//
-//        for (Color color:
-//             version.getCar().getColors()) {
-//            colorRepository.updateColor(color.getColor(),color.getUrl(),version.getCar().getCarId());
-//        }
-//
-//        versionRepository.updateVersion(version);
-//
-//        return true;
-//    }
-
-//    @GetMapping("/{modelName}/{versionName}")
-//    @ResponseBody
-//    public Version getVersion(@PathVariable String modelName, @PathVariable String versionName){
-//        if(versionRepository.checkVersionName(versionName) == 0) return null;
-//        if(modelRepository.checkNameModel(modelName) == 0) return  null;
-//
-//        return versionRepository.getVersionByModelAndNameVersion(modelName,versionName);
-//    }
-//
-//    @GetMapping("/{modelName}")
-//    @ResponseBody
-//    public List<Version>  getAllVersionsFromModelName(@PathVariable(required = false) String modelName){
-//        return versionRepository.getAllVersionsFromModelName(modelName);
-//    }
 
     @GetMapping
     public ResponseEntity<Page<Version>> getAllVersions(
@@ -83,6 +73,7 @@ public class versionController {
         Sort.Direction direction = sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(direction, sortField));
         Page<Version> versionPage = versionRepository.findAll(pageable);
+
         return new ResponseEntity<>(versionPage, HttpStatus.OK);
     }
     @GetMapping("/{id}")
@@ -101,32 +92,40 @@ public class versionController {
         arrayList.add(version);
         return arrayList;
     }
+<<<<<<< HEAD
     @PutMapping("/{id}")
+    public ResponseEntity<Version> updatedVersion(@ModelAttribute VersionDTO versionDTO) {
+        Version version = versionDTO.mappedVersion();
+=======
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Version> updatedVersion(@PathVariable Long id, @RequestBody Version updatedVersion) {
         Version existingVersion = versionRepository.findById(id).orElse(null);
+>>>>>>> ee9452c7f5877694ee185e63aa8a35d45c4eca27
 
-        if (existingVersion != null) {
-            existingVersion.setNameVersion(updatedVersion.getNameVersion());
-            existingVersion.setNumCarSeat(updatedVersion.getNumCarSeat());
-            existingVersion.setInfo(updatedVersion.getInfo());
-            existingVersion.setGasCap(updatedVersion.getGasCap());
-            existingVersion.setFrontBrakes(updatedVersion.getFrontBrakes());
-            existingVersion.setRearBrakes(updatedVersion.getRearBrakes());
-            existingVersion.setFrontFogLight(updatedVersion.getFrontFogLight());
-            existingVersion.setDoorHandle(updatedVersion.getDoorHandle());
-            existingVersion.setWiperBlade(updatedVersion.getWiperBlade());
-            existingVersion.setWrappedSteeringWheelAndGearLever(updatedVersion.getWrappedSteeringWheelAndGearLever());
-            existingVersion.setSeatMaterial(updatedVersion.getSeatMaterial());
-            existingVersion.setAirBag(updatedVersion.getAirBag());
-            existingVersion.setBackCamera(updatedVersion.getBackCamera());
-            existingVersion.setAntiTheft(updatedVersion.getAntiTheft());
-            existingVersion.setAutoLock(updatedVersion.getAutoLock());
-            existingVersion.setPrice(updatedVersion.getPrice());
-            versionRepository.save(existingVersion);
-            return new ResponseEntity<>(existingVersion, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<Color> colorList = new ArrayList<>();
+
+        for (JSONObject jsonObj:
+                versionDTO.getColors()) {
+            Color color = new Color();
+            color.setColor(jsonObj.getString("color"));
+            color.setImageName(jsonObj.getString("imageName"));
+            colorList.add(color);
         }
+
+        if(versionDTO.getColorFiles() != null)
+            for (MultipartFile multipartFile:
+                 versionDTO.getColorFiles()) {
+                fileService.copyFileFromMultiFile(multipartFile);
+            }
+
+        colorRepository.deleteAllColor(version.getId());
+
+        for (int i = 0; i < colorList.size(); i++) {
+            colorRepository.saveColor(colorList.get(i),version.getId());
+        }
+
+        versionRepository.updateVersion(version);
+        return new ResponseEntity<>(version, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

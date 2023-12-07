@@ -1,12 +1,44 @@
-import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ReferenceField,ReferenceInput,SelectInput,NumberField,NumberInput } from "react-admin";
+import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ReferenceField,ReferenceInput,SelectInput,NumberField,NumberInput, ArrayInput, SimpleFormIterator, ImageInput, FormDataConsumer, ImageField } from "react-admin";
 import { Box,Typography } from "@mui/material";
+import { useEffect,useState } from "react";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const VersionTitle = () => {
     const record = useRecordContext();
     return <span>Version {record ? `"${record.nameVersion}"` : ''}</span>;
   };
-  
+
+  const ImageFieldCus = ({ url }) => {
+    if(url == 'empty'){
+        return null;
+    }
+
+    if(url instanceof Object){
+        const imageUrl = url && url.src;
+        return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
+    }else{
+        const [imageUrl, setImageUrl] = useState([]);
+
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/image/${url}`)
+                    if(response.ok){
+                        const blob = await response.blob()
+                        const imageURL = URL.createObjectURL(blob)
+                        setImageUrl(imageURL)
+                    }
+                } catch (error) {
+                    console.log("Error fetch data" , error);     
+                }
+            };
+            fetchData()
+        },[])
+
+        return imageUrl ? <img width={99.99} height={199.99}  src={imageUrl} alt="Image" id="image"/> : null;
+    }
+  };
+
 // Component cho trang danh sách
 export const VersionList = (props) => (
 <List {...props}>
@@ -99,6 +131,20 @@ export const VersionEdit = (props) => (
             Info
         </Typography>
         <TextInput fullWidth source="info" multiline rows={5} />
+        <br/>
+        <ArrayInput source="colors">
+            <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
+                <TextInput fullWidth required source="color"></TextInput>
+                <ImageInput source="imageFile" fullWidth>
+                    <ImageField source="src"></ImageField>
+                </ImageInput>
+                {<FormDataConsumer>
+                {({formData,...rest}) => (
+                    <ImageFieldCus url={rest.scopedFormData.imageName}></ImageFieldCus>
+                )}
+            </FormDataConsumer> }
+            </SimpleFormIterator>
+        </ArrayInput>
     </SimpleForm>
 </Edit>
 );
@@ -181,6 +227,15 @@ export const VersionCreate = (props) => (
             Info
         </Typography>
         <TextInput fullWidth source="info" multiline rows={5} />
+        <br/>
+        <ArrayInput source="colors" >
+            <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
+                <TextInput fullWidth required source="color"></TextInput>
+                <ImageInput fullWidth source="imageFile">
+                    <ImageField source="src"></ImageField>
+                </ImageInput>
+            </SimpleFormIterator>
+        </ArrayInput>
     </SimpleForm>
 </Create>
 );

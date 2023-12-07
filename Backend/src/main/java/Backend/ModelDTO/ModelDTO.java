@@ -18,8 +18,6 @@ public class ModelDTO {
     private String nameModel;
     private String info;
     private MultipartFile imageFile;
-    private String nameImage;
-    private byte[] url;
 
     public ModelDTO(){
 

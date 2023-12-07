@@ -24,7 +24,7 @@ public interface ModelRepository extends JpaRepository<Model,Long> {
     @Query(
             value = "UPDATE `model` " +
                     "SET `image_name`=:imageName,`info`=:info,`name_model`=:nameModel " +
-                    "WHERE model.model_id = :id",
+                    "WHERE model.id = :id",
             nativeQuery = true
     )
     void updateModel(@Param("id") Long id,

@@ -87,10 +87,10 @@ public class modelController {
         return arrayList;
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Model> updateModel(@ModelAttribute ModelDTO updatedModelDTO) {
         //Model existingModel = modelRepository.findById(id).orElse(null);
-        System.out.println(updatedModelDTO);
+        System.out.println(updatedModelDTO.getImageFile());
         Model model = new Model();
         model.setId(updatedModelDTO.getId());
         model.setNameModel(updatedModelDTO.getNameModel());
@@ -102,7 +102,7 @@ public class modelController {
             fileService.copyFileFromMultiFile(updatedModelDTO.getImageFile());
             model.setImageName(fileService.getNameFile());
         }else{
-            model.setImageName(updatedModelDTO.getNameImage());
+            model.setImageName("empty");
         }
 
         modelRepository.updateModel(model.getId(),model.getImageName(),model.getInfo(),model.getNameModel());

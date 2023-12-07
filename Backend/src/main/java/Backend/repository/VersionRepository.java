@@ -34,34 +34,26 @@ public interface VersionRepository extends JpaRepository<Version,Long> {
     @Modifying
     @Transactional
     @Query(
-            value = "UPDATE version, car " +
+            value = "UPDATE version " +
                     "SET " +
                     "version.name_version = :#{#version.getNameVersion()}, " +
-                    "version.model_id = :#{#version.getModelId()}, " +
-                    "car.air_bag = :#{#version.getCar().getAirBag()}, " +
-                    "car.anti_theft = :#{#version.getCar().getAntiTheft()}, " +
-                    "car.auto_lock = :#{#version.getCar().getAutoLock()}, " +
-                    "car.back_camera = :#{#version.getCar().getBackCamera()}, " +
-                    "car.door_handle = :#{#version.getCar().getDoorHandle()}, " +
-                    "car.front_brakes = :#{#version.getCar().getFrontBrakes()}, " +
-                    "car.front_fog_light = :#{#version.getCar().getFrontFogLight()}, " +
-                    "car.gas_cap = :#{#version.getCar().getGasCap()}, " +
-                    "car.num_car_seat = :#{#version.getCar().getNumCarSeat()}, " +
-                    "car.price = :#{#version.getCar().getPrice()}, " +
-                    "car.rear_brakes = :#{#version.getCar().getRearBrakes()}, " +
-                    "car.seat_material = :#{#version.getCar().getSeatMaterial()}, " +
-                    "car.wiper_blade = :#{#version.getCar().getWiperBlade()}, " +
-                    "car.wswandgl = :#{#version.getCar().getWrappedSteeringWheelAndGearLever()} " +
-                    "WHERE version.car_id = :#{#version.getCar().getCarId()} and version.version_id = :#{#version.getId()}",
+                    "version.air_bag = :#{#version.getAirBag()}, " +
+                    "version.anti_theft = :#{#version.getAntiTheft()}, " +
+                    "version.auto_lock = :#{#version.getAutoLock()}, " +
+                    "version.back_camera = :#{#version.getBackCamera()}, " +
+                    "version.door_handle = :#{#version.getDoorHandle()}, " +
+                    "version.front_brakes = :#{#version.getFrontBrakes()}, " +
+                    "version.front_fog_light = :#{#version.getFrontFogLight()}, " +
+                    "version.gas_cap = :#{#version.getGasCap()}, " +
+                    "version.num_car_seat = :#{#version.getNumCarSeat()}, " +
+                    "version.price = :#{#version.getPrice()}, " +
+                    "version.rear_brakes = :#{#version.getRearBrakes()}, " +
+                    "version.seat_material = :#{#version.getSeatMaterial()}, " +
+                    "version.wiper_blade = :#{#version.getWiperBlade()}, " +
+                    "version.wswandgl = :#{#version.getWrappedSteeringWheelAndGearLever()}, " +
+                    "version.info = :#{#version.getInfo()} " +
+                    "WHERE version.id = :#{#version.getId()}",
             nativeQuery = true
     )
     void updateVersion(@Param("version") Version version);
-
-    @Query(
-            value = "SELECT COUNT(*) = 1 " +
-                    "FROM version " +
-                    "WHERE version.name_version = :nameVersion",
-            nativeQuery = true
-    )
-    int checkVersionName(@Param("nameVersion") String nameVersion);
 }
