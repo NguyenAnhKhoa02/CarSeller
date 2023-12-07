@@ -18,9 +18,7 @@ public class Color {
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(
-            name= "versionId"
-    )
+    @Column( name= "versionId",nullable = false )
     private Long versionId;
     public Long getVersionId() { return versionId; }
     public void setVersionId(Long versionId) { this.versionId = versionId; }

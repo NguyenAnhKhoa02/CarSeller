@@ -26,10 +26,11 @@ public class ServicePlan {
     private String distributionCenter;
     private Date date;
     private Time time;
+    @Column(nullable = false)
     private String status;
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-    @Column(name = "serviceId")
+    @Column(name = "serviceId",nullable = false)
     private Long serviceId;
     public Long getServiceId() { return serviceId; }
     public void setServiceId(Long serviceId) { this.serviceId = serviceId; }
@@ -44,7 +45,7 @@ public class ServicePlan {
     )
     @JsonIgnore
     private Service services;
-    @Column(name = "modelId")
+    @Column(name = "modelId",nullable = false)
     private Long modelId;
     public Long getModelId() {
         return modelId;

@@ -65,7 +65,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       case UPDATE:
         url = `${apiUrl}/${resource}/edit/${params.id}`;
-
         if(resource == 'models' && params.data.imageName.rawFile != undefined){
           const formData = new FormData()
           formData.append('id',params.data.id)
@@ -74,7 +73,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
         }
-        else{
+        else if(resource == 'models' && params.data.imageName.rawFile == undefined){
           console.log(params.data)
           const formData = new FormData()
           formData.append('id',params.data.id)
@@ -82,6 +81,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('info',params.data.info)
           formData.append('nameImage',params.data.imageName)
           options.body=formData
+        } 
+        else {
+          options.body = JSON.stringify(params.data);
         }
         options.method = "PUT";
         break;

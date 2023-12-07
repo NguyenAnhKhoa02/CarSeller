@@ -24,7 +24,7 @@ public class Version {
             mappedBy = "versions"
     )
     private List<Color> colors;
-    @Column(name = "modelId")
+    @Column(name = "modelId",nullable = false)
     private Long modelId;
     public Long getModelId() {
         return modelId;
@@ -49,7 +49,9 @@ public class Version {
             mappedBy = "versions"
     )
     private List<TestingRegister> testingRegisters;
+    @Column(nullable = false)
     private String nameVersion;
+    @Column(nullable = false)
     private int numCarSeat;
     private String info;
     private String gasCap;
@@ -67,6 +69,7 @@ public class Version {
     private String backCamera;
     private String antiTheft;
     private String autoLock;
+    @Column(nullable = false)
     private int price;
     public String getNameVersion() { return nameVersion; }
     public int getNumCarSeat() { return numCarSeat; }

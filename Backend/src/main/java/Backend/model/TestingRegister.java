@@ -21,12 +21,13 @@ public class TestingRegister {
     private String numberPhone;
     private String distributionCenter;
     private String carPD;
+    @Column(nullable = false)
     private String status;
     public String getStatus() { return status; }
     public void setStatus(String status) {
         this.status = status;
     }
-    @Column(name = "versionId")
+    @Column(name = "versionId",nullable = false)
     private Long versionId;
     public Long getVersionId() {
         return versionId;

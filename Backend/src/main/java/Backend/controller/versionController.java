@@ -101,7 +101,7 @@ public class versionController {
         arrayList.add(version);
         return arrayList;
     }
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Version> updatedVersion(@PathVariable Long id, @RequestBody Version updatedVersion) {
         Version existingVersion = versionRepository.findById(id).orElse(null);
 
