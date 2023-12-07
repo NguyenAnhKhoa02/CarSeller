@@ -63,22 +63,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
       }
       case UPDATE:
-<<<<<<< HEAD
         url = `${apiUrl}/${resource}/${params.id}`;
 
         if(resource == 'models'){
-=======
-        url = `${apiUrl}/${resource}/edit/${params.id}`;
-        if(resource == 'models' && params.data.imageName.rawFile != undefined){
-          const formData = new FormData()
-          formData.append('id',params.data.id)
-          formData.append('nameModel',params.data.nameModel)
-          formData.append('info',params.data.info)
-          formData.append('imageFile',params.data.imageName.rawFile)
-          options.body=formData
-        }
-        else if(resource == 'models' && params.data.imageName.rawFile == undefined){
->>>>>>> ee9452c7f5877694ee185e63aa8a35d45c4eca27
           console.log(params.data)
           const formData = new FormData()
           formData.append('id',params.data.id)
@@ -111,7 +98,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           params.data.colors.forEach((color,index) => {
             const colorObject = new Object()
             colorObject.color = color.color
-            
+
             console.log(color)
             if(color.imageName != null)
               colorObject.imageName = color.imageName
@@ -122,14 +109,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 colorObject.imageName = "empty"
 
             formData.append('colors',JSON.stringify(colorObject))
-            
+
             if(color.imageFile != undefined)
               formData.append('colorFiles',color.imageFile.rawFile)
           });
           options.body=formData
-        } 
-        else {
-          options.body = JSON.stringify(params.data);
         }
         options.method = "PUT";
         break;

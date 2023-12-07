@@ -18,24 +18,6 @@ public class Color {
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-<<<<<<< HEAD
-=======
-    @Column( name= "versionId",nullable = false )
-    private Long versionId;
-    public Long getVersionId() { return versionId; }
-    public void setVersionId(Long versionId) { this.versionId = versionId; }
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "versionId",
-            nullable = false,
-            insertable = false,
-            updatable = false
-    )
-    @JsonIgnore
-    private Version versions;
->>>>>>> ee9452c7f5877694ee185e63aa8a35d45c4eca27
     private String color;
     private String imageName;
     public void setColor(String color) {

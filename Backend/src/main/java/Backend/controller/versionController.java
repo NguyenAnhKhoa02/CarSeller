@@ -92,16 +92,11 @@ public class versionController {
         arrayList.add(version);
         return arrayList;
     }
-<<<<<<< HEAD
-    @PutMapping("/{id}")
+
+
+    @PutMapping("/edit/{id}")
     public ResponseEntity<Version> updatedVersion(@ModelAttribute VersionDTO versionDTO) {
         Version version = versionDTO.mappedVersion();
-=======
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Version> updatedVersion(@PathVariable Long id, @RequestBody Version updatedVersion) {
-        Version existingVersion = versionRepository.findById(id).orElse(null);
->>>>>>> ee9452c7f5877694ee185e63aa8a35d45c4eca27
-
         List<Color> colorList = new ArrayList<>();
 
         for (JSONObject jsonObj:
