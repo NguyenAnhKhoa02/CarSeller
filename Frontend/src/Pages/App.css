@@ -113,3 +113,18 @@ label.form-check-label{
 }
 /*===================================AboutUs==============================*/
 /*===================================Admin==============================*/
+.box{
+    border-radius: 5px;
+}
+
+.mg-right{
+    margin-right: 5px;
+}
+
+.mg-left{
+    margin-left: 5px;
+}
+
+.line{
+    display: flex;
+}
