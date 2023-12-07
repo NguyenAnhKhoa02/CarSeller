@@ -57,7 +57,7 @@ public class userController {
         return arrayList;
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         User existingUser = userRepository.findById(id).orElse(null);
         if (existingUser != null) {
