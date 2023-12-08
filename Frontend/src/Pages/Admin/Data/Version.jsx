@@ -1,7 +1,6 @@
 import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ReferenceField,ReferenceInput,SelectInput,NumberField,NumberInput, ArrayInput, SimpleFormIterator, ImageInput, FormDataConsumer, ImageField } from "react-admin";
 import { Box,Typography } from "@mui/material";
 import { useEffect,useState } from "react";
-import ColorPicker from 'react-pick-color';
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const VersionTitle = () => {
@@ -136,7 +135,8 @@ export const VersionEdit = (props) => (
         <br/>
         <ArrayInput source="colors">
             <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
-                <TextInput fullWidth required source="color"></TextInput>
+                <TextInput fullWidth required source="color" type="Color"></TextInput>
+                <br/>
                 {<FormDataConsumer>
                 {({formData,...rest}) => (
                     <ImageFieldCus url={rest.scopedFormData.imageName}></ImageFieldCus>
