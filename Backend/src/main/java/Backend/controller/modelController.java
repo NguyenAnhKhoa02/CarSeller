@@ -79,14 +79,6 @@ public class modelController {
                 .body(model);
     }
 
-    @GetMapping("/id={id}")
-    public ArrayList<Model> getModelFromUrlId(@PathVariable Long id) {
-        Model model = modelRepository.findById(id).orElse(null);
-        ArrayList<Model> arrayList = new ArrayList<>();
-        arrayList.add(model);
-        return arrayList;
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Model> updateModel(@ModelAttribute ModelDTO updatedModelDTO) {
         //Model existingModel = modelRepository.findById(id).orElse(null);
