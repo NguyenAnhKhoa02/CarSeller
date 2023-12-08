@@ -13,6 +13,19 @@ import car9 from "../../../Components/Assets/Cars/xpandercrossgray.png";
 
 function Versions({}) {
     const { id } = useParams();
+    const [models, setModels] = useState([]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/models/${id}`);
+          setModels(await response.json());
+        } catch (error) {
+          console.error("Error fetching model details", error);
+        }
+      };
+      fetchData();
+    },[])
+    console.log(models)
     const [versions, setVersions] = useState([]);
     useEffect(() => {
       const fetchData = async () => {
@@ -20,7 +33,7 @@ function Versions({}) {
           const response = await fetch(`http://localhost:8080/versions/modelId=${id}`);
           setVersions(await response.json());
         } catch (error) {
-          console.error("Error fetching model details", error);
+          console.error("Error fetching version details", error);
         }
       };
       fetchData();
@@ -40,7 +53,7 @@ function Versions({}) {
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
         <div className="centered">
-            <h1 style={{fontWeight:"bold", fontSize:"3rem"}}>MITSUBISHI XPANDER 2023</h1>
+            <h1 style={{fontWeight:"bold", fontSize:"3rem"}}>{models.nameModel}</h1>
         </div>
     </Row>
     <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
