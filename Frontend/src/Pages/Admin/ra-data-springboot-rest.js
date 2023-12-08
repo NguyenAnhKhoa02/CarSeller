@@ -1,3 +1,4 @@
+import { darken } from "@mui/material";
 import { stringify } from "query-string";
 
 import {
@@ -45,16 +46,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             sortOrder: order,
         };
         url = `${apiUrl}/${resource}?${stringify(query)}&page=${page}&pageSize=${perPage}`;
+ 
         break;
       }
       case GET_ONE:
         url = `${apiUrl}/${resource}/${params.id}`;
         break;
       case GET_MANY: {
-        const query = {
-            id: params.ids,
-        };
-        url = `${apiUrl}/${resource}/${stringify(query)}`;
+        //new code
+        url = `${apiUrl}/${resource}/all`;
         break;
       }
       case GET_MANY_REFERENCE: {
@@ -66,7 +66,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         url = `${apiUrl}/${resource}/${params.id}`;
 
         if(resource == 'models'){
-          console.log(params.data)
           const formData = new FormData()
           formData.append('id',params.data.id)
           formData.append('nameModel',params.data.nameModel)
@@ -98,18 +97,14 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           params.data.colors.forEach((color,index) => {
             const colorObject = new Object()
             colorObject.color = color.color
-
-            console.log(color)
-            if(color.imageName != null)
-              colorObject.imageName = color.imageName
+  
+            if(color.imageFile != undefined)
+              colorObject.imageName = color.imageFile.title
             else
-              if(color.imageFile != undefined)
-                colorObject.imageName = color.imageFile.title
-              else
-                colorObject.imageName = "empty"
-
+              colorObject.imageName = color.imageName
+            
             formData.append('colors',JSON.stringify(colorObject))
-
+            
             if(color.imageFile != undefined)
               formData.append('colorFiles',color.imageFile.rawFile)
           });
@@ -146,15 +141,17 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('wiperBlade',params.data.wiperBlade)
           formData.append('wrappedSteeringWheelAndGearLever',params.data.wswandgl)
           params.data.colors.forEach((color,index) => {
-            formData.append('colorNames',color.color)
+            const colorObject = new Object()
+            colorObject.color = color.color
+            
             if(color.imageFile != null){
-              formData.append('colorFiles',color.imageFile[0].rawFile)
-              formData.append('isImages',true)
+              colorObject.imageName = color.imageFile.title
+              formData.append('colorFiles',color.imageFile.rawFile)
             }
-            else{
-              formData.append('colorFiles',color.imageFile)
-              formData.append('isImages',false)
-            }
+            else 
+              colorObject.imageName = 'empty'
+
+            formData.append('colors',JSON.stringify(colorObject))
           });
 
           options.body=formData
