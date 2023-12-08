@@ -48,7 +48,7 @@ public class modelController {
 
         fileService.copyFileFromMultiFile(modelDTO.getImageFile());
         model.setImageName(fileService.getNameFile());
-
+        
         modelRepository.save(model);
         return new ResponseEntity<>(model, HttpStatus.CREATED);
     }
