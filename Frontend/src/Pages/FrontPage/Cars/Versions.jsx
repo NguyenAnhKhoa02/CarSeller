@@ -1,6 +1,6 @@
 import {Row, Col, Accordion, Button} from "react-bootstrap"
-import {Link} from "react-router-dom"
-import {useState} from 'react';
+import {Link,useParams} from "react-router-dom"
+import {useState, useEffect} from 'react';
 import banner from "../../../Components/Assets/bannerservice1.png"
 import car1 from "../../../Components/Assets/Cars/xpandercrossbrown.png";
 import car2 from "../../../Components/Assets/Cars/xpandercrossgray.png";
@@ -11,7 +11,21 @@ import car7 from "../../../Components/Assets/Cars/xpandercrossblack.png";
 import car8 from "../../../Components/Assets/Cars/xpandercrossbrown.png";
 import car9 from "../../../Components/Assets/Cars/xpandercrossgray.png";
 
-function Product() {
+function Versions({}) {
+    const { id } = useParams();
+    const [versions, setVersions] = useState([]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/versions/modelId=${id}`);
+          setVersions(await response.json());
+        } catch (error) {
+          console.error("Error fetching model details", error);
+        }
+      };
+      fetchData();
+    },[])
+
     const [currentImage1, setCurrentImage1] = useState(car1);
     const [currentImage2, setCurrentImage2] = useState(car6);
 
@@ -32,6 +46,19 @@ function Product() {
     <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <h1 style={{textAlign:"center"}}>Trang thiết bị</h1>
         <Row className="justify-content-md-center" style={{paddingBottom:"50px"}}>
+            {versions.map((item, index) => (
+                <Col key={index} style={{textAlign:"center"}}>
+                    <img src={currentImage1} className="ProductImg" />
+                    <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
+                    <p>Giá từ 698.000.000 VNĐ</p>
+                    <div className="imageButtons">
+                        <button style={{backgroundColor:"brown"}}onClick={() => handleImageChange(car1, 1)}></button>
+                        <button style={{backgroundColor:"gray"}}onClick={() => handleImageChange(car2, 1)}></button>
+                        <button style={{backgroundColor:"black"}}onClick={() => handleImageChange(car3, 1)}></button>
+                        <button style={{backgroundColor:"white"}}onClick={() => handleImageChange(car4, 1)}></button>
+                    </div>
+                </Col>
+            ))}
             <Col style={{textAlign:"center"}}>
                 <img src={currentImage1} className="ProductImg" />
                 <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
@@ -150,4 +177,4 @@ function Product() {
     );
 }
 
-export default Product
+export default Versions

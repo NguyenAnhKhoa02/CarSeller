@@ -128,4 +128,10 @@ public class versionController {
         versionRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    /*for fetch*/
+    @GetMapping("/modelId={id}")
+    public List<Version> getVersionsByModelId(@PathVariable Integer id){
+        return versionRepository.findByModelId(id);
+    }
 }

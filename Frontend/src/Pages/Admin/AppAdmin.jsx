@@ -34,11 +34,6 @@ function App () {
           ]}
           <Resource name="versions" icon={VersionIcon} list={VersionList} edit={VersionEdit} create={VersionCreate} recordRepresentation="nameVersion"/>
           {/* <Resource name="colors" icon={VersionIcon} list={ColorList} show={ColorShow} create={ColorCreate} recordRepresentation="color"/> */}
-          <Resource name="models" icon={CarModelIcon} list={CarModelList} edit={CarModelEdit} create={CarModelCreate} recordRepresentation="nameModel"/>
-          <Resource name="services" icon={CarModelIcon} list={ServiceList} edit={ServiceEdit} create={ServiceCreate} recordRepresentation="nameService"/>
-          <Resource name="users" icon={VersionIcon} list={UserList} edit={UserEdit} create={UserCreate}/>
-          <Resource name="colors" icon={ColorIcon} list={ColorList} show={ColorShow} create={ColorCreate} recordRepresentation="color"/>
-          <Resource name="colors" icon={ColorIcon} list={ColorList} show={ColorShow} create={ColorCreate} recordRepresentation="color"/>
           <Resource name="testing_Registers" icon={TestingRegissterIcon} list={TestingRegisterList} show={TestingRegisterShow} edit={TestingRegisterEdit}/>
           <Resource name="service_Plans" icon={ServicePlanIcon} list={ServicePlanList} show={ServicePlanShow} edit={ServicePlanEdit}/>
         </Admin>
