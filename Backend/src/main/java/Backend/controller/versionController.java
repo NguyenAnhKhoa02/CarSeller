@@ -94,7 +94,7 @@ public class versionController {
     }
 
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Version> updatedVersion(@ModelAttribute VersionDTO versionDTO) {
         Version version = versionDTO.mappedVersion();
         List<Color> colorList = new ArrayList<>();
