@@ -82,4 +82,10 @@ public class servicePlanController {
         servicePlanRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @GetMapping("/save")
+    public  ResponseEntity<ServicePlan> saveServicePlan(@RequestBody ServicePlan servicePlan){
+        ServicePlan saveServicePlan = servicePlanRepository.save(servicePlan);
+        return  new ResponseEntity<>(saveServicePlan,HttpStatus.CREATED);
+
+    }
 }

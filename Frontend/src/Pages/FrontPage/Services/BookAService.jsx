@@ -1,7 +1,10 @@
 import {Row, Button, Form, FloatingLabel} from "react-bootstrap"
 import banner from "../../../Components/Assets/bannerservice1.png"
+import React from "react";
 
 function BookAService () {
+    const [ServicePlan,setServicePlan] = React.useState([   ])
+
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
@@ -13,7 +16,7 @@ function BookAService () {
                 <h3 style={{fontWeight:"bold"}}>1. Nhập thông tin cá nhân</h3>
             </div>
             <FloatingLabel controlId="name" label="HỌ VÀ TÊN *" className="mb-3">
-                <Form.Control type="text" placeholder="name" />
+                <Form.Control type="text" placeholder="name"  />
             </FloatingLabel>
             <FloatingLabel controlId="email" label="ĐỊA CHỈ EMAIL" className="mb-3">
                 <Form.Control type="email" placeholder="name@example.com" />

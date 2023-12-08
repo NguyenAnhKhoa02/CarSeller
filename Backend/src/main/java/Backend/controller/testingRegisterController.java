@@ -70,4 +70,5 @@ public class testingRegisterController {
         testingRegisterRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
