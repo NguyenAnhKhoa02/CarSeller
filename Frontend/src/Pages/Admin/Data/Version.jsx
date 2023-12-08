@@ -1,6 +1,7 @@
 import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ReferenceField,ReferenceInput,SelectInput,NumberField,NumberInput, ArrayInput, SimpleFormIterator, ImageInput, FormDataConsumer, ImageField } from "react-admin";
 import { Box,Typography } from "@mui/material";
 import { useEffect,useState } from "react";
+import ColorPicker from 'react-pick-color';
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const VersionTitle = () => {
@@ -12,7 +13,7 @@ const VersionTitle = () => {
     if(url == 'empty'){
         return null;
     }
-
+    console.log(url)
     if(url instanceof Object){
         const imageUrl = url && url.src;
         return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
@@ -38,6 +39,7 @@ const VersionTitle = () => {
         return imageUrl ? <img width={99.99} height={199.99}  src={imageUrl} alt="Image" id="image"/> : null;
     }
   };
+
 
 // Component cho trang danh sách
 export const VersionList = (props) => (
@@ -135,14 +137,15 @@ export const VersionEdit = (props) => (
         <ArrayInput source="colors">
             <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
                 <TextInput fullWidth required source="color"></TextInput>
-                <ImageInput source="imageFile" fullWidth>
-                    <ImageField source="src"></ImageField>
-                </ImageInput>
                 {<FormDataConsumer>
                 {({formData,...rest}) => (
                     <ImageFieldCus url={rest.scopedFormData.imageName}></ImageFieldCus>
                 )}
-            </FormDataConsumer> }
+                </FormDataConsumer> }
+                <p>Current Image</p>,
+                <ImageInput source="imageFile" fullWidth>
+                    <ImageField source="src"></ImageField>
+                </ImageInput>
             </SimpleFormIterator>
         </ArrayInput>
     </SimpleForm>
@@ -230,7 +233,6 @@ export const VersionCreate = (props) => (
         <br/>
         <ArrayInput source="colors" >
             <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
-                <TextInput fullWidth required source="color"></TextInput>
                 <ImageInput fullWidth source="imageFile">
                     <ImageField source="src"></ImageField>
                 </ImageInput>
