@@ -43,19 +43,20 @@ public class versionController {
         Version version = new Version();
         version = versionDTO.mappedVersion();
 
-        fileService = new FileService();
+        if(versionDTO.getColorFiles() != null)
+            for (MultipartFile multipartFile:
+                 versionDTO.getColorFiles()) {
+                fileService.copyFileFromMultiFile(multipartFile);
+            }
+
         List<Color> colorList = new ArrayList<>();
-        int countFile = 0;
-//        for (int i = 0; i < versionDTO.getColorNames().size(); i++) {
-//            Color color = new Color();
-//            color.setColor(versionDTO.getColorNames().get(i));
-//            if (versionDTO.getIsImages().get(i)) {
-//                fileService.copyFileFromMultiFile(versionDTO.getColorFiles().get(countFile));
-//                color.setImageName(fileService.getNameFile());
-//                countFile++;
-//            }
-//            colorList.add(color);
-//        }
+        for (JSONObject jsonObject:
+             versionDTO.getColors()) {
+            Color color = new Color();
+            color.setColor(jsonObject.getString("color"));
+            color.setImageName(jsonObject.getString("imageName"));
+            colorList.add(color);
+        }
 
         version.setColors(colorList);
         versionRepository.save(version);
