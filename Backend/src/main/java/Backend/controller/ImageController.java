@@ -20,6 +20,8 @@ public class ImageController {
     FileService fileService;
     @GetMapping("/{nameImage}")
     public ResponseEntity<byte[]> getImage(@PathVariable String nameImage) throws IOException {
+        if(nameImage == "empty") return  null;
+
         fileService = new FileService();
 
         File file = fileService.createFile(nameImage);

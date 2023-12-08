@@ -39,7 +39,7 @@ public class ServicePlan {
     )
     @JoinColumn(
             name = "serviceId",
-            nullable = false,
+
             insertable = false,
             updatable = false
     )
@@ -58,7 +58,7 @@ public class ServicePlan {
     )
     @JoinColumn(
             name = "modelId",
-            nullable = false,
+
             insertable = false,
             updatable = false
     )

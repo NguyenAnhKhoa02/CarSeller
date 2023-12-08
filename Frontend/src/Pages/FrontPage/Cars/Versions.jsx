@@ -25,7 +25,7 @@ function Versions({}) {
       };
       fetchData();
     },[])
-    console.log(models)
+
     const [versions, setVersions] = useState([]);
     useEffect(() => {
       const fetchData = async () => {
@@ -39,17 +39,46 @@ function Versions({}) {
       fetchData();
     },[])
 
-    const [currentImage1, setCurrentImage1] = useState(car1);
-    const [currentImage2, setCurrentImage2] = useState(car6);
-
-    const handleImageChange = (newImage, productNumber) => {
-        if (productNumber === 1) {
-          setCurrentImage1(newImage);
-        } else if (productNumber === 2) {
-          setCurrentImage2(newImage);
+    const ImageFieldCus = ({ id,url }) => {
+        if(url == 'empty'){
+            return null;
+        }   
+        if(url instanceof Object){
+            const imageUrl = url && url.src;
+            return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
+        }else{
+            const [imageUrl, setImageUrl] = useState([]);
+    
+            useEffect(() => {
+                const fetchData = async () => {
+                    try {
+                        const response = await fetch(`http://localhost:8080/image/${url}`)
+                        if(response.ok){
+                            const blob = await response.blob()
+                            const imageURL = URL.createObjectURL(blob)
+                            setImageUrl(imageURL)
+                        }
+                    } catch (error) {
+                        console.log("Error fetch data" , error);     
+                    }
+                };
+                fetchData()
+            },[])
+            
+            return imageUrl ? <img height={199.99}  src={imageUrl} alt="Image" id={id}/> : null;
         }
-    };
-        return (<>
+      };
+
+      async function handleImageChange(idImg,imageName) {
+        const response = await fetch(`http://localhost:8080/image/${imageName}`)
+        const blob = await response.blob()
+        const imageBlob = URL.createObjectURL(blob)
+
+        let img = document.getElementById(idImg)
+        img.setAttribute("src",imageBlob)
+        console.log(img)
+      }
+    return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
         <div className="centered">
@@ -61,39 +90,16 @@ function Versions({}) {
         <Row className="justify-content-md-center" style={{paddingBottom:"50px"}}>
             {versions.map((item, index) => (
                 <Col key={index} style={{textAlign:"center"}}>
-                    <img src={currentImage1} className="ProductImg" />
+                    <ImageFieldCus id={index} url={versions[index].colors[0].imageName}></ImageFieldCus>
                     <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
                     <p>Giá từ 698.000.000 VNĐ</p>
                     <div className="imageButtons">
-                        <button style={{backgroundColor:"brown"}}onClick={() => handleImageChange(car1, 1)}></button>
-                        <button style={{backgroundColor:"gray"}}onClick={() => handleImageChange(car2, 1)}></button>
-                        <button style={{backgroundColor:"black"}}onClick={() => handleImageChange(car3, 1)}></button>
-                        <button style={{backgroundColor:"white"}}onClick={() => handleImageChange(car4, 1)}></button>
+                        {item.colors.map((colorItem, colorIndex) => (
+                            <button style={{backgroundColor:`${colorItem.color}`}} onClick={() => handleImageChange(index,colorItem.imageName)}></button>
+                        ))}
                     </div>
                 </Col>
             ))}
-            <Col style={{textAlign:"center"}}>
-                <img src={currentImage1} className="ProductImg" />
-                <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
-                <p>Giá từ 698.000.000 VNĐ</p>
-                <div className="imageButtons">
-                    <button style={{backgroundColor:"brown"}}onClick={() => handleImageChange(car1, 1)}></button>
-                    <button style={{backgroundColor:"gray"}}onClick={() => handleImageChange(car2, 1)}></button>
-                    <button style={{backgroundColor:"black"}}onClick={() => handleImageChange(car3, 1)}></button>
-                    <button style={{backgroundColor:"white"}}onClick={() => handleImageChange(car4, 1)}></button>
-                </div>
-            </Col>
-            <Col style={{textAlign:"center"}}>
-                <img src={currentImage2} className="ProductImg" />
-                <h4 style={{fontWeight:"bold"}}>Xpander Cross 2</h4>
-                <p>Giá từ 898.000.000 VNĐ</p>
-                <div className="imageButtons">
-                    <button style={{backgroundColor:"white"}}onClick={() => handleImageChange(car6, 2)}></button>
-                    <button style={{backgroundColor:"black"}}onClick={() => handleImageChange(car7, 2)}></button>
-                    <button style={{backgroundColor:"brown"}}onClick={() => handleImageChange(car8, 2)}></button>
-                    <button style={{backgroundColor:"gray"}}onClick={() => handleImageChange(car9, 2)}></button>
-                </div>
-            </Col>
         </Row>
         <Row>
             <Accordion flush>
