@@ -33,6 +33,7 @@ export const authProvider = {
     },
     // called when the API returns an error
     checkError: ({ status }) => {
+        console.log(status)
         if (status === 401 || status === 403) {
             localStorage.removeItem("username");
             localStorage.removeItem("role");

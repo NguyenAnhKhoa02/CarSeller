@@ -233,6 +233,7 @@ export const VersionCreate = (props) => (
         <br/>
         <ArrayInput source="colors" >
             <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
+                <TextInput fullWidth required source="color" type="color" value="#c48b9b"></TextInput>
                 <ImageInput fullWidth source="imageFile">
                     <ImageField source="src"></ImageField>
                 </ImageInput>

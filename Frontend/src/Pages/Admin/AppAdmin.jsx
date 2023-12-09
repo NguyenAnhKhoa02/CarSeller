@@ -24,6 +24,7 @@ function App () {
     return (
         <Admin basename="/admin" authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard} theme={lightTheme} darkTheme={darkTheme}>
           {permissions => [
+            console.log(permissions),
               permissions === 'admin'
                   ? <>
                       <Resource name="users" icon={UserIcon} list={UserList} edit={UserEdit} create={UserCreate}/>
@@ -33,7 +34,6 @@ function App () {
                   : null,
           ]}
           <Resource name="versions" icon={VersionIcon} list={VersionList} edit={VersionEdit} create={VersionCreate} recordRepresentation="nameVersion"/>
-          {/* <Resource name="colors" icon={VersionIcon} list={ColorList} show={ColorShow} create={ColorCreate} recordRepresentation="color"/> */}
           <Resource name="testing_Registers" icon={TestingRegissterIcon} list={TestingRegisterList} show={TestingRegisterShow} edit={TestingRegisterEdit}/>
           <Resource name="service_Plans" icon={ServicePlanIcon} list={ServicePlanList} show={ServicePlanShow} edit={ServicePlanEdit}/>
         </Admin>
