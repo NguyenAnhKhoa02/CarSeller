@@ -1,8 +1,11 @@
 package Backend.controller;
 
+import Backend.ModelDTO.ServicePlanDTO;
 import Backend.model.ServicePlan;
 import Backend.repository.ServicePlanRepository;
 import Backend.services.GmailService;
+import netscape.javascript.JSObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 @RestController
@@ -82,10 +86,10 @@ public class servicePlanController {
         servicePlanRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/save")
-    public  ResponseEntity<ServicePlan> saveServicePlan(@RequestBody ServicePlan servicePlan){
-        ServicePlan saveServicePlan = servicePlanRepository.save(servicePlan);
-        return  new ResponseEntity<>(saveServicePlan,HttpStatus.CREATED);
-
+    @PostMapping("/save")
+    public  ResponseEntity<ServicePlan> saveServicePlan(@RequestBody ServicePlanDTO servicePlanDTO) throws ParseException {
+            ServicePlan servicePlan = servicePlanDTO.mappedServicePlan();
+             servicePlanRepository.save(servicePlan);
+            return new  ResponseEntity<>(servicePlan,HttpStatus.CREATED);
     }
 }
