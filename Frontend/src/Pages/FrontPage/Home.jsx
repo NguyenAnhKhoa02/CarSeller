@@ -1,4 +1,5 @@
 import {Row,Carousel,Button,Card,CardGroup} from "react-bootstrap";
+import {useEffect,useState} from "react";
 import Slider from "react-slick";
 import banner1 from "../../Components/Assets/banner1.png";
 import banner2 from "../../Components/Assets/banner2.png";
@@ -6,10 +7,6 @@ import banner3 from "../../Components/Assets/banner3.png";
 import banner4 from "../../Components/Assets/banner4.png";
 import banner5 from "../../Components/Assets/banner5.png";
 import banner6 from "../../Components/Assets/banner6.png";
-import car1 from "../../Components/Assets/Cars/car1.png";
-import car2 from "../../Components/Assets/car2.png";
-import car3 from "../../Components/Assets/car3.png";
-import car4 from "../../Components/Assets/car4.png";
 import dv1 from "../../Components/Assets/dv1.png";
 import dv2 from "../../Components/Assets/dv2.png";
 import dv3 from "../../Components/Assets/dv3.png";
@@ -24,7 +21,59 @@ function Home() {
     slidesToShow: 3,
     arrows: false,
     speed: 500
-  }; return (<>
+  }; 
+  const [models, setModels] = useState([]);
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await fetch("http://localhost:8080/models/all")
+              const data = await response.json();
+              const modelsData = data.map(async (item) => {
+                  const imageUrlResponse = await fetch(`http://localhost:8080/image/${item.imageName}`);
+                  if (imageUrlResponse.ok) {
+                      const blob = await imageUrlResponse.blob();
+                      const imageUrl = URL.createObjectURL(blob);
+                      return {
+                          ...item,
+                          imageUrl,
+                      };
+              }else return {...item,imageUrl: null}
+          });
+              const Models = await Promise.all(modelsData);
+              setModels(Models);
+          } catch (error) {
+              console.log("Error fetch data" , error);   
+          }
+      };
+      fetchData()
+  },[]);
+  
+  const LowestPrice = ({id}) => {
+    let lowestPrice = 0
+    
+    const [versions,setVersions] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/versions/modelId=${id}`);
+                setVersions(await response.json());
+            } catch (error) {
+                console.log("Error fetch data",error);
+            }
+        };
+        fetchData()
+    },[])
+
+    for (let index = 0; index < versions.length; index++) {
+        const element = versions[index].price;
+        if(lowestPrice == 0) lowestPrice = element
+        if(lowestPrice > element) lowestPrice = element
+    }
+
+    return <h5>Giá từ {lowestPrice} vnđ</h5>
+  }
+  return (<>
       <Carousel fade indicators={false} prevIcon={false} nextIcon={false}>
         <Carousel.Item>
           <img
@@ -65,50 +114,22 @@ function Home() {
       </Carousel>
       <Row style={{maxWidth:"100%",margin:"0 auto", textAlign:"justify"}}>
         <Row className="Title">
-          <h3>DANH MỤC XE</h3>
+          <h3>DANH MỤC MẪU XE</h3>
         </Row>
         <Slider {...settings}>
-          <div>
+          {models.map((item, index) => (
+          <div key={index} >
             <Card className="MyCard">
-              <Card.Img variant="top" src={car1} />
+              <Card.Img style={{height:"350px"}} variant="top" src={item.imageUrl} />
               <Card.Body style={{textAlign: "center", }}>
-                <Card.Title>XPANDER CROSS 2023</Card.Title>
+                <Card.Title><h5>{item.nameModel}</h5></Card.Title>
                 <Card.Text>
-                  Giá từ 698.000.000 VNĐ
+                  <LowestPrice id={item.id}></LowestPrice>
                 </Card.Text>
               </Card.Body>
             </Card>
           </div>
-          <div>
-            <Card>
-              <Card.Img variant="top" src={car2} />
-              <Card.Body style={{textAlign: "center", }}>
-                <Card.Title>NEW OUTLANDER</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          <div>
-            <Card>
-              <Card.Img variant="top" src={car3} />
-              <Card.Body style={{textAlign: "center", }}>
-                <Card.Title>NEW XPANDER</Card.Title>
-                <Button variant="secondary">Xem thêm</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div>
-            <Card>
-              <Card.Img variant="top" src={car4} />
-              <Card.Body style={{textAlign: "center", }}>
-                <Card.Title>XPANDER CROSS</Card.Title>
-                <Button variant="secondary">Xem thêm</Button>
-              </Card.Body>
-            </Card>
-          </div>
+          ))}
         </Slider>
         <Row className="Title">
           <h3>DANH MỤC DỊCH VỤ</h3>

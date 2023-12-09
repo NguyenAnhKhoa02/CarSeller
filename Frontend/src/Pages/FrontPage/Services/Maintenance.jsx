@@ -31,6 +31,58 @@ function Maintenance (){
             <hr style={{borderWidth:"2px"}}/>
             <p>Đảm bảo quá trình bảo hành theo quy định.</p>
         </Col>
+        <Table className="Table">
+            <thead>
+                <tr>
+                    <th style={{color:"white",textAlign:"center"}} className="Table bg-dark"><h5>DANH MỤC</h5></th>
+                    <th style={{color:"white",textAlign:"center"}} className="Table bg-dark"><h5>DANH SÁCH PHỤ TÙNG VÀ HOÁ CHẤT</h5></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowSpan="6" className="Table bg-grey">Các hạng mục kiểm tra (Kiểm tra / thay thế phụ tùng khi cần thiết)</td>
+                </tr>
+                <tr>
+                    <td className="Table bg-grey">Gầm, thân xe</td>
+                </tr>
+                <tr>
+                    <td className="Table">Hệ thống lái</td>
+                </tr>
+                <tr>
+                    <td className="Table bg-grey">Động cơ, hộp số</td>
+                </tr>
+                <tr>
+                    <td className="Table">Hệ thống điện: ăc quy, đèn, gạt mưa</td>
+                </tr>
+                <tr>
+                    <td className="Table bg-grey">Hệ thống phanh</td>
+                </tr>
+                <tr>
+                    <td rowSpan="3" className="Table bg-grey">Các phụ tùng thay thế bắt buộc</td>
+                </tr>
+                <tr>
+                    <td className="Table">Dầu động cơ Mitsubishi</td>
+                </tr>
+                <tr>
+                    <td className="Table bg-grey">Gioăng ốc xả nhớt</td>
+                </tr>
+                <tr>
+                    <td rowSpan="5" className="Table bg-grey">Các phụ tùng thay thế bắt buộc</td>
+                </tr>
+                <tr>
+                    <td className="Table">Nước rửa kính chính hãng</td>
+                </tr>
+                <tr>
+                    <td className="Table bg-grey">Phụ gia nâng cấp nhớt Mitsubishi</td>
+                </tr>
+                <tr>
+                    <td className="Table">Dung dịch súc rửa động cơ Mitsubishi</td>
+                </tr>
+                <tr>
+                    <td className="Table bg-grey">Dung dịch vệ sinh hệ thống nhiên liệu xăng / Diesel Mitsubishi</td>
+                </tr>
+            </tbody>
+        </Table>
         <div style={{borderTopStyle:"solid", paddingTop:"25px", marginTop:"25px"}}>
             <Row style={{color:"#5A646E"}}>
                 <h5 style={{fontWeight:"bold"}}>BẠN ĐÃ SẴN SÀNG TRẢI NGHIỆM CÙNG MITSUBISHI MOTORS VIỆT NAM?</h5><br/>

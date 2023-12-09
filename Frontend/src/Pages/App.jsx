@@ -7,7 +7,7 @@ import BookATestDrive from "./FrontPage/Cars/BookATestDrive";
 import AllModels from "./FrontPage/Cars/AllModels";
 import Versions from "./FrontPage/Cars/Versions";
 import Price from "./FrontPage/Cars/Price";
-import TryDriveSchedule from "./FrontPage/Cars/TryDriveSchedule";
+import TestDriveSchedule from "./FrontPage/Cars/TestDriveSchedule";
 import FleetSales from "./FrontPage/Offers/Fleetsales";
 import Promotion from "./FrontPage/Offers/Promotion";
 import GenuineUsedCarProgram from "./FrontPage/Offers/GenuineUsedCarProgram";
@@ -44,7 +44,7 @@ return (
                 <Route path="SanPham/TatCaDongXe" element={<AllModels />} />
                 <Route path="SanPham/TatCaXe/:id" element={<Versions />} />
                 <Route path="SanPham/BangGia" element={<Price />} />
-                <Route path="SanPham/LichLaiThu" element={<TryDriveSchedule />} />
+                <Route path="SanPham/LichLaiThu" element={<TestDriveSchedule />} />
                 <Route path="MuaXe/BanHangDuAn" element={<FleetSales />} />
                 <Route path="MuaXe/XeDaQuaSuDungChinhHang" element={<GenuineUsedCarProgram />} />
                 <Route path="MuaXe/ChuongTrinhKhuyenMai" element={<Promotion />} />

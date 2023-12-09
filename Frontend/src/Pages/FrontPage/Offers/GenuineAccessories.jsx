@@ -13,7 +13,7 @@ import CanhLuotGio from "../../../Components/Assets/Canh_luot_gio1.jpg"
 function GenuineAccessories() {
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
-        <img src={banner} height="316" width="100%"/>
+        <img src={banner} height="550" width="100%"/>
         <div className="centered">
             <h1 style={{fontWeight:"bold", fontSize:"3rem"}}>Phụ kiện</h1>
             <p style={{fontSize:"1.5rem"}}>Cá tính theo cách của ban!</p>

@@ -133,7 +133,7 @@ public class versionController {
 
     /*for fetch*/
     @GetMapping("/modelId={id}")
-    public List<Version> getVersionsByModelId(@PathVariable Integer id){
+    public List<Version> getVersionsByModelId(@PathVariable Long id){
         return versionRepository.findByModelId(id);
     }
 }

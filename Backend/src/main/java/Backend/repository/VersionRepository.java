@@ -62,5 +62,5 @@ public interface VersionRepository extends JpaRepository<Version,Long> {
                     "WHERE version.model_id = :modelId",
             nativeQuery = true
     )
-    List<Version> findByModelId(@Param("modelId") Integer modelId);
+    List<Version> findByModelId(@Param("modelId") Long modelId);
 }

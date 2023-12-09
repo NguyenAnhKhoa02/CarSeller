@@ -1,11 +1,9 @@
 import {Row, Col, Button} from "react-bootstrap"
+import {useEffect,useState} from "react"
 import {Link} from "react-router-dom"
 import banner from "../../../Components/Assets/bannerservice1.png"
 import icon1 from "../../../Components/Assets/allproducticon1.png"
 import icon2 from "../../../Components/Assets/allproducticon2.png"
-import model1 from "../../../Components/Assets/Models/all-new-xforce-all-product.png"
-import model2 from "../../../Components/Assets/Models/xpander-cross-all-product.png"
-import { useEffect,useState, version } from "react"
 
 function AllModels () {
     const [models, setModels] = useState([]);
@@ -14,8 +12,7 @@ function AllModels () {
             try {
                 const response = await fetch("http://localhost:8080/models/all")
                 const data = await response.json();
-                const modelsWithImageURLs = data.map(async (item) => {
-  
+                const modelsData = data.map(async (item) => {
                     const imageUrlResponse = await fetch(`http://localhost:8080/image/${item.imageName}`);
                     if (imageUrlResponse.ok) {
                         const blob = await imageUrlResponse.blob();
@@ -26,8 +23,8 @@ function AllModels () {
                         };
                 }else return {...item,imageUrl: null}
             });
-                const modelsWithResolvedImageURLs = await Promise.all(modelsWithImageURLs);
-                setModels(modelsWithResolvedImageURLs);
+                const Models = await Promise.all(modelsData);
+                setModels(Models);
             } catch (error) {
                 console.log("Error fetch data" , error);   
             }
