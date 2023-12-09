@@ -1,4 +1,4 @@
-import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField } from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField,FormDataConsumer, FunctionField, DateField } from "react-admin";
 import { Box,Typography } from "@mui/material";
 
 const status = [
@@ -16,11 +16,13 @@ const ServicePlanTitle = () => {
 // Component cho trang danh sách
 export const ServicePlanList = (props) => (
 <List {...props}>
+    {console.log(props)}
     <Datagrid rowClick="show">
         <TextField source="id" />
-        <TextField source="date" />
-        <TextField source="fullName" />
-        <ReferenceField label="Model" source="modelId" reference="models" />
+        <DateField source="date"></DateField>
+        <TextField source="time"></TextField>
+        <TextField source="fullName"/>
+        <ReferenceField label="Model" source="modelId" reference="models"/>
         <ReferenceField label="Service" source="serviceId" reference="services" />
         <ChipField source="status" />
         <EditButton />
@@ -51,6 +53,7 @@ export const ServicePlanEdit = (props) => (
 // Component cho trang hiển thị chi tiết
 export const ServicePlanShow = (props) => (
 <Show title={<ServicePlanTitle />} {...props}>
+    {console.log(props)},
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="date" />

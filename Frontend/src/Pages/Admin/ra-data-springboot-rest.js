@@ -46,7 +46,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             sortOrder: order,
         };
         url = `${apiUrl}/${resource}?${stringify(query)}&page=${page}&pageSize=${perPage}`;
- 
+
         break;
       }
       case GET_ONE:

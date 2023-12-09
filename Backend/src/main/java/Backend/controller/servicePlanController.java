@@ -26,17 +26,6 @@ public class servicePlanController {
 //    @Autowired
 //    private GmailService gmailService;
 //    @PostMapping("/save")
-//    public boolean saveServicePlan(@RequestBody ServicePlan servicePlan){
-//        servicePlanRepository.save(servicePlan);
-//        gmailService.sendingGmailServicePlan(servicePlan);
-//        return true;
-//    }
-//    @GetMapping("/{fullName}")
-//    @ResponseBody
-//    public boolean saveServicePlan(@PathVariable String fullName){
-//        servicePlanRepository.checkServicePlanName(fullName);
-//        return true;
-//    }
     @GetMapping
     public ResponseEntity<Page<ServicePlan>>  getAllServicePlans(
             @RequestParam(value = "page", defaultValue = "1") int page,
@@ -47,6 +36,7 @@ public class servicePlanController {
         Sort.Direction direction = sortOrder.equalsIgnoreCase("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC;
         Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(direction, sortField));
         Page<ServicePlan> servicePlanPage = servicePlanRepository.findAll(pageable);
+
         return new ResponseEntity<>(servicePlanPage, HttpStatus.OK);
     }
 
@@ -89,7 +79,7 @@ public class servicePlanController {
     @PostMapping("/save")
     public  ResponseEntity<ServicePlan> saveServicePlan(@RequestBody ServicePlanDTO servicePlanDTO) throws ParseException {
             ServicePlan servicePlan = servicePlanDTO.mappedServicePlan();
-//             servicePlanRepository.save(servicePlan);
+            servicePlanRepository.save(servicePlan);
             return new  ResponseEntity<>(servicePlan,HttpStatus.CREATED);
     }
 }

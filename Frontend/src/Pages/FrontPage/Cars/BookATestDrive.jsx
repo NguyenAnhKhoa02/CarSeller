@@ -5,6 +5,7 @@ import car1 from "../../../Components/Assets/ForDatabase/Cars/car1.png";
 import car2 from "../../../Components/Assets/car2.png";
 import car3 from "../../../Components/Assets/car3.png";
 import car4 from "../../../Components/Assets/car4.png";
+import { useRef } from "react";
 
 function BookATestDrive () {
     const settings = {
@@ -16,6 +17,7 @@ function BookATestDrive () {
       arrows: false,
       speed: 500
     };
+
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
@@ -31,9 +33,9 @@ function BookATestDrive () {
             </div>
             <Slider {...settings}>
                 <div>
-                    <Card className="MyCard">
+                    <Card className="MyCard" style={{height:"300px"}}>
                     <Card.Img variant="top" src={car1} />
-                    <Card.Body style={{textAlign: "center", }}>
+                    <Card.Body  style={{textAlign: "center"}}>
                         <Card.Title>XPANDER CROSS 2023</Card.Title>
                         <Card.Text>
                         Giá từ 698.000.000 VNĐ
@@ -42,7 +44,7 @@ function BookATestDrive () {
                     </Card>
                 </div>
                 <div>
-                    <Card>
+                    <Card className="MyCard" style={{height:"300px"}}>
                     <Card.Img variant="top" src={car2} />
                     <Card.Body style={{textAlign: "center", }}>
                         <Card.Title>NEW OUTLANDER</Card.Title>
