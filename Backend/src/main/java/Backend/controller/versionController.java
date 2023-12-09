@@ -50,15 +50,18 @@ public class versionController {
             }
 
         List<Color> colorList = new ArrayList<>();
-        for (JSONObject jsonObject:
-             versionDTO.getColors()) {
-            Color color = new Color();
-            color.setColor(jsonObject.getString("color"));
-            color.setImageName(jsonObject.getString("imageName"));
-            colorList.add(color);
+
+        if(colorList.size() > 0){
+            for (JSONObject jsonObject:
+                    versionDTO.getColors()) {
+                Color color = new Color();
+                color.setColor(jsonObject.getString("color"));
+                color.setImageName(jsonObject.getString("imageName"));
+                colorList.add(color);
+            }
+            version.setColors(colorList);
         }
 
-        version.setColors(colorList);
         versionRepository.save(version);
 
         return new ResponseEntity<>(version, HttpStatus.CREATED);

@@ -40,33 +40,29 @@ function Versions({}) {
     },[])
 
     const ImageFieldCus = ({ id,url }) => {
-        if(url == 'empty'){
-            return null;
-        }   
-        if(url instanceof Object){
-            const imageUrl = url && url.src;
-            return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
-        }else{
-            const [imageUrl, setImageUrl] = useState([]);
-    
-            useEffect(() => {
-                const fetchData = async () => {
-                    try {
-                        const response = await fetch(`http://localhost:8080/image/${url}`)
-                        if(response.ok){
-                            const blob = await response.blob()
-                            const imageURL = URL.createObjectURL(blob)
-                            setImageUrl(imageURL)
-                        }
-                    } catch (error) {
-                        console.log("Error fetch data" , error);     
+        if(url == 'empty' || url == undefined) url = "no-image-available.png"
+        else url = url.imageName
+
+        const [imageUrl, setImageUrl] = useState([]);
+
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/image/${url}`)
+                    if(response.ok){
+                        const blob = await response.blob()
+                        const imageURL = URL.createObjectURL(blob)
+                        setImageUrl(imageURL)
                     }
-                };
-                fetchData()
-            },[])
-            
-            return imageUrl ? <img height={199.99}  src={imageUrl} alt="Image" id={id}/> : null;
-        }
+                } catch (error) {
+                    console.log("Error fetch data" , error);     
+                }
+            };
+            fetchData()
+        },[])
+        
+        return imageUrl ? <img height={199.99}  src={imageUrl} alt="Image" id={id}/> : null;
+
       };
 
       async function handleImageChange(idImg,imageName) {
@@ -76,117 +72,182 @@ function Versions({}) {
 
         let img = document.getElementById(idImg)
         img.setAttribute("src",imageBlob)
-        console.log(img)
       }
     return (<>
+    {/* Banner header */}
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
         <div className="centered">
             <h1 style={{fontWeight:"bold", fontSize:"3rem"}}>{models.nameModel}</h1>
         </div>
     </Row>
+
+    {/* Title */}
+    <Row><h1 style={{textAlign:"center"}}>Trang thiết bị</h1></Row>
+
+    {/* Show and change image */}
+    <Row className="justify-content-md-center" style={{paddingBottom:"50px"}}>
+        {versions.map((item, index) => (
+            <Col key={index} style={{textAlign:"center"}}>
+                <ImageFieldCus id={index} url={versions[index].colors[0]}></ImageFieldCus>
+                <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
+                <p>Giá 698.000.000 VNĐ</p>
+                <div className="imageButtons">
+                    {item.colors.map((colorItem, colorIndex) => (
+                        <button style={{backgroundColor:`${colorItem.color}`}} onClick={() => handleImageChange(index,colorItem.imageName)}></button>
+                    ))}
+                </div>
+            </Col>
+        ))}
+    </Row>
+
+    {/* Information */}
+    <Row>
+        {versions.map((item,index) => (
+            <Col>
+                <h4 style={{textAlign:"center"}}>{item.info}</h4>
+            </Col>
+        ))}
+    </Row>
+
     <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
-        <h1 style={{textAlign:"center"}}>Trang thiết bị</h1>
-        <Row className="justify-content-md-center" style={{paddingBottom:"50px"}}>
-            {versions.map((item, index) => (
-                <Col key={index} style={{textAlign:"center"}}>
-                    <ImageFieldCus id={index} url={versions[index].colors[0].imageName}></ImageFieldCus>
-                    <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
-                    <p>Giá từ 698.000.000 VNĐ</p>
-                    <div className="imageButtons">
-                        {item.colors.map((colorItem, colorIndex) => (
-                            <button style={{backgroundColor:`${colorItem.color}`}} onClick={() => handleImageChange(index,colorItem.imageName)}></button>
-                        ))}
-                    </div>
-                </Col>
-            ))}
-        </Row>
         <Row>
             <Accordion flush>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>KÍCH THƯỚC VÀ TRỌNG LƯỢNG</Accordion.Header>
                     <Accordion.Body>
-                    <h5>Kích thước tổng thể (DàixRộngxCao)</h5>
-                    {versions.map((item,index) => (
-                        console.log(item)
-                    ))}
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>4.595 x 1.790 x 1.750 mm</p>
-                    <h5>Khoảng cách hai cầu xe (Chiều dài cơ sở)</h5>
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>2.775 mm</p>
-                    <h5>Khoảng cách hai bánh xe trước</h5>
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>1.520 mm</p>
-                    <h5>Khoảng cách hai bánh xe sau</h5>
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>1.510 mm</p>
-                    <h5>Bán kính quay vòng tối thiểu</h5>
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>5,2 m</p>
-                    <h5>Khoảng sáng gầm xe</h5>
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>225 mm</p>
                     <h5>Số chỗ ngồi</h5>
-                    <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>7</p>
+                    <Row style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4>{models.numCarSeat}</h4>
+                            </Col>
+                        ))}
+                    </Row>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
                     <Accordion.Header>ĐỘNG CƠ VÀ VẬN HÀNH</Accordion.Header>
                     <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    <h5>Dung tích thùng nhiên liệu</h5>
+                    <Row style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.gasCap}</h4>
+                            </Col>
+                        ))}
+                    </Row>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="2">
                     <Accordion.Header>TRUYỀN ĐỘNG VÀ HỆ THỐNG TREO</Accordion.Header>
                     <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    <h5>Phanh trước</h5>
+                    <Row style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.frontBrakes}</h4>
+                            </Col>
+                        ))}
+                    </Row>
+
+                    <h5>Phanh sau</h5>
+                    <Row style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.rearBrakes}</h4>
+                            </Col>
+                        ))}
+                    </Row>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="3">
                     <Accordion.Header>NGOẠI THẤT</Accordion.Header>
                     <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    <h5>Đèn LED sương mù trước</h5>
+                    <Row style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.frontFogLight}</h4>
+                            </Col>
+                        ))}
+                    </Row>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="4">
                     <Accordion.Header>NỘI THẤT</Accordion.Header>
                     <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    <h5>Vô lăng và cần số bọc da</h5>
+                    <Row style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.wrappedSteeringWheelAndGearLever}</h4>
+                            </Col>
+                        ))}
+                    </Row>
+                    
+                    <h5>Chất liệu ghế</h5>
+                    <Row style={{ backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.seatMaterial}</h4>
+                            </Col>
+                        ))}
+                    </Row>
+
+                    <h5>Tay nắm cửa</h5>
+                    <Row style={{ backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.doorHandle}</h4>
+                            </Col>
+                        ))}
+                    </Row>
                     </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="5">
                     <Accordion.Header>AN TOÀN</Accordion.Header>
                     <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    <h5>Túi khí an toàn</h5>
+                    <Row style={{ backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.airBag}</h4>
+                            </Col>
+                        ))}
+                    </Row>
+
+                    <h5>Camera lùi</h5>
+                    <Row style={{ backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.backCamera}</h4>
+                            </Col>
+                        ))}
+                    </Row>
+
+                    <h5>Chìa khóa có mã chống trộm</h5>
+                    <Row style={{ backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.antiTheft}</h4>
+                            </Col>
+                        ))}
+                    </Row>
+
+                    <h5>Khóa cửa từ xa</h5>
+                    <Row style={{ backgroundColor:"#F5F5F5", textAlign:"center"}}>
+                        {versions.map((item,index) => (
+                            <Col>
+                                <h4 key={index}>{item.autoLock}</h4>
+                            </Col>
+                        ))}
+                    </Row>
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
         </Row>
+
         <div style={{borderTopStyle:"solid", paddingTop:"25px", marginTop:"25px", textAlign:"center"}}>
             <Row>
                 <h5 style={{color:"red",fontWeight:"bold"}}>BẠN MUỐN LÁI THỬ?</h5><br/>
