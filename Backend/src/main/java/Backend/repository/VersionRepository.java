@@ -45,7 +45,6 @@ public interface VersionRepository extends JpaRepository<Version,Long> {
                     "version.front_brakes = :#{#version.getFrontBrakes()}, " +
                     "version.front_fog_light = :#{#version.getFrontFogLight()}, " +
                     "version.gas_cap = :#{#version.getGasCap()}, " +
-                    "version.num_car_seat = :#{#version.getNumCarSeat()}, " +
                     "version.price = :#{#version.getPrice()}, " +
                     "version.rear_brakes = :#{#version.getRearBrakes()}, " +
                     "version.seat_material = :#{#version.getSeatMaterial()}, " +

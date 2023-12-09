@@ -23,6 +23,8 @@ public class Model {
     private String nameModel;
     private String imageName;
     private String info;
+    private String fuel;
+    private int numCarSeat;
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,

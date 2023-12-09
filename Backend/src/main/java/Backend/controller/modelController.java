@@ -40,15 +40,16 @@ public class modelController {
     @PostMapping
     public @ResponseBody ResponseEntity<Model> saveModel(@ModelAttribute ModelDTO modelDTO) throws IOException, SQLException {
         fileService = new FileService();
-        System.out.println(modelDTO);
 
-        Model model = new Model();
-        model.setNameModel(modelDTO.getNameModel());
-        model.setInfo(modelDTO.getInfo());
+        Model model = modelDTO.mappedModel();
 
-        fileService.copyFileFromMultiFile(modelDTO.getImageFile());
-        model.setImageName(fileService.getNameFile());
-        
+        if(modelDTO.getImageFile() != null){
+            fileService.copyFileFromMultiFile(modelDTO.getImageFile());
+            model.setImageName(fileService.getNameFile());
+        }else{
+            model.setImageName("empty");
+        }
+
         modelRepository.save(model);
         return new ResponseEntity<>(model, HttpStatus.CREATED);
     }
@@ -82,22 +83,20 @@ public class modelController {
     @PutMapping("/{id}")
     public ResponseEntity<Model> updateModel(@ModelAttribute ModelDTO updatedModelDTO) {
         //Model existingModel = modelRepository.findById(id).orElse(null);
-        System.out.println(updatedModelDTO.getImageFile());
-        Model model = new Model();
-        model.setId(updatedModelDTO.getId());
-        model.setNameModel(updatedModelDTO.getNameModel());
-        model.setInfo(updatedModelDTO.getInfo());
 
+        Model model = updatedModelDTO.mappedModel();
         if(updatedModelDTO.getImageFile() != null){
             fileService = new FileService();
 
             fileService.copyFileFromMultiFile(updatedModelDTO.getImageFile());
             model.setImageName(fileService.getNameFile());
+        } else if (updatedModelDTO.getImageName() != null) {
+            model.setImageName(updatedModelDTO.getImageName());
         }else{
             model.setImageName("empty");
         }
 
-        modelRepository.updateModel(model.getId(),model.getImageName(),model.getInfo(),model.getNameModel());
+        modelRepository.updateModel(model);
         return ResponseEntity.status(HttpStatus.OK).body(model);
     }
 

@@ -67,11 +67,20 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
         if(resource == 'models'){
           const formData = new FormData()
+          console.log(params)
           formData.append('id',params.data.id)
           formData.append('nameModel',params.data.nameModel)
           formData.append('info',params.data.info)
-          if(params.data.imageName != null)
-            formData.append('imageFile',params.data.imageName.rawFile)
+          formData.append('numCarSeat',params.data.numCarSeat)
+          formData.append('fuel',params.data.fuel)
+          console.log(params.data)
+
+          if(typeof params.data.imageName == "string")
+            formData.append('imageName',params.data.imageName)
+          if(typeof params.data.imageName == "object")
+            if(params.data.imageName != null)
+              formData.append('imageFile',params.data.imageName.rawFile)
+
           options.body=formData
         }
         else if(resource == 'versions'){
@@ -88,7 +97,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('info',params.data.info)
           formData.append('modelId',params.data.modelId)
           formData.append('nameVersion',params.data.nameVersion)
-          formData.append('numCarSeat',params.data.numCarSeat)
           formData.append('price',params.data.price)
           formData.append('rearBrakes',params.data.rearBrakes)
           formData.append('seatMaterial',params.data.seatMaterial)
@@ -114,11 +122,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
       case CREATE:
         url = `${apiUrl}/${resource}`;
-        if(resource == 'models' && params.data.imageFile != undefined){
+        if(resource == 'models'){
           const formData = new FormData()
+          console.log(params.data)
           formData.append('nameModel',params.data.nameModel)
           formData.append('info',params.data.info)
-          formData.append('imageFile',params.data.imageFile.rawFile)
+          formData.append('numCarSeat',params.data.numCarSeat)
+          formData.append('fuel',params.data.fuel)
+          if(params.data.imageFile != undefined)
+            formData.append('imageFile',params.data.imageFile.rawFile)
           options.body=formData
         }
         else if(resource == 'versions'){
@@ -134,7 +146,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('info',params.data.info)
           formData.append('modelId',params.data.modelId)
           formData.append('nameVersion',params.data.nameVersion)
-          formData.append('numCarSeat',params.data.numCarSeat)
           formData.append('price',params.data.price)
           formData.append('rearBrakes',params.data.rearBrakes)
           formData.append('seatMaterial',params.data.seatMaterial)
@@ -156,8 +167,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
           options.body=formData
         }
-        else
-         options.body = JSON.stringify(params.data);
         
         options.method = "POST";
       

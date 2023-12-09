@@ -1,4 +1,4 @@
-import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ImageInput,ImageField,FileInput,FormDataConsumer } from "react-admin";
+import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ImageInput,ImageField,FileInput,FormDataConsumer, NumberInput, SelectInput } from "react-admin";
 import { Box,Typography } from "@mui/material";
 import { useState,useEffect } from "react";
 
@@ -67,6 +67,17 @@ export const CarModelEdit = (props) => (
         </Box>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <NumberInput fullWidth required source="numCarSeat"></NumberInput>
+            </Box>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <SelectInput fullWidth required source="fuel" choices={[
+                    {id:'gasoline',name:'Xăng'},
+                    {id:'dieselFuel',name:'Dầu diesel'}
+                ]}/>
+            </Box>
+        </Box>
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                 <TextInput fullWidth source="info" multiline rows={5}/>
             </Box>
         </Box>
@@ -94,13 +105,20 @@ export const CarModelCreate = (props) => (
             Create Car Model
         </Typography>
         <TextInput fullWidth required source="nameModel" />
+        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <NumberInput fullWidth required source="numCarSeat"></NumberInput>
+            </Box>
+            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                <SelectInput fullWidth required source="fuel" choices={[
+                    {id:'gasoline',name:'Xăng'},
+                    {id:'dieselFuel',name:'Dầu diesel'}
+                ]}/>
+            </Box>
+        </Box>
         <TextInput fullWidth multiline rows={5} source="info" />
         <ImageInput source="imageFile" label="Related pictures" accept="image/*" id="image">
-            {<FormDataConsumer>
-                {({formData,...rest}) => (
-                    <ImageFieldCus url={formData.imageFile} {...rest} />
-                )}
-            </FormDataConsumer> }
+            <ImageField source="src"></ImageField>
         </ImageInput>
     </SimpleForm>
 </Create>

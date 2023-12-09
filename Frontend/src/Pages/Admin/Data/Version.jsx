@@ -35,7 +35,7 @@ const VersionTitle = () => {
             fetchData()
         },[])
 
-        return imageUrl ? <img width={99.99} height={199.99}  src={imageUrl} alt="Image" id="image"/> : null;
+        return imageUrl ? <img style={{width:"100%", height:"100%"}}  src={imageUrl} alt="Image" id="image"/> : null;
     }
   };
 
@@ -72,9 +72,6 @@ export const VersionEdit = (props) => (
             </Box>
         </Box>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <NumberInput fullWidth source="numCarSeat" disabled required/>
-            </Box>
             <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                 <NumberInput fullWidth source="price" required/>
             </Box>
@@ -170,9 +167,6 @@ export const VersionCreate = (props) => (
             </Box>
         </Box>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <NumberInput fullWidth source="numCarSeat" required/>
-            </Box>
             <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                 <NumberInput fullWidth source="price" required/>
             </Box>
@@ -233,6 +227,7 @@ export const VersionCreate = (props) => (
         <br/>
         <ArrayInput source="colors" >
             <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
+                <TextInput fullWidth required source="color" type="color" value="#c48b9b"></TextInput>
                 <ImageInput fullWidth source="imageFile">
                     <ImageField source="src"></ImageField>
                 </ImageInput>
