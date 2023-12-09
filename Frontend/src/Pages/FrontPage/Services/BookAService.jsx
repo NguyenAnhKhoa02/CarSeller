@@ -1,9 +1,27 @@
 import {Row, Button, Form, FloatingLabel} from "react-bootstrap"
 import banner from "../../../Components/Assets/bannerservice1.png"
-import React from "react";  
-import axios from "axios";
+import React, { useEffect, useState } from "react";  
 
 function BookAService () {
+    const [models,setModels] = useState([])
+    useEffect(() => {
+        const fetchData = async() => {
+            const response = await fetch("http://localhost:8080/models/all")
+            setModels(await response.json())
+        }
+        fetchData()
+    },[])
+
+    const [services, setServices] = useState([])
+    useEffect(() => {
+        const fetchData = async() => {
+            const response = await fetch("http://localhost:8080/services/all")
+            setServices(await response.json())
+        }
+        fetchData()
+    },[])
+    console.log(services)
+
     const [fullName,setFullName] = React.useState();
     const [email,setEmail] = React.useState();
     const [numberPhone,setNumberPhone] = React.useState();
@@ -13,7 +31,6 @@ function BookAService () {
     const [serviceId,setService] = React.useState();
     const [date,setDate] = React.useState();
     const [time,setTime] = React.useState();
-   // const [servicePlan,setServicePlan] = React.useState([])
 
     const [checked,setChecked] = React.useState();
 
@@ -66,10 +83,9 @@ function BookAService () {
             </FloatingLabel>
             <FloatingLabel controlId="typecar" label="MẪU XE *" className="mb-3">
                 <Form.Select aria-label="Chọn mẫu xe" onChange={(e)=> setModel(e.target.selectedIndex)}>
-                    <option>Chọn mẫu xe</option>
-                    <option value="Xpander">Xpander</option>
-                    <option value="Outlander">Outlander</option>
-                    <option value="Attrage">Attrage</option>
+                    {models.map((item,index) => (
+                        <option key={index}>{item.nameModel}</option>
+                    ))}
                 </Form.Select>
     
             </FloatingLabel>
@@ -85,10 +101,9 @@ function BookAService () {
                 <Form.Select aria-label="Chọn loại dịch vụ" 
                 onChange={(e)=> setService(e.target.selectedIndex)}
                 >
-                    <option>Chọn loại dịch vụ</option>
-                    <option value="DichVuKhac">Dịch vụ khác</option>
-                    <option value="ChuongTrinhTrieuHoi">Chương trình triệu hồi</option>
-                    <option value="BaoHanh">Bảo hành</option>
+                    {services.map((item,index) => (
+                        <option value="">{item.nameService}</option>
+                    ))}
                 </Form.Select>
             </FloatingLabel>
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
@@ -108,12 +123,10 @@ function BookAService () {
                 <Form.Control type="date" min={new Date().toISOString().slice(0, 10)} placeholder="1/1/2024"
                 onChange={(e)=> setDate(e.target.value)}
                  />
-                 console.log({date});
             </FloatingLabel>
             <FloatingLabel controlId="time" label="GIỜ ĐẶT LỊCH *" className="mb-3">
                 <Form.Control type="time" placeholder="6:00 SA" 
                 onChange={(e)=> setTime(e.target.value)}/>
-                console.log({time});
             </FloatingLabel>
             <p style={{color:"gray"}}>ĐIỀU KIỆN & ĐIỀU KHOẢN VỀ CHÍNH SÁCH BẢO MẬT*</p>
             <div key={`default-checkbox`} className="mb-3">
@@ -123,7 +136,6 @@ function BookAService () {
                     label="Tôi xác nhận đồng ý nhận thông tin liên quan đến dịch vụ chăm sóc khách hàng, khuyến mãi, hoặc các thông tin tiếp thị sản phẩm và dịch vụ được cung cấp bởi MMV, các nhà phân phối ủy quyền của MMV và các đối tác kinh doanh được chỉ định bởi MMV."
                     onChange={handleCheckBoxChange}
                 />
-                console.log({checked});
             </div>
             <Row><Button variant="outline-dark" type="submit" size="lg" className="MyBorder2">ĐẶT LỊCH</Button></Row>
         </Form>

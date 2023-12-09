@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/services")
@@ -74,5 +75,11 @@ public class serviceController {
     public ResponseEntity<Void> deleteService(@PathVariable Long id) {
         serviceRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /* for fetch*/
+    @GetMapping("/all")
+    public List<Service> getAll(){
+        return serviceRepository.findAll();
     }
 }
