@@ -23,12 +23,13 @@ public interface ModelRepository extends JpaRepository<Model,Long> {
     @Transactional
     @Query(
             value = "UPDATE `model` " +
-                    "SET `image_name`=:imageName,`info`=:info,`name_model`=:nameModel " +
-                    "WHERE model.id = :id",
+                    "SET " +
+                    "model.image_name=:#{#model.getImageName()}," +
+                    "model.info=:#{#model.getInfo()}," +
+                    "model.name_model=:#{#model.getNameModel()}, " +
+                    "model.fuel = :#{#model.getFuel()} " +
+                    "WHERE model.id = :#{#model.getId()}" ,
             nativeQuery = true
     )
-    void updateModel(@Param("id") Long id,
-                @Param("imageName") String imageName,
-                @Param("info") String info,
-                @Param("nameModel") String nameModel);
+    void updateModel(@Param("model") Model model);
 }

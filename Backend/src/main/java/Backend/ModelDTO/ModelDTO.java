@@ -1,5 +1,6 @@
 package Backend.ModelDTO;
 
+import Backend.model.Model;
 import lombok.Data;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,16 +19,18 @@ public class ModelDTO {
     private String nameModel;
     private String info;
     private MultipartFile imageFile;
+    private int numCarSeat;
+    private String fuel;
+    private String imageName;
 
-    public ModelDTO(){
+    public Model mappedModel(){
+        Model model = new Model();
+        model.setId(id);
+        model.setNameModel(nameModel);
+        model.setInfo(info);
+        model.setNumCarSeat(numCarSeat);
+        model.setFuel(fuel);
 
+        return model;
     }
-
-    public ModelDTO(Long id, String nameModel, String info) {
-        this.id = id;
-        this.nameModel = nameModel;
-        this.info = info;
-    }
-
-
 }

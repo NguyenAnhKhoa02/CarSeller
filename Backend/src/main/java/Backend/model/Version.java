@@ -52,7 +52,6 @@ public class Version {
     @Column(nullable = false)
     private String nameVersion;
     @Column(nullable = false)
-    private int numCarSeat;
     private String info;
     private String gasCap;
     private String frontBrakes;
@@ -72,7 +71,6 @@ public class Version {
     @Column(nullable = false)
     private int price;
     public String getNameVersion() { return nameVersion; }
-    public int getNumCarSeat() { return numCarSeat; }
     public String getInfo() { return info; }
     public String getGasCap() { return gasCap; }
     public String getFrontBrakes() { return frontBrakes; }
@@ -92,7 +90,6 @@ public class Version {
     public void setNameVersion(String nameVersion) {
         this.nameVersion = nameVersion;
     }
-    public void setNumCarSeat(int numCarSeat) {this.numCarSeat = numCarSeat;}
     public void setInfo(String info) {
         this.info = info;
     }

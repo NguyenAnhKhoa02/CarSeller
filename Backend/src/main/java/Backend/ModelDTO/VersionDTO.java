@@ -35,6 +35,7 @@ public class VersionDTO {
     private String backCamera;
     private String antiTheft;
     private String autoLock;
+    private String fuel;
     private int price;
 
     public Version mappedVersion(){
@@ -51,7 +52,6 @@ public class VersionDTO {
         version.setInfo(info);
         version.setModelId(modelId);
         version.setNameVersion(nameVersion);
-        version.setNumCarSeat(numCarSeat);
         version.setPrice(price);
         version.setRearBrakes(rearBrakes);
         version.setSeatMaterial(seatMaterial);

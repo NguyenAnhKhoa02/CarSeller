@@ -107,6 +107,9 @@ function Versions({}) {
                     <Accordion.Header>KÍCH THƯỚC VÀ TRỌNG LƯỢNG</Accordion.Header>
                     <Accordion.Body>
                     <h5>Kích thước tổng thể (DàixRộngxCao)</h5>
+                    {versions.map((item,index) => (
+                        console.log(item)
+                    ))}
                     <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>4.595 x 1.790 x 1.750 mm</p>
                     <h5>Khoảng cách hai cầu xe (Chiều dài cơ sở)</h5>
                     <p style={{backgroundColor:"#F5F5F5", textAlign:"center"}}>2.775 mm</p>
