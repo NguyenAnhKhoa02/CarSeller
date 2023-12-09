@@ -42,7 +42,6 @@ public class versionController {
 //        Version savedVersion = versionRepository.save(version);
         Version version = new Version();
         version = versionDTO.mappedVersion();
-
         if(versionDTO.getColorFiles() != null)
             for (MultipartFile multipartFile:
                  versionDTO.getColorFiles()) {
@@ -50,8 +49,7 @@ public class versionController {
             }
 
         List<Color> colorList = new ArrayList<>();
-
-        if(colorList.size() > 0){
+        if(versionDTO.getColorFiles().size()> 0){
             for (JSONObject jsonObject:
                     versionDTO.getColors()) {
                 Color color = new Color();

@@ -164,7 +164,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
             formData.append('colors',JSON.stringify(colorObject))
           });
-
           options.body=formData
         }
         
