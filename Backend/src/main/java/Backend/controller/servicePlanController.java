@@ -89,7 +89,7 @@ public class servicePlanController {
     @PostMapping("/save")
     public  ResponseEntity<ServicePlan> saveServicePlan(@RequestBody ServicePlanDTO servicePlanDTO) throws ParseException {
             ServicePlan servicePlan = servicePlanDTO.mappedServicePlan();
-             servicePlanRepository.save(servicePlan);
+//             servicePlanRepository.save(servicePlan);
             return new  ResponseEntity<>(servicePlan,HttpStatus.CREATED);
     }
 }

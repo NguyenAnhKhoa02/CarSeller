@@ -26,9 +26,9 @@ function BookAService () {
     const [email,setEmail] = React.useState();
     const [numberPhone,setNumberPhone] = React.useState();
     const [licensePlate,setLicensePlate] = React.useState();
-    const [modelId,setModel] = React.useState();
+    const [modelId,setModelId] = React.useState();
     const [distributionCenter,setDistributionCenter] =React.useState();
-    const [serviceId,setService] = React.useState();
+    const [serviceId,setServiceId] = React.useState();
     const [date,setDate] = React.useState();
     const [time,setTime] = React.useState();
 
@@ -40,7 +40,19 @@ function BookAService () {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         const servicePlan = {fullName,email,numberPhone,licensePlate,modelId,distributionCenter,serviceId,date,time}
+        console.log(servicePlan)
+
+        if(servicePlan.modelId == undefined || servicePlan.modelId == ""){
+            alert("Choose model")
+            return
+        } 
+
+        if(servicePlan.serviceId == undefined || servicePlan.serviceId == ""){
+            alert("Choose service")
+            return
+        } 
 
         if(checked =="checked"){
             alert("gửi gòi")
@@ -82,9 +94,10 @@ function BookAService () {
                  />
             </FloatingLabel>
             <FloatingLabel controlId="typecar" label="MẪU XE *" className="mb-3">
-                <Form.Select aria-label="Chọn mẫu xe" onChange={(e)=> setModel(e.target.selectedIndex)}>
+                <Form.Select aria-label="Chọn mẫu xe" onChange={(e)=> setModelId(e.target.value)}>
+                    <option></option>
                     {models.map((item,index) => (
-                        <option key={index}>{item.nameModel}</option>
+                        <option value={item.id} key={index}>{item.nameModel}</option>
                     ))}
                 </Form.Select>
     
@@ -98,11 +111,10 @@ function BookAService () {
                 <h3 style={{fontWeight:"bold"}}>2. Chọn loại dịch vụ</h3>
             </div>
             <FloatingLabel controlId="typeservice" label="DỊCH VỤ *" className="mb-3">
-                <Form.Select aria-label="Chọn loại dịch vụ" 
-                onChange={(e)=> setService(e.target.selectedIndex)}
-                >
+                <Form.Select aria-label="Chọn loại dịch vụ" onChange={(e)=> setServiceId(e.target.value)}>
+                    <option></option>
                     {services.map((item,index) => (
-                        <option value="">{item.nameService}</option>
+                        <option key={index} value={item.id}>{item.nameService}</option>
                     ))}
                 </Form.Select>
             </FloatingLabel>
