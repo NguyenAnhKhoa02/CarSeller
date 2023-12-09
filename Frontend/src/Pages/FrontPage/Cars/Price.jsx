@@ -1,9 +1,9 @@
 import {Row, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import banner from "../../../Components/Assets/bannerservice1.png"
-import car2 from "../../../Components/Assets/Cars/car2.png"
-import car3 from "../../../Components/Assets/Cars/car3.png"
-import car4 from "../../../Components/Assets/Cars/car4.png"
+import banner from "../../../Components/Assets/Page/bannerservice1.png"
+import car2 from "../../../Components/Assets/ForDatabase/Cars/car2.png"
+import car3 from "../../../Components/Assets/ForDatabase/Cars/car3.png"
+import car4 from "../../../Components/Assets/ForDatabase/Cars/car4.png"
 
 function Price () {
     return (<>

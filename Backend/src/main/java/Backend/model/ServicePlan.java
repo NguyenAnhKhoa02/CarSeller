@@ -27,18 +27,13 @@ public class ServicePlan {
     private Date date;
     private Time time;
     private String status;
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
     @Column(name = "serviceId")
     private Long serviceId;
-    public Long getServiceId() { return serviceId; }
-    public void setServiceId(Long serviceId) { this.serviceId = serviceId; }
     @ManyToOne(
             cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "serviceId",
-
             insertable = false,
             updatable = false
     )
@@ -46,18 +41,11 @@ public class ServicePlan {
     private Service services;
     @Column(name = "modelId")
     private Long modelId;
-    public Long getModelId() {
-        return modelId;
-    }
-    public void setModelId(Long modelId) {
-        this.modelId = modelId;
-    }
     @ManyToOne(
             cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "modelId",
-
             insertable = false,
             updatable = false
     )

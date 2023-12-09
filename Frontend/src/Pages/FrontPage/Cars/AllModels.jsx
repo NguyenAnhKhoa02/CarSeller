@@ -1,9 +1,9 @@
 import {Row, Col, Button} from "react-bootstrap"
 import {useEffect,useState} from "react"
 import {Link} from "react-router-dom"
-import banner from "../../../Components/Assets/bannerservice1.png"
-import icon1 from "../../../Components/Assets/allproducticon1.png"
-import icon2 from "../../../Components/Assets/allproducticon2.png"
+import banner from "../../../Components/Assets/Page/bannerservice1.png"
+import icon1 from "../../../Components/Assets/Page/allproducticon1.png"
+import icon2 from "../../../Components/Assets/Page/allproducticon2.png"
 
 function AllModels () {
     const [models, setModels] = useState([]);

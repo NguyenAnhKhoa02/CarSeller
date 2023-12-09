@@ -30,7 +30,7 @@
     display: flex;
     justify-content: center;
     margin-top: 10px;
-  }
+}
 .imageButtons button {
   width: 20px;
   height: 20px;
@@ -47,7 +47,6 @@
 .Table{
     border: solid 1px #ccc ;
     font-weight: 380;
-
 }
 .bg-grey{
     background-color: #dfdfe4!important;
@@ -55,6 +54,13 @@
 /*===================================Offers==============================*/
 .Container-image {
     margin-bottom: 20px;
+}
+.PromotionButton {
+    color: black;
+    font-weight: bold;
+}
+.PromotionButton:hover  {
+    color: red;
 }
 /*===================================Services==============================*/
 .centered{
@@ -93,21 +99,17 @@ label.form-check-label{
     width: 25%;
     margin: 0 0 30px 12px;
 }
-
 .fontWeight-700{
     font-weight: 700;
 }
-
 .fontWeight-750{
     font-weight: 750;
 }
-
 .description{
     font-weight: 750;
     font-size: 16px;
     text-align: center;
 }
-
 .fontS-16{
     font-size: 16px;
 }

@@ -1,15 +1,7 @@
 import {Row, Col, Accordion, Button} from "react-bootstrap"
 import {Link,useParams} from "react-router-dom"
 import {useState, useEffect} from 'react';
-import banner from "../../../Components/Assets/bannerservice1.png"
-import car1 from "../../../Components/Assets/Cars/xpandercrossbrown.png";
-import car2 from "../../../Components/Assets/Cars/xpandercrossgray.png";
-import car3 from "../../../Components/Assets/Cars/xpandercrossblack.png";
-import car4 from "../../../Components/Assets/Cars/xpandercrosswhite.png";
-import car6 from "../../../Components/Assets/Cars/xpandercrosswhite.png";
-import car7 from "../../../Components/Assets/Cars/xpandercrossblack.png";
-import car8 from "../../../Components/Assets/Cars/xpandercrossbrown.png";
-import car9 from "../../../Components/Assets/Cars/xpandercrossgray.png";
+import banner from "../../../Components/Assets/Page/bannerservice1.png"
 
 function Versions({}) {
     const { id } = useParams();
@@ -90,8 +82,8 @@ function Versions({}) {
         {versions.map((item, index) => (
             <Col key={index} style={{textAlign:"center"}}>
                 <ImageFieldCus id={index} url={versions[index].colors[0]}></ImageFieldCus>
-                <h4 style={{fontWeight:"bold"}}>Xpander Cross</h4>
-                <p>Giá 698.000.000 VNĐ</p>
+                <h4 style={{fontWeight:"bold"}}>{item.nameVersion}</h4>
+                <p>Giá {item.price} VNĐ</p>
                 <div className="imageButtons">
                     {item.colors.map((colorItem, colorIndex) => (
                         <button style={{backgroundColor:`${colorItem.color}`}} onClick={() => handleImageChange(index,colorItem.imageName)}></button>

@@ -11,7 +11,7 @@ public class FileService {
     private String pathFile;
 
     private String pathSavedFile;
-    private String path = "C:/CarSeller/";
+    private String path = "C:/CarSeller/Frontend/src/Components/Assets/";
     public FileService(){
         /*check C:/CarSeller is exists
         * if not: create

@@ -1,10 +1,10 @@
 import {Row, Col, Nav,Navbar,NavDropdown} from "react-bootstrap"
 import {Link} from "react-router-dom";
-import Logo from "../Assets/Logo.png"
-import top1 from "../Assets/top1.png" 
-import top2 from "../Assets/top2.png" 
-import top3 from "../Assets/top3.png" 
-import top4 from "../Assets/top4.png" 
+import Logo from "../Assets/Page/Logo.png"
+import top1 from "../Assets/Page/top1.png" 
+import top2 from "../Assets/Page/top2.png" 
+import top3 from "../Assets/Page/top3.png" 
+import top4 from "../Assets/Page/top4.png" 
 import "./Navbar.css"
 
 function Header() {

@@ -1,16 +1,16 @@
 import {Row,Carousel,Button,Card,CardGroup} from "react-bootstrap";
 import {useEffect,useState} from "react";
 import Slider from "react-slick";
-import banner1 from "../../Components/Assets/banner1.png";
-import banner2 from "../../Components/Assets/banner2.png";
-import banner3 from "../../Components/Assets/banner3.png";
-import banner4 from "../../Components/Assets/banner4.png";
-import banner5 from "../../Components/Assets/banner5.png";
-import banner6 from "../../Components/Assets/banner6.png";
-import dv1 from "../../Components/Assets/dv1.png";
-import dv2 from "../../Components/Assets/dv2.png";
-import dv3 from "../../Components/Assets/dv3.png";
-import dv4 from "../../Components/Assets/dv4.png";
+import banner1 from "../../Components/Assets/Page/banner1.png";
+import banner2 from "../../Components/Assets/Page/banner2.png";
+import banner3 from "../../Components/Assets/Page/banner3.png";
+import banner4 from "../../Components/Assets/Page/banner4.png";
+import banner5 from "../../Components/Assets/Page/banner5.png";
+import banner6 from "../../Components/Assets/Page/banner6.png";
+import dv1 from "../../Components/Assets/Page/dv1.png";
+import dv2 from "../../Components/Assets/Page/dv2.png";
+import dv3 from "../../Components/Assets/Page/dv3.png";
+import dv4 from "../../Components/Assets/Page/dv4.png";
 
 function Home() {
   const settings = {

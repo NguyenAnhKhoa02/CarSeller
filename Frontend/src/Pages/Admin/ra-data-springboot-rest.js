@@ -53,7 +53,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         url = `${apiUrl}/${resource}/${params.id}`;
         break;
       case GET_MANY: {
-        //new code
         url = `${apiUrl}/${resource}/all`;
         break;
       }
@@ -117,6 +116,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
               formData.append('colorFiles',color.imageFile.rawFile)
           });
           options.body=formData
+        } else if(resource == 'promotions') {
+          const formData = new FormData()
+          formData.append('title',params.data.title)
+          formData.append('content',params.data.content)
+          if(params.data.imageFile != undefined)
+            formData.append('imageFile',params.data.imageFile.rawFile)
+          options.body=formData
+        } else {
+          options.body = JSON.stringify(params.data);
         }
         options.method = "PUT";
         break;
@@ -132,8 +140,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           if(params.data.imageFile != undefined)
             formData.append('imageFile',params.data.imageFile.rawFile)
           options.body=formData
-        }
-        else if(resource == 'versions'){
+        } else if(resource == 'versions'){
           const formData = new FormData()
           formData.append('airBag',params.data.airBag)
           formData.append('antiTheft',params.data.antiTheft)
@@ -165,10 +172,17 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             formData.append('colors',JSON.stringify(colorObject))
           });
           options.body=formData
+        } else if(resource == 'promotions') {
+          const formData = new FormData()
+          formData.append('title',params.data.title)
+          formData.append('content',params.data.content)
+          if(params.data.imageFile != undefined)
+            formData.append('imageFile',params.data.imageFile.rawFile)
+          options.body=formData
+        } else {
+          options.body = JSON.stringify(params.data);
         }
-        
         options.method = "POST";
-      
         break;
       case DELETE:
         url = `${apiUrl}/${resource}/${params.id}`;

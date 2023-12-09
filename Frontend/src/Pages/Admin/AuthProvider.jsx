@@ -33,7 +33,6 @@ export const authProvider = {
     },
     // called when the API returns an error
     checkError: ({ status }) => {
-        console.log(status)
         if (status === 401 || status === 403) {
             localStorage.removeItem("username");
             localStorage.removeItem("role");
@@ -48,6 +47,6 @@ export const authProvider = {
     // called when the user navigates to a new location, to check for permissions / roles
     getPermissions: () => {
         const role = localStorage.getItem('role');
-        return role ? Promise.resolve(role) : Promise.reject();
+        return Promise.resolve(role);
     }
 };

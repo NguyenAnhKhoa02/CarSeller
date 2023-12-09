@@ -58,7 +58,7 @@ public class serviceController {
         return arrayList;
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Service> updateService(@PathVariable Long id, @RequestBody Service updatedService) {
         Service existingService = serviceRepository.findById(id).orElse(null);
 

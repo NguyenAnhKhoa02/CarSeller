@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Transactional
 public class Color {
     @Id
@@ -20,14 +20,4 @@ public class Color {
     private Long id;
     private String color;
     private String imageName;
-    public void setColor(String color) {
-        this.color = color;
-    }
-    public String getColor() { return color; }
-    public String getImageName() {
-        return imageName;
-    }
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
 }

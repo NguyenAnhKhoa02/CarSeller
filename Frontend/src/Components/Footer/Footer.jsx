@@ -1,8 +1,8 @@
 import {Row,Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import phone from "../Assets/foot1.png"
-import phone2 from "../Assets/foot2.png"
-import message from "../Assets/foot3.png"
+import phone from "../Assets/Page/foot1.png"
+import phone2 from "../Assets/Page/foot2.png"
+import message from "../Assets/Page/foot3.png"
 import "./Footer.css"
 
 function Footer() {

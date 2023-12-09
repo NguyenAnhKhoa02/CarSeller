@@ -1,5 +1,5 @@
 import {Row} from "react-bootstrap"
-import banner from "../../../Components/Assets/bannerservice1.png"
+import banner from "../../../Components/Assets/Page/bannerservice1.png"
 
 function Warranty() {
     return (<>

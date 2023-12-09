@@ -1,10 +1,10 @@
 import {Row, Col, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import banner from "../../../Components/Assets/bannerservice2.png"
-import service1 from "../../../Components/Assets/expressservice1.png"
-import service2 from "../../../Components/Assets/expressservice2.png"
-import service3 from "../../../Components/Assets/expressservice3.png"
-import service4 from "../../../Components/Assets/expressservice4.png"
+import banner from "../../../Components/Assets/Page/bannerservice2.png"
+import service1 from "../../../Components/Assets/Page/expressservice1.png"
+import service2 from "../../../Components/Assets/Page/expressservice2.png"
+import service3 from "../../../Components/Assets/Page/expressservice3.png"
+import service4 from "../../../Components/Assets/Page/expressservice4.png"
 
 function ExpressService() {
     return (<>

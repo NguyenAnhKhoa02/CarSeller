@@ -108,7 +108,6 @@ public class modelController {
 
     /*for fetch*/
     @GetMapping("/all")
-    @CrossOrigin("http://localhost:3000/SanPham/TatCaDongXe")
     public List<Model> getAll(){
         return modelRepository.findAll();
     }

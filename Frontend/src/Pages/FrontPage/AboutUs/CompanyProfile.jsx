@@ -1,5 +1,5 @@
 import {Row} from "react-bootstrap"
-import banner from "../../../Components/Assets/CompanyProfile.jpg"
+import banner from "../../../Components/Assets/Page/CompanyProfile.jpg"
 
 function CompanyProfile () {
     return (<>

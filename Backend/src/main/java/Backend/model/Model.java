@@ -37,13 +37,4 @@ public class Model {
             mappedBy = "servicePlanModels"
     )
     private List<ServicePlan> servicePlans;
-    public Long getId() { return id; }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNameModel() { return nameModel; }
-    public String getUrl() {return imageName;}
-    public void setNameModel(String name) {
-        this.nameModel = name;
-    }
 }

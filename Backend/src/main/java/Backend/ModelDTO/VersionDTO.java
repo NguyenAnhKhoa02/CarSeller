@@ -57,7 +57,6 @@ public class VersionDTO {
         version.setSeatMaterial(seatMaterial);
         version.setWiperBlade(wiperBlade);
         version.setWrappedSteeringWheelAndGearLever(wrappedSteeringWheelAndGearLever);
-
         return version;
     }
 }

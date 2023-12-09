@@ -1,22 +1,7 @@
-import {Row,Col,Button,Form,FloatingLabel,Table,Card} from "react-bootstrap";
+import {Row,Col,Button,Table} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import car1 from "../../../Components/Assets/Cars/car1.png";
-import car2 from "../../../Components/Assets/car2.png";
-import car3 from "../../../Components/Assets/car3.png";
-import car4 from "../../../Components/Assets/car4.png";
-
-import Slider from "react-slick";
 
 function TryDriveSchedule() {
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    arrows: true,
-    speed: 500,
-  };
   return (
     <>
     <Row style={{ position: "relative", textAlign: "center", color: "black" }}>

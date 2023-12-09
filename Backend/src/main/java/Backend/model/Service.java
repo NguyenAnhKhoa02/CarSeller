@@ -24,6 +24,4 @@ public class Service {
     )
     private List<ServicePlan> servicePlans;
     private String nameService;
-    public String getNameService() { return nameService; }
-    public void setNameService(String nameService) { this.nameService = nameService; }
 }

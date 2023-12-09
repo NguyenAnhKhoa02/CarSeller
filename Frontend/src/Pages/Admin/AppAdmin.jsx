@@ -3,17 +3,17 @@ import { dataProvider } from "./DataProvider";
 import { authProvider } from "./AuthProvider";
 import { Dashboard } from "./Data/Dashboard";
 import { VersionList, VersionCreate, VersionEdit } from "./Data/Version";
-import { ColorList, ColorCreate, ColorShow} from "./Data/Color";
 import { CarModelList, CarModelCreate, CarModelEdit } from "./Data/CarModel";
 import { ServiceList, ServiceCreate, ServiceEdit} from "./Data/Service";
 import { UserList, UserCreate, UserEdit} from "./Data/User";
 import { TestingRegisterList, TestingRegisterEdit, TestingRegisterShow } from "./Data/TestingRegister";
 import { ServicePlanList, ServicePlanEdit, ServicePlanShow } from "./Data/ServicePlan";
+import { PromotionList, PromotionCreate, PromotionEdit } from "./Data/Promotions";
 import VersionIcon from '@mui/icons-material/DirectionsCar';
-import ColorIcon from '@mui/icons-material/InvertColors';
 import CarModelIcon from '@mui/icons-material/CarCrash';
 import ServiceIcon from '@mui/icons-material/Construction';
 import UserIcon from '@mui/icons-material/AccountBox';
+import PromotionIcon from '@mui/icons-material/Celebration';
 import TestingRegissterIcon from '@mui/icons-material/CarRental';
 import ServicePlanIcon from '@mui/icons-material/CalendarMonth';
 
@@ -29,6 +29,7 @@ function App () {
                   ? <>
                       <Resource name="users" icon={UserIcon} list={UserList} edit={UserEdit} create={UserCreate}/>
                       <Resource name="models" icon={CarModelIcon} list={CarModelList} edit={CarModelEdit} create={CarModelCreate} recordRepresentation="nameModel"/>
+                      <Resource name="promotions" icon={PromotionIcon} list={PromotionList} edit={PromotionEdit} create={PromotionCreate} />
                       <Resource name="services" icon={ServiceIcon} list={ServiceList} edit={ServiceEdit} create={ServiceCreate} recordRepresentation="nameService"/>
                     </>
                   : null,

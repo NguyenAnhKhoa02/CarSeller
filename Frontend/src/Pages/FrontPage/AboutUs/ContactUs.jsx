@@ -1,7 +1,7 @@
 import {Row, Col, Button, Form, FloatingLabel, Card} from "react-bootstrap";
-import banner from "../../../Components/Assets/contactUs.png";
-import icon from "../../../Components/Assets/foot2.png"
-import email from "../../../Components/Assets/foot3.png"
+import banner from "../../../Components/Assets/Page/contactUs.png";
+import icon from "../../../Components/Assets/Page/foot2.png"
+import email from "../../../Components/Assets/Page/foot3.png"
 
 function ContactUs () {
     

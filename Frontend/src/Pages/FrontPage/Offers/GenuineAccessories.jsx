@@ -1,14 +1,14 @@
 import {Row, Col, Button} from "react-bootstrap";
 import {Link} from "react-router-dom"
-import banner from "../../../Components/Assets/accessoriessBanner1.jpg"
-import OpCanTruoc from "../../../Components/Assets/OpCanTruoc.jpg"
-import OpCanSau from "../../../Components/Assets/OpCanSau.jpg"
-import OpHongXe from "../../../Components/Assets/OpHongXe.jpg"
-import OpXeSau1 from "../../../Components/Assets/OpCanSau1.jpg"
-import OpXeTruoc1 from "../../../Components/Assets/OpCanTruoc1.jpg"
-import LogoPAJERO from "../../../Components/Assets/LogoPAJERO.jpg"
-import OpVeToiMau1 from "../../../Components/Assets/OpVeToiMau1.jpg"
-import CanhLuotGio from "../../../Components/Assets/Canh_luot_gio1.jpg"
+import banner from "../../../Components/Assets/Page/banneroffers3.jpg"
+import OpCanTruoc from "../../../Components/Assets/Page/OpCanTruoc1.jpg"
+import OpCanSau from "../../../Components/Assets/Page/OpCanSau1.jpg"
+import OpHongXe from "../../../Components/Assets/Page/OpHongXe.jpg"
+import OpXeSau1 from "../../../Components/Assets/Page/OpCanSau2.jpg"
+import OpXeTruoc1 from "../../../Components/Assets/Page/OpCanTruoc2.jpg"
+import LogoPAJERO from "../../../Components/Assets/Page/LogoPAJERO.jpg"
+import OpVeToiMau1 from "../../../Components/Assets/Page/OpVeToiMau.jpg"
+import CanhLuotGio from "../../../Components/Assets/Page/CanhLuotGio.jpg"
 
 function GenuineAccessories() {
     return (<>

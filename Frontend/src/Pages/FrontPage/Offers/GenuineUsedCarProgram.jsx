@@ -1,8 +1,8 @@
 import {Row, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
-import banner from "../../../Components/Assets/banneroffers2.png"
-import MUC1 from "../../../Components/Assets/MUC1.png"
-import MUC2 from "../../../Components/Assets/MUC2.png"
+import banner from "../../../Components/Assets/Page/banneroffers2.png"
+import MUC1 from "../../../Components/Assets/Page/MUC1.png"
+import MUC2 from "../../../Components/Assets/Page/MUC2.png"
 
 function GenuineUsedCarProgram() {
     return (<>

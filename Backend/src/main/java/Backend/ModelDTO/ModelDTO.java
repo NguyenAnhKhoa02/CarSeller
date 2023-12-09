@@ -30,7 +30,6 @@ public class ModelDTO {
         model.setInfo(info);
         model.setNumCarSeat(numCarSeat);
         model.setFuel(fuel);
-
         return model;
     }
 }

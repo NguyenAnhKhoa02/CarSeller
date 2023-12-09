@@ -25,7 +25,6 @@ public class ServicePlanDTO {
     private  Long serviceId;
     private  Long modelId;
 
-
     public ServicePlan mappedServicePlan(){
         Backend.model.ServicePlan servicePlan = new Backend.model.ServicePlan();
         servicePlan.setId(id);
@@ -34,7 +33,6 @@ public class ServicePlanDTO {
         servicePlan.setNumberPhone(numberPhone);
         servicePlan.setLicensePlate(licensePlate);
         servicePlan.setDistributionCenter(distributionCenter);
-
         servicePlan.setDate(Date.valueOf(date));
         //SimpleDateFormat sdf = new SimpleDateFormat()
         LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
