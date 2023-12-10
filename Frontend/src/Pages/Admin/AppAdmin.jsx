@@ -9,6 +9,7 @@ import { UserList, UserCreate, UserEdit} from "./Data/User";
 import { TestingRegisterList, TestingRegisterEdit, TestingRegisterShow } from "./Data/TestingRegister";
 import { ServicePlanList, ServicePlanEdit, ServicePlanShow } from "./Data/ServicePlan";
 import { PromotionList, PromotionCreate, PromotionEdit } from "./Data/Promotions";
+import { DistributionCenterCreate, DistributionCenterEdit, DistributionCenterList } from "./Data/DistributionCenter";
 import VersionIcon from '@mui/icons-material/DirectionsCar';
 import CarModelIcon from '@mui/icons-material/CarCrash';
 import ServiceIcon from '@mui/icons-material/Construction';
@@ -16,6 +17,7 @@ import UserIcon from '@mui/icons-material/AccountBox';
 import PromotionIcon from '@mui/icons-material/Celebration';
 import TestingRegissterIcon from '@mui/icons-material/CarRental';
 import ServicePlanIcon from '@mui/icons-material/CalendarMonth';
+import DistributionCenterIcon from '@mui/icons-material/EmojiTransportation';
 
 const lightTheme = defaultTheme;
 const darkTheme = { ...defaultTheme, palette: { mode: "dark" } };
@@ -31,6 +33,7 @@ function App () {
                       <Resource name="models" icon={CarModelIcon} list={CarModelList} edit={CarModelEdit} create={CarModelCreate} recordRepresentation="nameModel"/>
                       <Resource name="promotions" icon={PromotionIcon} list={PromotionList} edit={PromotionEdit} create={PromotionCreate} />
                       <Resource name="services" icon={ServiceIcon} list={ServiceList} edit={ServiceEdit} create={ServiceCreate} recordRepresentation="nameService"/>
+                      <Resource name="distributionCenters" icon={DistributionCenterIcon} list={DistributionCenterList} edit={DistributionCenterEdit} create={DistributionCenterCreate} recordRepresentation={"distributionCenter"}/>
                     </>
                   : null,
           ]}
