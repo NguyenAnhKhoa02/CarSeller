@@ -14,9 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 
 @RestController
 @RequestMapping("/promotions")
@@ -59,7 +59,7 @@ public class promotionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Promotion> getOnePromotion(@PathVariable Long id) {
+    public ResponseEntity<Promotion> getOnePromotion(@PathVariable Long id) throws SQLException, IOException {
         Promotion promotion = promotionRepository.findById(id).orElse(null);
         return ResponseEntity
                 .ok()
@@ -71,7 +71,6 @@ public class promotionController {
         Promotion promotion = updatePromotionDTO.mappedPromotion();
         if(updatePromotionDTO.getImageFile() != null){
             fileService = new FileService();
-
             fileService.copyFileFromMultiFile(updatePromotionDTO.getImageFile());
             promotion.setImageName(fileService.getNameFile());
         } else if (updatePromotionDTO.getImageName() != null) {
@@ -79,7 +78,6 @@ public class promotionController {
         }else{
             promotion.setImageName("empty");
         }
-
         promotionRepository.updatePromotion(promotion);
         return ResponseEntity.status(HttpStatus.OK).body(promotion);
     }

@@ -16,7 +16,7 @@ function GenuineAccessories() {
         <img src={banner} height="550" width="100%"/>
         <div className="centered">
             <h1 style={{fontWeight:"bold", fontSize:"3rem"}}>Phụ kiện</h1>
-            <p style={{fontSize:"1.5rem"}}>Cá tính theo cách của ban!</p>
+            <p style={{fontSize:"1.5rem"}}>Cá tính theo cách của bạn!</p>
         </div>
     </Row>
     <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
@@ -32,15 +32,15 @@ function GenuineAccessories() {
             </Col>
             <Col>
                 <div className="Container-image">
-                    <img src={OpCanSau} style={{maxWidth:"100%"}}/>
+                    <img src={OpHongXe} style={{maxWidth:"100%"}}/>
                 </div>
-                <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP CẢN SAU</h3>
+                <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP HÔNG XE</h3>
             </Col>
             <Col>
                 <div className="Container-image">
-                    <img src={OpHongXe} style={{maxWidth:"100%"}}/>
+                    <img src={OpCanSau} style={{maxWidth:"100%"}}/>
                 </div>
-                <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP CẢN TRƯỚC</h3>
+                <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP CẢN SAU</h3>
             </Col>
             <Col>
                 <div className="Container-image">
@@ -58,15 +58,15 @@ function GenuineAccessories() {
             </Col>
             <Col>
                 <div className="Container-image">
-                    <img src={OpVeToiMau1} style={{maxWidth:"100%"}}/>
-                </div>
-                <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP VÈ TỐI MÀU PAJERO</h3>
-            </Col>
-            <Col>
-                <div className="Container-image">
                     <img src={OpXeSau1} style={{maxWidth:"100%"}}/>
                 </div>
                 <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP CẢN SAU PAJERO</h3>
+            </Col>
+            <Col>
+                <div className="Container-image">
+                    <img src={OpVeToiMau1} style={{maxWidth:"100%"}}/>
+                </div>
+                <h3  style={{fontWeight:"700", fontSize:"32px"}}>ỐP VÈ TỐI MÀU PAJERO</h3>
             </Col>
             <Col>
                 <div className="Container-image">
