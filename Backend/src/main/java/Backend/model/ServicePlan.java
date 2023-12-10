@@ -51,11 +51,11 @@ public class ServicePlan {
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            targetEntity = AddressDistributionCenter.class
+            targetEntity = DistributionCenter.class
     )
     @JoinColumn(
-            name = "address_id",
-            referencedColumnName = "id"
+            name = "distribution_id",
+            referencedColumnName = "id_distribution_center"
     )
-    private AddressDistributionCenter addressDistributionCenter;
+    private DistributionCenter addressDistributionCenter;
 }

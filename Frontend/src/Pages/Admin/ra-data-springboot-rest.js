@@ -170,7 +170,16 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           if(params.data.imageFile != undefined)
             formData.append('imageFile',params.data.imageFile.rawFile)
           options.body=formData
-        } else {
+        } else if(resource == 'distributionCenters'){
+            const formData = new FormData()
+            
+            formData.append('nameDistributionCenter',params.data.nameDistributionCenter)
+            formData.append('hotline',params.data.hotline)
+            formData.append('addresses',JSON.stringify(params.data.addresses))
+
+            options.body=formData
+          } 
+        else {
           options.body = JSON.stringify(params.data);
         }
         options.method = "POST";
@@ -220,6 +229,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
      * @returns {Promise} the Promise for a data response
      */
   return (type, resource, params) => {
+    console.log(type)
     // simple-rest doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
     if (type === UPDATE_MANY) {
       return Promise.all(

@@ -1,5 +1,7 @@
 package Backend.controller;
 
+import Backend.ModelDTO.DistributionCenterDTO;
+import Backend.ModelDTO.ModelDTO;
 import Backend.model.DistributionCenter;
 import Backend.model.Model;
 import Backend.repository.DistributionCenterReposity;
@@ -11,10 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +23,13 @@ import java.util.List;
 public class distributionCenterController {
     @Autowired
     private DistributionCenterReposity distributionCenterReposity;
+
+    @PostMapping
+    public @ResponseBody ResponseEntity<DistributionCenter> saveDistributionCenter(@ModelAttribute DistributionCenterDTO distributionCenterDTO){
+        DistributionCenter distributionCenter = distributionCenterDTO.mappedDisributionCenter();
+        distributionCenterReposity.save(distributionCenter);
+        return new ResponseEntity<>(distributionCenter,HttpStatus.CREATED);
+    }
 
     @GetMapping
     public ResponseEntity<Page<DistributionCenter>> getAllDistributions(
@@ -41,6 +47,21 @@ public class distributionCenterController {
                 .contentType(MediaType.valueOf("application/json"))
                 .body(distributionCenterPage);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DistributionCenter> getOneDistributionCenter(@PathVariable Long id){
+        DistributionCenter distributionCenter = distributionCenterReposity.findById(id).orElse(null);
+        System.out.println(distributionCenter);
+        return ResponseEntity
+                .ok()
+                .body(distributionCenter);
+    }
+
+    @PutMapping
+    public ResponseEntity<DistributionCenter> updateDistributionCenter(@ModelAttribute DistributionCenterDTO distributionCenterDTO){
+        return new ResponseEntity<>(null,HttpStatus.OK);
+    }
+
 
     @GetMapping("/all")
     public List<DistributionCenter> getAlls(){
