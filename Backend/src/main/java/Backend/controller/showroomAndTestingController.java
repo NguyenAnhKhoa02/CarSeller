@@ -11,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/showroomAndTestings")
-public class showroomAndTesting {
+public class showroomAndTestingController {
     @Autowired
     private ShowroomAndTestingResposity showroomAndTestingResposity;
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<ShowroomAndTesting> getAlls(){
         return showroomAndTestingResposity.findAll();
     }

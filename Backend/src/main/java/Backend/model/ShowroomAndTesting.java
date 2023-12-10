@@ -26,7 +26,7 @@ public class ShowroomAndTesting {
             name = "fk_address",
             referencedColumnName = "id_distribution_center"
     )
-    private AddressDistributionCenter addressDistributionCenter;
+    private DistributionCenter distributionCenter;
     private Date date;
     private String timeWorking;
 }
