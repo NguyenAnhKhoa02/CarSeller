@@ -11,7 +11,7 @@ import TestDriveSchedule from "./FrontPage/Cars/TestDriveSchedule";
 import FleetSales from "./FrontPage/Offers/Fleetsales";
 import Promotion from "./FrontPage/Offers/Promotion";
 import GenuineUsedCarProgram from "./FrontPage/Offers/GenuineUsedCarProgram";
-import GenuineAccessories from "./FrontPage/Offers/GenuineAccessories";
+import Accessories from "./FrontPage/Offers/Accessories";
 import Warranty from "./FrontPage/Services/Warranty";
 import ExpressService from "./FrontPage/Services/ExpressService";
 import Maintenance from "./FrontPage/Services/Maintenance";
@@ -48,7 +48,7 @@ return (
                 <Route path="MuaXe/BanHangDuAn" element={<FleetSales />} />
                 <Route path="MuaXe/XeDaQuaSuDungChinhHang" element={<GenuineUsedCarProgram />} />
                 <Route path="MuaXe/ChuongTrinhKhuyenMai" element={<Promotion />} />
-                <Route path="MuaXe/PhuKienChinhHang" element={<GenuineAccessories />} />
+                <Route path="MuaXe/PhuKienChinhHang" element={<Accessories />} />
                 <Route path="DichVu/ChinhSachBaoHanh" element={<Warranty />} />
                 <Route path="DichVu/BaoDuongNhanh" element={<ExpressService />} />
                 <Route path="DichVu/CacHangMucBaoDuong" element={<Maintenance />} />

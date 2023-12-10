@@ -1,4 +1,3 @@
-import { darken } from "@mui/material";
 import { stringify } from "query-string";
 
 import {
@@ -46,7 +45,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             sortOrder: order,
         };
         url = `${apiUrl}/${resource}?${stringify(query)}&page=${page}&pageSize=${perPage}`;
-
         break;
       }
       case GET_ONE:
@@ -66,20 +64,16 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
         if(resource == 'models'){
           const formData = new FormData()
-          console.log(params)
           formData.append('id',params.data.id)
           formData.append('nameModel',params.data.nameModel)
           formData.append('info',params.data.info)
           formData.append('numCarSeat',params.data.numCarSeat)
           formData.append('fuel',params.data.fuel)
-          console.log(params.data)
-
           if(typeof params.data.imageName == "string")
             formData.append('imageName',params.data.imageName)
           if(typeof params.data.imageName == "object")
             if(params.data.imageName != null)
               formData.append('imageFile',params.data.imageName.rawFile)
-
           options.body=formData
         }
         else if(resource == 'versions'){
@@ -104,14 +98,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           params.data.colors.forEach((color,index) => {
             const colorObject = new Object()
             colorObject.color = color.color
-  
             if(color.imageFile != undefined)
               colorObject.imageName = color.imageFile.title
             else
               colorObject.imageName = color.imageName
-            
             formData.append('colors',JSON.stringify(colorObject))
-            
             if(color.imageFile != undefined)
               formData.append('colorFiles',color.imageFile.rawFile)
           });
@@ -120,8 +111,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           const formData = new FormData()
           formData.append('title',params.data.title)
           formData.append('content',params.data.content)
-          if(params.data.imageFile != undefined)
-            formData.append('imageFile',params.data.imageFile.rawFile)
+          if(typeof params.data.imageName == "string")
+            formData.append('imageName',params.data.imageName)
+          if(typeof params.data.imageName == "object")
+            if(params.data.imageName != null)
+              formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
         } else {
           options.body = JSON.stringify(params.data);
@@ -132,7 +126,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         url = `${apiUrl}/${resource}`;
         if(resource == 'models'){
           const formData = new FormData()
-          console.log(params.data)
           formData.append('nameModel',params.data.nameModel)
           formData.append('info',params.data.info)
           formData.append('numCarSeat',params.data.numCarSeat)
@@ -161,14 +154,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           params.data.colors.forEach((color,index) => {
             const colorObject = new Object()
             colorObject.color = color.color
-            
             if(color.imageFile != null){
               colorObject.imageName = color.imageFile.title
               formData.append('colorFiles',color.imageFile.rawFile)
             }
             else 
               colorObject.imageName = 'empty'
-
             formData.append('colors',JSON.stringify(colorObject))
           });
           options.body=formData

@@ -12,7 +12,6 @@ const VersionTitle = () => {
     if(url == 'empty'){
         return null;
     }
-    console.log(url)
     if(url instanceof Object){
         const imageUrl = url && url.src;
         return imageUrl ? <img height={300} width={300} src={imageUrl} alt="Image" id="image"/> : null;
@@ -71,11 +70,7 @@ export const VersionEdit = (props) => (
                 </ReferenceInput>
             </Box>
         </Box>
-        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-            <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                <NumberInput fullWidth source="price" required/>
-            </Box>
-        </Box>
+        <NumberInput fullWidth source="price" required/>
         <br/>
         <Typography variant="h5" gutterBottom> 
             Detail
@@ -166,11 +161,7 @@ export const VersionCreate = (props) => (
                 </ReferenceInput>
             </Box>
         </Box>
-        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-            <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                <NumberInput fullWidth source="price" required/>
-            </Box>
-        </Box>
+        <NumberInput fullWidth source="price" required/>
         <br/>
         <Typography variant="h5" gutterBottom> 
             Detail

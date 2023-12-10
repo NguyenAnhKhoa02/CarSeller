@@ -24,7 +24,6 @@ function App () {
     return (
         <Admin basename="/admin" authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard} theme={lightTheme} darkTheme={darkTheme}>
           {permissions => [
-            console.log(permissions),
               permissions === 'admin'
                   ? <>
                       <Resource name="users" icon={UserIcon} list={UserList} edit={UserEdit} create={UserCreate}/>
