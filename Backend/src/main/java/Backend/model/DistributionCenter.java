@@ -23,6 +23,7 @@ public class DistributionCenter {
     )
     private Long id;
     private String hotline;
+    private String nameDistributionCenter;
 
     @OneToMany(
             cascade = CascadeType.ALL,
