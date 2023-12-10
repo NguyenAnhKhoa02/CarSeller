@@ -32,7 +32,7 @@ public class ServicePlanDTO {
         servicePlan.setEmail(email);
         servicePlan.setNumberPhone(numberPhone);
         servicePlan.setLicensePlate(licensePlate);
-        servicePlan.setDistributionCenter(distributionCenter);
+//        servicePlan.setDistributionCenter(distributionCenter);
         servicePlan.setDate(Date.valueOf(date));
         //SimpleDateFormat sdf = new SimpleDateFormat()
         LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
@@ -40,8 +40,8 @@ public class ServicePlanDTO {
         Time sqlTime = Time.valueOf(localTime);
         servicePlan.setTime(sqlTime);
         servicePlan.setStatus(status);
-        servicePlan.setServiceId(serviceId);
-        servicePlan.setModelId(modelId);
+//        servicePlan.setServiceId(serviceId);
+//        servicePlan.setModelId(modelId);
         servicePlan.setStatus("watting");
         return servicePlan;
     }

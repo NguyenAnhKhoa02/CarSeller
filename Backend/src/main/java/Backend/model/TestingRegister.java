@@ -19,7 +19,6 @@ public class TestingRegister {
     private String fullName;
     private String email;
     private String numberPhone;
-    private String distributionCenter;
     private String carPD;
     private String status;
     @Column(name = "versionId",nullable = false)
@@ -34,4 +33,14 @@ public class TestingRegister {
     )
     @JsonIgnore
     private Version versions;
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            targetEntity = AddressDistributionCenter.class
+    )
+    @JoinColumn(
+            name = "fk_address_center",
+            referencedColumnName = "id"
+    )
+    private AddressDistributionCenter addressDistributionCenter;
 }

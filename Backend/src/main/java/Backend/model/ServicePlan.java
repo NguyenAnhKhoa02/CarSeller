@@ -23,24 +23,21 @@ public class ServicePlan {
     private  String email;
     private  String numberPhone;
     private  String licensePlate;
-    private String distributionCenter;
     private Date date;
     private Time time;
     private String status;
-    @Column(name = "serviceId")
-    private Long serviceId;
-    @ManyToOne(
-            cascade = CascadeType.ALL
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            targetEntity = Service.class
     )
     @JoinColumn(
-            name = "serviceId",
+            name = "service_id",
+            referencedColumnName = "id_service",
             insertable = false,
             updatable = false
     )
-    @JsonIgnore
-    private Service services;
-    @Column(name = "modelId")
-    private Long modelId;
+    private Service service;
+
     @ManyToOne(
             cascade = CascadeType.ALL
     )
@@ -51,4 +48,14 @@ public class ServicePlan {
     )
     @JsonIgnore
     private Model servicePlanModels;
+
+    @OneToOne(
+            cascade = CascadeType.ALL,
+            targetEntity = AddressDistributionCenter.class
+    )
+    @JoinColumn(
+            name = "address_id",
+            referencedColumnName = "id"
+    )
+    private AddressDistributionCenter addressDistributionCenter;
 }

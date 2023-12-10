@@ -13,15 +13,9 @@ import java.util.List;
 public class Service {
     @Id
     @Column(
-            name = "serviceId"
+            name = "id_service"
     )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            mappedBy = "services"
-    )
-    private List<ServicePlan> servicePlans;
     private String nameService;
 }
