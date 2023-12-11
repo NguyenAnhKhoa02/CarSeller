@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.sql.Time;
 
 @Entity
 @Data
@@ -17,16 +18,7 @@ public class ShowroomAndTesting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(
-        cascade = CascadeType.ALL,
-            targetEntity = DistributionCenter.class
-    )
-    @JoinColumn(
-            name = "fk_address",
-            referencedColumnName = "id_distribution_center"
-    )
-    private DistributionCenter distributionCenter;
     private Date date;
-    private String timeWorking;
+    private long begin;
+    private long end;
 }

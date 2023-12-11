@@ -1,3 +1,4 @@
+import { Alert } from "@mui/material";
 import { stringify } from "query-string";
 
 import {
@@ -119,13 +120,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
               formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
         }else if(resource == 'distributionCenters'){
+
           console.log(params.data)
           const formData = new FormData()
           formData.append('id',params.data.id)
           formData.append('nameDistributionCenter',params.data.nameDistributionCenter)
           formData.append('hotline',params.data.hotline)
           formData.append('addresses',JSON.stringify(params.data.addressDistributionCenters))
-          console.log(params.data.addressDistributionCenters)
           options.body = formData
         } 
         else {
@@ -187,8 +188,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('hotline',params.data.hotline)
           formData.append('addresses',JSON.stringify(params.data.addresses))
           options.body=formData
-        } else if(resource == 'showroomAndTestings'){
-          console.log(params.data)
         }
         else {
           options.body = JSON.stringify(params.data);

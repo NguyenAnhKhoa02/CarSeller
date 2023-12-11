@@ -1,6 +1,6 @@
-import { Typography,Box } from "@mui/material";
+import { Typography,Box, Alert, Divider } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { List, Datagrid, TextField, Edit, SimpleForm, Create, TextInput, NumberInput, FormDataConsumer, ArrayInput, SimpleFormIterator, BooleanInput, useRecordContext, useDataProvider, useGetList, useGetOne, useInput, useStore, useStoreContext, useEditContext, SelectInput } from "react-admin";
+import { List, Datagrid, TextField, Edit, SimpleForm, Create, TextInput, NumberInput, FormDataConsumer, ArrayInput, SimpleFormIterator, BooleanInput, useRecordContext, useDataProvider, useGetList, useGetOne, useInput, useStore, useStoreContext, useEditContext, SelectInput, DateInput, TimeInput, Toolbar, SaveButton, useNotify, useRedirect } from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const DistributionCenter = () =>{
@@ -8,11 +8,15 @@ const DistributionCenter = () =>{
     return <span>Distribution Center {record ? `"${record.id}"` : ''}</span>;
 };
 
+
+
 // Display list distribution center
 export const DistributionCenterList = (props) => (
     <List {...props}>
         <Datagrid rowClick="edit">
             <TextField source="id"/>
+            <TextField source="nameDistributionCenter" />
+            <TextField source="hotline" />
         </Datagrid>
     </List>
     );
@@ -104,6 +108,16 @@ export const DistributionCenterEdit = ({props,response,id}) =>(
                         {id:"true",name:"Infrastructure is well"},
                         {id:"false",name:"Lack condition"}
                     ]}/>
+
+                    <ArrayInput source="showroomAndTestings">
+                        <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
+                            <DateInput required source="date"/>
+
+                            <TimeInput required source="begin" />
+                            <TimeInput required source="end" />
+                        </SimpleFormIterator>
+                    </ArrayInput>
+
                 </SimpleFormIterator>
             </ArrayInput>
 

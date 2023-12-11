@@ -1,7 +1,100 @@
+import { useEffect, useState } from "react";
+import { number } from "react-admin";
 import {Row,Col,Button,Table} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function TryDriveSchedule() {
+  const [showroomAndTestings, setShowroomANdTestings] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/showroomAndTestings/all`);
+            setShowroomANdTestings(await response.json());
+        } catch (error) {
+            console.log("Error fetch data",error);
+        }
+    };
+    fetchData()
+  },[])
+
+  console.log(showroomAndTestings)
+
+  const DisplayDate = ({timeStamp}) => {
+    const originalDate = new Date(timeStamp)
+    const formattedDate = originalDate.toLocaleDateString('en-GB',{
+      day:'2-digit',
+      month:'2-digit',
+      year:'numeric'
+    })
+    return(
+      <td>{formattedDate}</td>
+    )
+  }
+
+  const DisplayTime = ({timeStamp}) => {
+    const date = new Date(timeStamp)
+    const Hour = ('0' + date.getHours()).slice(-2);
+    const Minutes = ('0' + date.getMinutes()).slice(-2);
+
+    return(
+      <td>{Hour}:{Minutes}</td>
+    )
+  }
+
+  const DisplayAddress = ({id}) => {
+    const [nameAddress, setNameAddress] = useState([])
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await fetch(`http://localhost:8080/showroomAndTestings/nameAddress/${id}`);
+              setNameAddress(await response.text());
+          } catch (error) {
+              console.log("Error fetch data",error);
+          }
+      };
+      fetchData()
+    },[])
+    return(
+      <td>{nameAddress}</td>
+    )
+  }
+
+  const DisplayNameDistribution = ({id}) => {
+    const [nameDistribution, setnameDistribution] = useState([])
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await fetch(`http://localhost:8080/showroomAndTestings/nameDistribution/${id}`);
+              setnameDistribution(await response.text());
+          } catch (error) {
+              console.log("Error fetch data",error);
+          }
+      };
+      fetchData()
+    },[])
+    return(
+      <td>{nameDistribution}</td>
+    )
+  }
+
+  const DisplayHotline = ({id}) => {
+    const [hotline, setHotline] = useState([])
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await fetch(`http://localhost:8080/showroomAndTestings/hotline/${id}`);
+              setHotline(await response.text());
+          } catch (error) {
+              console.log("Error fetch data",error);
+          }
+      };
+      fetchData()
+    },[])
+    return(
+      <td>{hotline}</td>
+    )
+  }
+
   return (
     <>
     <Row style={{ position: "relative", textAlign: "center", color: "black" }}>
@@ -35,16 +128,16 @@ function TryDriveSchedule() {
             <thead>
               <tr>
                 <th style={{}} className="Table bg-grey">
-                  TỈNH/THÀNH
-                </th>
-                <th style={{}} className="Table bg-grey">
                   NHÀ PHÂN PHỐI
                 </th>
                 <th style={{}} className="Table bg-grey">
                   NGÀY SỰ KIỆN
                 </th>
                 <th style={{}} className="Table bg-grey">
-                  GIỜ SỰ KIỆN
+                  GIỜ BẮT ĐẦU
+                </th>
+                <th style={{}} className="Table bg-grey">
+                  GIỜ KẾT THÚC
                 </th>
                 <th style={{}} className="Table bg-grey">
                   ĐỊA ĐIỂM
@@ -55,67 +148,17 @@ function TryDriveSchedule() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="Table">HÀ NỘI</td>
-                <td className="Table">AN DÂN</td>
-                <td className="Table">11/12/2023</td>
-                <td className="Table">8h00 - 14h00</td>
-                <td className="Table">
-                  AN CAFE <br />
-                  Lô 62–63 dự án 319 Bồ Đề, quận Long Biên, Hà Nội, Long Biên,
-                  Hà Nội
-                </td>
-                <td className="Table">0987 121 219</td>
-              </tr>
+              {showroomAndTestings.map((item,index) => (
+                <tr>
+                  <DisplayNameDistribution id={item.id}></DisplayNameDistribution>
+                  <DisplayDate timeStamp={item.date}></DisplayDate>
+                  <DisplayTime timeStamp={item.begin}></DisplayTime>
+                  <DisplayTime timeStamp={item.end}></DisplayTime>
+                  <DisplayAddress id={item.id}></DisplayAddress>
+                  <DisplayHotline id={item.id}></DisplayHotline>
+                </tr>
+              ))}
 
-              <tr>
-                <td className="Table bg-grey">HÀ NỘI</td>
-                <td className="Table bg-grey">AN DÂN</td>
-                <td className="Table bg-grey">12/12/2023</td>
-                <td className="Table bg-grey">8h00 - 13h00</td>
-                <td className="Table bg-grey">
-                  Showroom An Dân <br />
-                  Số 1 Nguyễn Văn Linh, Long Biên, Hà Nội
-                </td>
-                <td className="Table bg-grey">0987 121 219</td>
-              </tr>
-
-              <tr>
-                <td className="Table">HÀ NỘI</td>
-                <td className="Table">VIỆT HÙNG</td>
-                <td className="Table">11/12/2023</td>
-                <td className="Table">8h00 - 14h00</td>
-                <td className="Table">
-                  EMU CAFE <br />
-                  KĐT Dương Nội, Hà Đông, Hà Nội
-                </td>
-                <td className="Table">0987 121 219</td>
-              </tr>
-
-              <tr>
-                <td className="Table bg-grey">HÀ NỘI</td>
-                <td className="Table bg-grey">VIỆT HÙNG</td>
-                <td className="Table bg-grey">11/12/2023</td>
-                <td className="Table bg-grey">8h00 - 14h00</td>
-                <td className="Table bg-grey">
-                  Green Cafe Hà Nam <br />
-                  Trường Trinh, Phủ Lý, Hà Nam
-                </td>
-                <td className="Table bg-grey">0987 121 219</td>
-              </tr>
-
-              <tr>
-                <td className="Table">HÀ NỘI</td>
-                <td className="Table">AN DÂN</td>
-                <td className="Table">11/12/2023</td>
-                <td className="Table">8h00 - 14h00</td>
-                <td className="Table">
-                  AN CAFE <br />
-                  Lô 62–63 dự án 319 Bồ Đề, quận Long Biên, Hà Nội, Long Biên,
-                  Hà Nội
-                </td>
-                <td className="Table">0987 121 219</td>
-              </tr>
             </tbody>
           </Table>
           <p style={{padding:"0"}}>

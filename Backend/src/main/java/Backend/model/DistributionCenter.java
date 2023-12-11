@@ -33,5 +33,5 @@ public class DistributionCenter {
             name = "fk_distribution_int",
             referencedColumnName = "id_distribution_center"
     )
-    private List<AddressDistributionCenter> addressDistributionCenters;
+        private List<AddressDistributionCenter> addressDistributionCenters;
 }

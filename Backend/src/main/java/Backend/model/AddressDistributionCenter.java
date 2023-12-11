@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,4 +22,14 @@ public class AddressDistributionCenter {
     private String isSeller;
     private String isReplacementParts;
     private String isSecondHand;
+
+    @OneToMany(
+            targetEntity = ShowroomAndTesting.class,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "fk_address",
+            referencedColumnName = "id"
+    )
+    private List<ShowroomAndTesting> showroomAndTestings;
 }

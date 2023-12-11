@@ -10,7 +10,6 @@ import { TestingRegisterList, TestingRegisterEdit, TestingRegisterShow } from ".
 import { ServicePlanList, ServicePlanEdit, ServicePlanShow } from "./Data/ServicePlan";
 import { PromotionList, PromotionCreate, PromotionEdit } from "./Data/Promotions";
 import { DistributionCenterCreate, DistributionCenterEdit, DistributionCenterList } from "./Data/DistributionCenter";
-import { ShowroomAndTestingCreate, ShowroomAndTestingEdit, ShowroomAndTestingList } from "./Data/ShowroomAndTesting";
 import VersionIcon from '@mui/icons-material/DirectionsCar';
 import CarModelIcon from '@mui/icons-material/CarCrash';
 import ServiceIcon from '@mui/icons-material/Construction';
@@ -39,7 +38,6 @@ function App () {
                   : null, 
           ]}
           <Resource name="addressDistributionCenters" recordRepresentation="address"/>
-          <Resource name="showroomAndTestings" icon={ShowroomAndTesting} list={ShowroomAndTestingList} create={ShowroomAndTestingCreate} edit={ShowroomAndTestingEdit}/>
           <Resource name="versions" icon={VersionIcon} list={VersionList} edit={VersionEdit} create={VersionCreate} recordRepresentation="nameVersion"/>
           <Resource name="testing_Registers" icon={TestingRegissterIcon} list={TestingRegisterList} show={TestingRegisterShow} edit={TestingRegisterEdit}/>
           <Resource name="service_Plans" icon={ServicePlanIcon} list={ServicePlanList} show={ServicePlanShow} edit={ServicePlanEdit}/>

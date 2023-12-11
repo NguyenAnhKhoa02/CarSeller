@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -58,48 +59,44 @@ public class distributionCenterController {
                 .body(distributionCenterPage);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DistributionCenter> getOneDistributionCenter(@PathVariable Long id){
-        DistributionCenter distributionCenter = distributionCenterReposity.findById(id).orElse(null);
-
-        return ResponseEntity
-                .ok()
-                .body(distributionCenter);
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<DistributionCenter> getOneDistributionCenter(@PathVariable Long id){
+//        DistributionCenter distributionCenter = distributionCenterReposity.findById(id).orElse(null);
+//
+//        return ResponseEntity
+//                .ok()
+//                .body(distributionCenter);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<DistributionCenter> updateDistributionCenter(@ModelAttribute DistributionCenterDTO distributionCenterDTO){
         DistributionCenter distributionCenter = distributionCenterDTO.mappedDistributionCenterForEdit();
 
-        if(!distributionCenterDTO.getExistedAddresses().isEmpty()){
-            List<Long> idList = addressDistributionCenterReposity.findAllIdFromDistribution(distributionCenter.getId());
+        List<Long> idListInAddressDb = addressDistributionCenterReposity.findAllIdFromDistribution(distributionCenter.getId());
 
+        for (Long id:
+             idListInAddressDb) {
+            showroomAndTestingResposity.deleteAllFromAddress(id);
+        }
+
+        if(!distributionCenterDTO.getExistedAddresses().isEmpty()){
             for (AddressDistributionCenter addressDistributionCenter:
                  distributionCenterDTO.getExistedAddresses()) {
 
-                idList.remove(addressDistributionCenter.getId());
+                idListInAddressDb.remove(addressDistributionCenter.getId());
+
                 addressDistributionCenterReposity.updateAddressDistributionCenter(addressDistributionCenter);
             }
 
-            if(!idList.isEmpty()){
-                for (Long idAddress:
-                    idList) {
-                    showroomAndTestingResposity.deleteAllFromAddress(idAddress);
-                }
-                addressDistributionCenterReposity.deleteAllById(idList);
-            }
+            if(!idListInAddressDb.isEmpty()) addressDistributionCenterReposity.deleteAllById(idListInAddressDb);
 
         }else{
-            List<Long> idList = addressDistributionCenterReposity.findAllIdFromDistribution(distributionCenter.getId());
-            for (Long idAddress:
-                    idList) {
-                showroomAndTestingResposity.deleteAllFromAddress(idAddress);
-            }
-            addressDistributionCenterReposity.deleteAllById(idList);
+            addressDistributionCenterReposity.deleteAllById(idListInAddressDb);
         }
 
         if(!distributionCenterDTO.getNewAddresses().isEmpty()){
             Long currentID = addressDistributionCenterReposity.findLastId();
+            if (currentID == null) currentID = 0L;
             Long idDistribution = distributionCenter.getId();
             for (AddressDistributionCenter addressDistributionCenter:
                  distributionCenterDTO.getNewAddresses()) {
@@ -108,11 +105,27 @@ public class distributionCenterController {
             }
         }
 
+        if(!distributionCenterDTO.getExistedAddresses().isEmpty())
+            for (ShowroomAndTesting showroomAndTesting:
+                    distributionCenterDTO.getShowroomAndTestings()) {
+                Long idAddress = showroomAndTesting.getId();
+                showroomAndTesting.setId(null);
+
+                showroomAndTestingResposity.saveAddress(showroomAndTesting,idAddress);
+            }
+
         distributionCenterReposity.updateDistributionCenter(distributionCenter);
 
         return ResponseEntity.status(HttpStatus.OK).body(distributionCenter);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DistributionCenter> getOneModel(@PathVariable Long id) throws SQLException, IOException {
+        DistributionCenter distributionCenter = distributionCenterReposity.findById(id).orElse(null);
+        return ResponseEntity
+                .ok()
+                .body(distributionCenter);
+    }
 
     @GetMapping("/all")
     public List<DistributionCenter> getAlls(){
