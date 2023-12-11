@@ -11,7 +11,7 @@ public class FileService {
     private String pathFile;
 
     private String pathSavedFile;
-    private String path = "C:/CarSeller/";
+    private String path = "C:/CarSeller";
     public FileService(){
         /*check C:/CarSeller is exists
         * if not: create
@@ -45,6 +45,6 @@ public class FileService {
     }
 
     public File createFile(String nameImage){
-        return new File(path + nameImage);
+        return new File(path + "\\" + nameImage);
     }
 }

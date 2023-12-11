@@ -1,6 +1,6 @@
 import { Typography,Box } from "@mui/material";
-import { useContext, useEffect } from "react";
-import { List, Datagrid, TextField, Edit, SimpleForm, Create, TextInput, NumberInput, FormDataConsumer, ArrayInput, SimpleFormIterator, BooleanInput, useRecordContext, useDataProvider, useGetList, useGetOne, useInput, useStore, useStoreContext, useEditContext } from "react-admin";
+import { useContext, useEffect, useState } from "react";
+import { List, Datagrid, TextField, Edit, SimpleForm, Create, TextInput, NumberInput, FormDataConsumer, ArrayInput, SimpleFormIterator, BooleanInput, useRecordContext, useDataProvider, useGetList, useGetOne, useInput, useStore, useStoreContext, useEditContext, SelectInput } from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const DistributionCenter = () =>{
@@ -41,10 +41,22 @@ export const DistributionCenterCreate = (props) =>(
             <ArrayInput source="addresses">
                 <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
                     <TextInput required fullWidth source="address"></TextInput>
-                    <BooleanInput fullWidth source="isService"></BooleanInput>
-                    <BooleanInput fullWidth source="isSecondHand"></BooleanInput>
-                    <BooleanInput fullWidth source="isSeller"></BooleanInput>
-                    <BooleanInput fullWidth source="isReplacementParts"></BooleanInput>
+                    <SelectInput source="isService" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
+                    <SelectInput source="isSecondHand" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
+                    <SelectInput source="isSeller" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
+                    <SelectInput source="isReplacementParts" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
                 </SimpleFormIterator>
             </ArrayInput>
 
@@ -53,7 +65,7 @@ export const DistributionCenterCreate = (props) =>(
 );
 
 // edit distribution center
-export const DistributionCenterEdit = ({props,response}) =>(
+export const DistributionCenterEdit = ({props,response,id}) =>(
     <Edit title={<DistributionCenter/>} {...props}>
         <SimpleForm sx={{ maxWidth: 800 }}>
             <Typography variant="h5" gutterBottom> 
@@ -74,16 +86,24 @@ export const DistributionCenterEdit = ({props,response}) =>(
 
             <ArrayInput source="addressDistributionCenters" >
                 <SimpleFormIterator getItemLabel={index => `#${index + 1}`}>
-                {<FormDataConsumer>
-                {({formData,...rest}) => (
-                    console.log(rest.scopedFormData)
-                )}
-                </FormDataConsumer> }
+
                     <TextInput required fullWidth source="address"/>
-                    <BooleanInput label="Is Service" source="isService"/>
-                    <BooleanInput label="Is Second Hand" source="isSecondHand" />
-                    <BooleanInput label="Is Seller" source="isSeller" />
-                    <BooleanInput label="Is Replacement Parts" source="isReplacementParts" />
+                    <SelectInput source="isService" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
+                    <SelectInput source="isSecondHand" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
+                    <SelectInput source="isSeller" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
+                    <SelectInput source="isReplacementParts" choices={[
+                        {id:"true",name:"Infrastructure is well"},
+                        {id:"false",name:"Lack condition"}
+                    ]}/>
                 </SimpleFormIterator>
             </ArrayInput>
 

@@ -16,8 +16,8 @@ public class AddressDistributionCenter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String address;
-    private boolean isServiced;
-    private boolean isSeller;
-    private boolean isReplacementParts;
-    private boolean isSecondHand;
+    private String isService;
+    private String isSeller;
+    private String isReplacementParts;
+    private String isSecondHand;
 }

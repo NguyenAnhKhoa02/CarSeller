@@ -45,6 +45,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             sortOrder: order,
         };
         url = `${apiUrl}/${resource}?${stringify(query)}&page=${page}&pageSize=${perPage}`;
+      
+
         break;
       }
       case GET_ONE:
@@ -61,7 +63,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       case UPDATE:
         url = `${apiUrl}/${resource}/${params.id}`;
-
         if(resource == 'models'){
           const formData = new FormData()
           formData.append('id',params.data.id)
@@ -117,7 +118,17 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             if(params.data.imageName != null)
               formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
-        } else {
+        }else if(resource == 'distributionCenters'){
+          console.log(params.data)
+          const formData = new FormData()
+          formData.append('id',params.data.id)
+          formData.append('nameDistributionCenter',params.data.nameDistributionCenter)
+          formData.append('hotline',params.data.hotline)
+          formData.append('addresses',JSON.stringify(params.data.addressDistributionCenters))
+          console.log(params.data.addressDistributionCenters)
+          options.body = formData
+        } 
+        else {
           options.body = JSON.stringify(params.data);
         }
         options.method = "PUT";
@@ -171,14 +182,14 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             formData.append('imageFile',params.data.imageFile.rawFile)
           options.body=formData
         } else if(resource == 'distributionCenters'){
-            const formData = new FormData()
-            
-            formData.append('nameDistributionCenter',params.data.nameDistributionCenter)
-            formData.append('hotline',params.data.hotline)
-            formData.append('addresses',JSON.stringify(params.data.addresses))
-
-            options.body=formData
-          } 
+          const formData = new FormData()
+          formData.append('nameDistributionCenter',params.data.nameDistributionCenter)
+          formData.append('hotline',params.data.hotline)
+          formData.append('addresses',JSON.stringify(params.data.addresses))
+          options.body=formData
+        } else if(resource == 'showroomAndTestings'){
+          console.log(params.data)
+        }
         else {
           options.body = JSON.stringify(params.data);
         }
@@ -229,7 +240,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
      * @returns {Promise} the Promise for a data response
      */
   return (type, resource, params) => {
-    console.log(type)
     // simple-rest doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
     if (type === UPDATE_MANY) {
       return Promise.all(

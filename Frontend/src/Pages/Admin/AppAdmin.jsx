@@ -10,6 +10,7 @@ import { TestingRegisterList, TestingRegisterEdit, TestingRegisterShow } from ".
 import { ServicePlanList, ServicePlanEdit, ServicePlanShow } from "./Data/ServicePlan";
 import { PromotionList, PromotionCreate, PromotionEdit } from "./Data/Promotions";
 import { DistributionCenterCreate, DistributionCenterEdit, DistributionCenterList } from "./Data/DistributionCenter";
+import { ShowroomAndTestingCreate, ShowroomAndTestingEdit, ShowroomAndTestingList } from "./Data/ShowroomAndTesting";
 import VersionIcon from '@mui/icons-material/DirectionsCar';
 import CarModelIcon from '@mui/icons-material/CarCrash';
 import ServiceIcon from '@mui/icons-material/Construction';
@@ -18,6 +19,7 @@ import PromotionIcon from '@mui/icons-material/Celebration';
 import TestingRegissterIcon from '@mui/icons-material/CarRental';
 import ServicePlanIcon from '@mui/icons-material/CalendarMonth';
 import DistributionCenterIcon from '@mui/icons-material/EmojiTransportation';
+import ShowroomAndTesting from '@mui/icons-material/Grading';
 
 const lightTheme = defaultTheme;
 const darkTheme = { ...defaultTheme, palette: { mode: "dark" } };
@@ -32,10 +34,12 @@ function App () {
                       <Resource name="models" icon={CarModelIcon} list={CarModelList} edit={CarModelEdit} create={CarModelCreate} recordRepresentation="nameModel"/>
                       <Resource name="promotions" icon={PromotionIcon} list={PromotionList} edit={PromotionEdit} create={PromotionCreate} />
                       <Resource name="services" icon={ServiceIcon} list={ServiceList} edit={ServiceEdit} create={ServiceCreate} recordRepresentation="nameService"/>
-                      <Resource name="distributionCenters" icon={DistributionCenterIcon} list={DistributionCenterList} edit={DistributionCenterEdit} create={DistributionCenterCreate} recordRepresentation={"distributionCenter"}/>
+                      <Resource name="distributionCenters" icon={DistributionCenterIcon} list={DistributionCenterList} edit={DistributionCenterEdit} create={DistributionCenterCreate} recordRepresentation="nameDistributionCenter"/>
                     </>
-                  : null,
+                  : null, 
           ]}
+          <Resource name="addressDistributionCenters" recordRepresentation="address"/>
+          <Resource name="showroomAndTestings" icon={ShowroomAndTesting} list={ShowroomAndTestingList} create={ShowroomAndTestingCreate} edit={ShowroomAndTestingEdit}/>
           <Resource name="versions" icon={VersionIcon} list={VersionList} edit={VersionEdit} create={VersionCreate} recordRepresentation="nameVersion"/>
           <Resource name="testing_Registers" icon={TestingRegissterIcon} list={TestingRegisterList} show={TestingRegisterShow} edit={TestingRegisterEdit}/>
           <Resource name="service_Plans" icon={ServicePlanIcon} list={ServicePlanList} show={ServicePlanShow} edit={ServicePlanEdit}/>
