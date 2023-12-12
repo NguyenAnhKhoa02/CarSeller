@@ -21,26 +21,41 @@ public class TestingRegister {
     private String numberPhone;
     private String carPD;
     private String status;
-    @Column(name = "versionId",nullable = false)
+    @Column(
+            name = "versionId",
+            insertable = false,
+            updatable = false,
+            nullable = false
+    )
     private Long versionId;
+
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            targetEntity = Version.class
     )
     @JoinColumn(
             name = "versionId",
-            insertable = false,
-            updatable = false
-    )
-    @JsonIgnore
-    private Version versions;
-
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            targetEntity = AddressDistributionCenter.class
-    )
-    @JoinColumn(
-            name = "fk_address_center",
             referencedColumnName = "id"
     )
-    private AddressDistributionCenter addressDistributionCenter;
+    private Version version;
+
+    @ManyToOne(
+            cascade = CascadeType.ALL,
+            targetEntity = DistributionCenter.class
+    )
+    @JoinColumn(
+            name = "fk_distribution",
+            referencedColumnName = "id_distribution_center"
+    )
+    private DistributionCenter distributionCenter;
+
+    @Column(
+            name = "fk_distribution",
+            insertable = false,
+            updatable = false,
+            nullable = false
+    )
+    private Long distributionId;
+
+
 }

@@ -17,7 +17,6 @@ function TryDriveSchedule() {
     fetchData()
   },[])
 
-  console.log(showroomAndTestings)
 
   const DisplayDate = ({timeStamp}) => {
     const originalDate = new Date(timeStamp)

@@ -1,7 +1,13 @@
 package Backend.controller;
 
+import Backend.ModelDTO.TestingRegisterDTO;
+import Backend.model.DistributionCenter;
 import Backend.model.TestingRegister;
+import Backend.model.Version;
+import Backend.repository.DistributionCenterReposity;
+import Backend.repository.ModelRepository;
 import Backend.repository.TestingRegisterRepository;
+import Backend.repository.VersionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/testing_Registers")
@@ -19,6 +27,15 @@ public class testingRegisterController {
 
     @Autowired
     private TestingRegisterRepository testingRegisterRepository;
+
+    @Autowired
+    private DistributionCenterReposity distributionCenterReposity;
+
+    @Autowired
+    private VersionRepository versionRepository;
+
+    @Autowired
+    private ModelRepository modelRepository;
 
     @GetMapping
     public ResponseEntity<Page<TestingRegister>>  getAllTestingRegisters(
@@ -71,4 +88,19 @@ public class testingRegisterController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping("/save")
+    public ResponseEntity<TestingRegister> saveTestingRegister(@RequestBody TestingRegisterDTO testingRegisterDTO){
+
+        TestingRegister testingRegister = testingRegisterDTO.mappedTestingRegister();
+        Long idVersion = testingRegisterDTO.getVersionId();
+        Long idDistribution = testingRegisterDTO.getDistributionCenterId();
+
+        Long lastId = testingRegisterRepository.getLastId();
+        if(lastId == null) testingRegister.setId(1L);
+        else testingRegister.setId(++lastId);
+        System.out.println(testingRegister.getId());
+        testingRegisterRepository.saveTestingRegister(testingRegister,idVersion, idDistribution);
+
+        return ResponseEntity.ok().body(null);
+    }
 }

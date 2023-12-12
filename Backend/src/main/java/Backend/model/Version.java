@@ -1,6 +1,7 @@
 package Backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties("versionModels")
 public class Version {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,12 +38,7 @@ public class Version {
     )
     @JsonIgnore
     private Model versionModels;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            mappedBy = "versions"
-    )
-    private List<TestingRegister> testingRegisters;
+
     @Column(nullable = false)
     private String nameVersion;
     private String info;

@@ -5,18 +5,132 @@ import car1 from "../../../Components/Assets/ForDatabase/Cars/car1.png";
 import car2 from "../../../Components/Assets/car2.png";
 import car3 from "../../../Components/Assets/car3.png";
 import car4 from "../../../Components/Assets/car4.png";
-import { useRef } from "react";
+import React,{ useEffect, useRef, useState } from "react";
+import { Alert } from "@mui/material";
 
 function BookATestDrive () {
     const settings = {
       className: "center",
       centerMode: true,
       infinite: true,
-      centerPadding: "60px",
+      centerPadding: "0px",
       slidesToShow: 3,
       arrows: false,
       speed: 500
     };
+
+    // get all models
+    const [models,setModels] = useState([])
+    useEffect(() => {
+        const fetchData =  async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/models/all`);
+                const data = await response.json()
+
+                const modelDatas = data.map(async(item) => {
+                    const imageResponse = await fetch(`http://localhost:8080/image/${item.imageName}`)
+                    
+                    if(imageResponse.ok){
+                        const blob = await imageResponse.blob()
+                        const imageURL = await URL.createObjectURL(blob)
+                        return{
+                            ...item,
+                            imageURL
+                        };
+                    }else
+                        return{
+                            ...item,
+                            imageURL:null
+                        }
+                });
+                
+                setModels(await Promise.all(modelDatas))
+
+            } catch (error) {
+                console.log("Error:" + error)
+            }
+        };
+        fetchData()
+    },[])
+
+    // get all distribution centers
+    const [distributionCenters,setDistributionCenters] = useState([])
+    useEffect(() => {
+        const fetchData = async() =>{
+            const response = await fetch(`http://localhost:8080/distributionCenters/all`)
+            setDistributionCenters(await response.json())
+        }
+        fetchData()
+    },[])
+
+    // show lowest price    
+    const LowestPrice = ({id}) => {
+        let lowestPrice = 0
+        
+        const [versions,setVersions] = useState([])
+
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/versions/modelId=${id}`);
+                    setVersions(await response.json());
+                } catch (error) {
+                    console.log("Error fetch data",error);
+                }
+            };
+            fetchData()
+        },[])
+
+        for (let index = 0; index < versions.length; index++) {
+            const element = versions[index].price;
+            if(lowestPrice == 0) lowestPrice = element
+            if(lowestPrice > element) lowestPrice = element
+        }
+
+        return <Card.Text>Giá từ {lowestPrice} vnđ</Card.Text>
+    }
+
+    let curRef = useRef(null)
+    const [versions,setVersions] = useState([])
+    const [modelId,setModelId] = useState([])
+    async function handleClick(idModel) {
+        const response = await fetch(`http://localhost:8080/versions/modelId=${idModel}`)
+        setVersions(await response.json())
+        setModelId(idModel)
+        curRef.current.scrollIntoView()
+    }   
+
+
+    const [fullName,setFullName] = useState([])
+    const [email,setEmail] = useState([])
+    const [numberPhone,setNumberPhone] = useState([])
+    const [versionId,setVersionId] = useState([])
+    const [distributionCenterId,setDistributionCenterId] = useState([])
+    const [carPD,setCarPD] = useState([])
+    const [checked,setChecked] = React.useState()
+
+    const handleCheckBoxChange = (e)=> {
+        return setChecked(e.target.checked ? "checked":"unchecked")
+        
+    };
+
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+
+        if(checked == undefined || checked == "unchecked"){
+            alert("Check privacy")
+            return
+        }
+
+        const testingRegister = {versionId,fullName,email,numberPhone,distributionCenterId,carPD,modelId}
+        console.log(testingRegister)
+        fetch("http://localhost:8080/testing_Registers/save",
+        {
+            method:"POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(testingRegister)
+        })
+    }
 
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
@@ -27,77 +141,49 @@ function BookATestDrive () {
         </div>
     </Row>
     <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
                 <h3 style={{fontWeight:"bold"}}>1. Chọn mẫu xe của bạn</h3>
             </div>
-            <Slider {...settings}>
-                <div>
-                    <Card className="MyCard" style={{height:"300px"}}>
-                    <Card.Img variant="top" src={car1} />
-                    <Card.Body  style={{textAlign: "center"}}>
-                        <Card.Title>XPANDER CROSS 2023</Card.Title>
-                        <Card.Text>
-                        Giá từ 698.000.000 VNĐ
-                        </Card.Text>
-                    </Card.Body>
-                    </Card>
-                </div>
-                <div>
-                    <Card className="MyCard" style={{height:"300px"}}>
-                    <Card.Img variant="top" src={car2} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>NEW OUTLANDER</Card.Title>
-                        <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                    </Card>
-                </div>
-                <div>
-                    <Card>
-                    <Card.Img variant="top" src={car3} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>NEW XPANDER</Card.Title>
-                        <Button variant="secondary">Xem thêm</Button>
-                    </Card.Body>
-                    </Card>
-                </div>
-                <div>
-                    <Card>
-                    <Card.Img variant="top" src={car4} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>XPANDER CROSS</Card.Title>
-                        <Button variant="secondary">Xem thêm</Button>
-                    </Card.Body>
-                    </Card>
-                </div>
+            <Slider focusOnSelect {...settings}>
+                {models.map((item,index) => (
+                    <>
+                        <Card onClick={()=>handleClick(item.id)} className="MyCard" style={{height:"400px", width:"250px", paddingLeft:"10px"}}>
+                            <Card.Header style={{marginBottom:"100px", textAlign:"center"}}>Click to choose</Card.Header>
+                            <Card.Img variant="center" src={item.imageURL}/>
+                            <Card.Body  style={{textAlign: "center"}}>
+                                <Card.Title>{item.nameModel}</Card.Title>
+                                <LowestPrice id={item.id} />
+                            </Card.Body>
+                        </Card>
+                    </>
+
+                ))}
             </Slider>
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
                 <h3 style={{fontWeight:"bold"}}>2. Thông tin cá nhân</h3>
             </div>
-            <FloatingLabel controlId="name" label="HỌ VÀ TÊN *" className="mb-3">
-                <Form.Control type="text" placeholder="name" />
+            <FloatingLabel ref={curRef} controlId="name" label="HỌ VÀ TÊN *" className="mb-3">
+                <Form.Control required type="text" placeholder="name" onChange={(e) => setFullName(e.target.value)}/>
             </FloatingLabel>
             <Row className="g-2">
                 <Col md>
                     <FloatingLabel controlId="email" label="ĐỊA CHỈ EMAIL (TUỲ CHỌN)" className="mb-3">
-                        <Form.Control type="email" placeholder="name@example.com" />
+                        <Form.Control required type="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
                     </FloatingLabel>
                 </Col>
                 <Col md>
                     <FloatingLabel controlId="phonenumber" label="SỐ ĐIỆN THOẠI *" className="mb-3">
-                        <Form.Control type="tel" placeholder="00000" />
+                        <Form.Control required type="tel" placeholder="00000" onChange={(e) => setNumberPhone(e.target.value)}/>
                     </FloatingLabel>
                 </Col>
             </Row>
-            <FloatingLabel controlId="car" label="PHIÊN BẢN" className="mb-3">
-                <Form.Select aria-label="Chọn phiên bản">
-                    <option>Chọn phiên bản</option>
-                    <option value="Xpander">Xpander</option>
-                    <option value="Outlander">Outlander</option>
-                    <option value="Attrage">Attrage</option>
+            <FloatingLabel controlId="version" label="PHIÊN BẢN" className="mb-3">
+                <Form.Select required aria-label="Chọn phiên bản" onChange={(e) => setVersionId(e.target.value)}>
+                    <option value="">Chon phien ban</option>
+                    {versions.map((item,index) => (
+                        <option value={item.id}>{item.nameVersion}</option>
+                    ))}
                 </Form.Select>
             </FloatingLabel>
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
@@ -106,22 +192,22 @@ function BookATestDrive () {
             <Row className="g-2">
                 <Col md>
                     <FloatingLabel controlId="distributor" label="NHÀ PHÂN PHỐI *" className="mb-3">
-                        <Form.Select aria-label="Chọn nhà phân phối">
-                            <option>Chọn nhà phân phối</option>
-                            <option value="TP.HCM">Thành phố Hồ Chí Minh</option>
-                            <option value="HaNoi">Thành phố Hà Nội</option>
-                            <option value="GiaLai">Tỉnh Gia Lai</option>
+                        <Form.Select required aria-label="Chọn nhà phân phối" onChange={(e) => setDistributionCenterId(e.target.value)}>
+                            <option value="">Chọn nhà phân phối</option>
+                            {distributionCenters.map((item,index) => (
+                                <option value={item.id}>{item.nameDistributionCenter}</option>
+                            ))}
                         </Form.Select>
                     </FloatingLabel>
                 </Col>
                 <Col md>
-                    <FloatingLabel controlId="requirement" label="BẠN CÓ NHU CẦU MUA XE TRONG BAO LÂU?*" className="mb-3">
-                        <Form.Select aria-label="Chọn nhà phân phối">
-                            <option>Chọn nhu cầu</option>
-                            <option value="1">1 tháng</option>
-                            <option value="3">3 tháng</option>
-                            <option value="6">6 tháng</option>
-                            <option value=">6">Trên 6 tháng</option>
+                    <FloatingLabel required controlId="requirement" label="BẠN CÓ NHU CẦU MUA XE TRONG BAO LÂU?*" className="mb-3">
+                        <Form.Select required aria-label="Chọn nhà phân phối" onChange={(e) => setCarPD(e.target.value)}>
+                            <option value="">Chọn nhu cầu</option>
+                            <option value="1 tháng">1 tháng</option>
+                            <option value="3 tháng">3 tháng</option>
+                            <option value="6 tháng">6 tháng</option>
+                            <option value="Trên 6 tháng">Trên 6 tháng</option>
                         </Form.Select>
                     </FloatingLabel>
                 </Col>
@@ -132,6 +218,7 @@ function BookATestDrive () {
                     type="checkbox"
                     id="default-checkbox"
                     label="Tôi xác nhận đồng ý nhận thông tin liên quan đến dịch vụ chăm sóc khách hàng, khuyến mãi, hoặc các thông tin tiếp thị sản phẩm và dịch vụ được cung cấp bởi MMV, các nhà phân phối ủy quyền của MMV và các đối tác kinh doanh được chỉ định bởi MMV."
+                    onChange={handleCheckBoxChange}
                 />
             </div>
             <Row><Button variant="outline-dark" type="submit" size="lg" className="MyBorder2">ĐẶT LỊCH</Button></Row>

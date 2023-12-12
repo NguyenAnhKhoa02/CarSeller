@@ -49,7 +49,7 @@ public class versionController {
             }
 
         List<Color> colorList = new ArrayList<>();
-        if(versionDTO.getColorFiles().size()> 0){
+        if(versionDTO.getColorFiles() != null) {
             for (JSONObject jsonObject:
                     versionDTO.getColors()) {
                 Color color = new Color();
@@ -136,4 +136,7 @@ public class versionController {
     public List<Version> getVersionsByModelId(@PathVariable Long id){
         return versionRepository.findByModelId(id);
     }
+
+    @GetMapping("/all")
+    public List<Version> getAll(){return versionRepository.findAll();};
 }

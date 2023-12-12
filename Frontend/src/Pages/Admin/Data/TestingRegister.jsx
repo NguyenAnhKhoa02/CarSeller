@@ -1,10 +1,10 @@
-import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField } from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField, Toolbar, TopToolbar, PrevNextButtons } from "react-admin";
 import { Box,Typography } from "@mui/material";
 
 const status = [
-    { id:"waiting for contract", name:"Waiting For Contract"}, 
-    { id:"contracted", name:"Contracted"}, 
-    { id:"completed", name:"Completed"}
+    { id:"Waiting", name:"Waiting For Contract"}, 
+    { id:"Contracted", name:"Contracted"}, 
+    { id:"Completed", name:"Completed"}
 ];
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
@@ -20,6 +20,7 @@ export const TestingRegisterList = (props) => (
         <TextField source="id" />
         <TextField source="fullName" />
         <ReferenceField label="Version" source="versionId" reference="versions" />
+        <ReferenceField source="distributionId" reference="distributionCenters" />
         <ChipField source="status" />
         <EditButton />
         <DeleteButton />
@@ -48,11 +49,11 @@ export const TestingRegisterEdit = (props) => (
 
 // Component cho trang hiển thị chi tiết
 export const TestingRegisterShow = (props) => (
-<Show title={<TestingRegisterTitle />} {...props}>
+<Show actions={<TopToolbar><PrevNextButtons linkType="show"/></TopToolbar>} title={<TestingRegisterTitle />} {...props}>
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="carpd" />
-        <TextField source="distributionCenter" />
+        <ReferenceField source="distributionId" reference="distributionCenters"></ReferenceField>
         <TextField source="fullName" />
         <TextField source="email" />
         <TextField source="numberPhone" />

@@ -1,6 +1,9 @@
 package Backend.repository;
 
 import Backend.model.Version;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface VersionRepository extends JpaRepository<Version,Long> {
@@ -63,4 +67,14 @@ public interface VersionRepository extends JpaRepository<Version,Long> {
             nativeQuery = true
     )
     List<Version> findByModelId(@Param("modelId") Long modelId);
+
+
+    @Query(
+            value = "SELECT version.air_bag " +
+                    "FROM version " +
+                    "WHERE version.id = :versionId",
+            nativeQuery = true
+    )
+    String findAirBag(@Param("versionId") Long versionId);
+
 }
