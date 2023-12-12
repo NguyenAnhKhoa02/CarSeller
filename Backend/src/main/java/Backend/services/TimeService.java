@@ -4,9 +4,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class TimeService {
@@ -23,6 +22,22 @@ public class TimeService {
 
         return  timestampMilis;
     }
+
+        public long TimeToTimestamp (String timeStamp){
+            System.out.println(timeStamp);
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+                LocalTime time = LocalTime.parse(timeStamp, timeFormatter);
+
+                // Assuming you want to set the date to today
+                LocalDateTime todayDateTime = LocalDateTime.of(LocalDate.now(), time);
+
+                // Convert LocalDateTime to Date
+                java.util.Date date = java.util.Date.from(todayDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+
+            return date.getTime();
+        }
 
     public Date ConvertDateFromTimeStampMilis(Long timestampMilis){
         return new Date(timestampMilis);

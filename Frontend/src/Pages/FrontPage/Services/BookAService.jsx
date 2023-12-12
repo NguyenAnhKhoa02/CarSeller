@@ -20,19 +20,40 @@ function BookAService () {
         }
         fetchData()
     },[])
-    console.log(services)
+
+    const [distributions, setDistributions] = useState([])
+    useEffect(() => {
+        const fetchData = async() => {
+            const response = await fetch("http://localhost:8080/distributionCenters/all")
+            setDistributions(await response.json())
+        }
+        fetchData()
+    },[])
+
 
     const [fullName,setFullName] = React.useState();
     const [email,setEmail] = React.useState();
     const [numberPhone,setNumberPhone] = React.useState();
     const [licensePlate,setLicensePlate] = React.useState();
     const [modelId,setModelId] = React.useState();
-    const [distributionCenter,setDistributionCenter] =React.useState();
     const [serviceId,setServiceId] = React.useState();
     const [date,setDate] = React.useState();
     const [time,setTime] = React.useState();
+    const [idAddress,setIdAddress]= React.useState();
+    const [distribution,setDistribution] = React.useState();
+
+    const getAddress = ()=>{ 
+        distribution.map((item)=>(
+            console.log(item),
+            setIdAddress(item.distributionCenter
+                .id)
+        ))
+            console.log(idAddress)
+    }
+
 
     const [checked,setChecked] = React.useState();
+
 
     const handleCheckBoxChange = (e)=> {
         return setChecked(e.target.checked ? "checked":"unchecked")
@@ -41,8 +62,7 @@ function BookAService () {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        const servicePlan = {fullName,email,numberPhone,licensePlate,modelId,distributionCenter,serviceId,date,time}
-        console.log(servicePlan)
+        const servicePlan = {fullName,email,numberPhone,licensePlate,modelId,distribution,serviceId,date,time}
 
         if(servicePlan.modelId == undefined || servicePlan.modelId == ""){
             alert("Choose model")
@@ -53,6 +73,7 @@ function BookAService () {
             alert("Choose service")
             return
         } 
+        
 
         if(checked =="checked"){
             alert("gửi gòi")
@@ -66,6 +87,9 @@ function BookAService () {
              }
 
       }
+
+      
+
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
@@ -123,12 +147,13 @@ function BookAService () {
             </div>
             <FloatingLabel controlId="distributor" label="NHÀ PHÂN PHỐI *" className="mb-3">
                 <Form.Select aria-label="Chọn nhà phân phối"
-                 onChange={(e)=> setDistributionCenter(e.target.value)}
-                 >
-                    <option>Chọn nhà phân phối</option>
-                    <option value="TP.HCM">Thành phố Hồ Chí Minh</option>
-                    <option value="HaNoi">Thành phố Hà Nội</option>
-                    <option value="GiaLai">Tỉnh Gia Lai</option>
+                 onChange={(e)=> setDistribution(e.target.value)}> 
+                    <option value=""></option>    
+                    {distributions.map((item,index) => (
+                        item.addressDistributionCenters.map((itemAddress,indexAddress) => (
+                            <option value={item.nameDistributionCenter + " - " + itemAddress.address}>{item.nameDistributionCenter + " - " + itemAddress.address}</option>
+                        ))
+                    ))}     
                 </Form.Select>
             </FloatingLabel>
             <FloatingLabel controlId="date" label="NGÀY ĐẶT LỊCH *"  className="mb-3">

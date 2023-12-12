@@ -24,7 +24,7 @@ public class ServicePlan {
     private  String numberPhone;
     private  String licensePlate;
     private Date date;
-    private Time time;
+    private Long time;
     private String status;
     @OneToOne(
             cascade = CascadeType.ALL,
@@ -49,13 +49,5 @@ public class ServicePlan {
     @JsonIgnore
     private Model servicePlanModels;
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            targetEntity = DistributionCenter.class
-    )
-    @JoinColumn(
-            name = "distribution_id",
-            referencedColumnName = "id_distribution_center"
-    )
-    private DistributionCenter addressDistributionCenter;
+    private String  addressDistributionCenter;
 }

@@ -1,8 +1,12 @@
 package Backend.ModelDTO;
 
+import Backend.model.AddressDistributionCenter;
+import Backend.model.DistributionCenter;
 import Backend.model.ServicePlan;
+import Backend.services.TimeService;
 import jakarta.persistence.Column;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -18,30 +22,29 @@ public class ServicePlanDTO {
     private  String email;
     private  String numberPhone;
     private  String licensePlate;
-    private String distributionCenter;
     private String date;
     private String time;
     private String status;
     private  Long serviceId;
     private  Long modelId;
+    private String distribution;
+
+    @Autowired
+    TimeService timeService;
 
     public ServicePlan mappedServicePlan(){
         Backend.model.ServicePlan servicePlan = new Backend.model.ServicePlan();
+        timeService = new TimeService();
+
         servicePlan.setId(id);
         servicePlan.setFullName(fullName);
         servicePlan.setEmail(email);
         servicePlan.setNumberPhone(numberPhone);
         servicePlan.setLicensePlate(licensePlate);
-//        servicePlan.setDistributionCenter(distributionCenter);
         servicePlan.setDate(Date.valueOf(date));
-        //SimpleDateFormat sdf = new SimpleDateFormat()
-        LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
-        // Convert LocalTime to java.sql.Time
-        Time sqlTime = Time.valueOf(localTime);
-        servicePlan.setTime(sqlTime);
+        servicePlan.setTime(timeService.TimeToTimestamp(time));
         servicePlan.setStatus(status);
-//        servicePlan.setServiceId(serviceId);
-//        servicePlan.setModelId(modelId);
+        servicePlan.setAddressDistributionCenter(distribution);
         servicePlan.setStatus("watting");
         return servicePlan;
     }
