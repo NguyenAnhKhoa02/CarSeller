@@ -23,22 +23,6 @@ public class TimeService {
         return  timestampMilis;
     }
 
-        public long TimeToTimestamp (String timeStamp){
-            System.out.println(timeStamp);
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
-                LocalTime time = LocalTime.parse(timeStamp, timeFormatter);
-
-                // Assuming you want to set the date to today
-                LocalDateTime todayDateTime = LocalDateTime.of(LocalDate.now(), time);
-
-                // Convert LocalDateTime to Date
-                java.util.Date date = java.util.Date.from(todayDateTime.atZone(ZoneId.systemDefault()).toInstant());
-
-
-            return date.getTime();
-        }
-
     public Date ConvertDateFromTimeStampMilis(Long timestampMilis){
         return new Date(timestampMilis);
     }

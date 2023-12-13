@@ -32,4 +32,12 @@ public interface ModelRepository extends JpaRepository<Model,Long> {
             nativeQuery = true
     )
     void updateModel(@Param("model") Model model);
+
+    @Query(
+            value = "SELECT model.name_model " +
+                    "FROM model " +
+                    "WHERE model.id = :idModel",
+            nativeQuery = true
+    )
+    String findNameModel(@Param("idModel") Long idModel);
 }

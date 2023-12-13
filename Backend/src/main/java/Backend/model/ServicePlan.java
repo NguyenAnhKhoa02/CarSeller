@@ -24,7 +24,7 @@ public class ServicePlan {
     private  String numberPhone;
     private  String licensePlate;
     private Date date;
-    private Long time;
+    private String time;
     private String status;
     @OneToOne(
             cascade = CascadeType.ALL,
@@ -50,4 +50,18 @@ public class ServicePlan {
     private Model servicePlanModels;
 
     private String  addressDistributionCenter;
+
+    @Column(
+            name = "modelId",
+            insertable = false,
+            updatable = false
+    )
+    Long modelId;
+
+    @Column(
+            name = "service_id",
+            insertable = false,
+            updatable = false
+    )
+    Long serviceId;
 }

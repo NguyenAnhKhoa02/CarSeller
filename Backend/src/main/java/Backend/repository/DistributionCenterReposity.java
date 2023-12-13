@@ -21,4 +21,12 @@ public interface DistributionCenterReposity extends JpaRepository<DistributionCe
             nativeQuery = true
     )
     public void updateDistributionCenter(@Param("distributionCenter") DistributionCenter distributionCenter);
+
+    @Query(
+          value = "SELECT distribution_center.name_distribution_center " +
+                  "FROM distribution_center " +
+                  "WHERE distribution_center.id_distribution_center = :idDistributionCenter" ,
+            nativeQuery = true
+    )
+    public String findNameDistributionCenter(@Param("idDistributionCenter") Long idDistributionCenter);
 }

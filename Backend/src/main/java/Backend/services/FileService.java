@@ -27,6 +27,10 @@ public class FileService {
     public void copyFileFromMultiFile(MultipartFile multipartFile){
         try {
             File fileToSave = new File(pathFile + multipartFile.getOriginalFilename());
+            if(fileToSave.exists()){
+                pathSavedFile = fileToSave.getName();
+                return;
+            }
             pathSavedFile = fileToSave.getName();
             multipartFile.transferTo(fileToSave);
         } catch (IOException e) {

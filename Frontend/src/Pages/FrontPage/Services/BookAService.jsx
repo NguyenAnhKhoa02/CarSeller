@@ -30,7 +30,6 @@ function BookAService () {
         fetchData()
     },[])
 
-
     const [fullName,setFullName] = React.useState();
     const [email,setEmail] = React.useState();
     const [numberPhone,setNumberPhone] = React.useState();
@@ -87,8 +86,6 @@ function BookAService () {
              }
 
       }
-
-      
 
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>

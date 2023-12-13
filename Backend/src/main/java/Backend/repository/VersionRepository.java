@@ -70,11 +70,11 @@ public interface VersionRepository extends JpaRepository<Version,Long> {
 
 
     @Query(
-            value = "SELECT version.air_bag " +
+            value = "SELECT version.name_version " +
                     "FROM version " +
                     "WHERE version.id = :versionId",
             nativeQuery = true
     )
-    String findAirBag(@Param("versionId") Long versionId);
+    String findNameVersion(@Param("versionId") Long versionId);
 
 }
