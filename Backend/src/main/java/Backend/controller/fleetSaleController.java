@@ -5,6 +5,8 @@ import Backend.model.FleetSale;
 import Backend.model.Model;
 import Backend.model.ServicePlan;
 import Backend.repository.FleetSaleReposity;
+import Backend.repository.ModelRepository;
+import Backend.services.GmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +25,12 @@ import java.sql.SQLException;
 public class fleetSaleController {
     @Autowired
     FleetSaleReposity fleetSaleReposity;
+
+    @Autowired
+    ModelRepository modelRepository;
+
+    @Autowired
+    GmailService gmailService;
 
     @GetMapping
     public ResponseEntity<Page<FleetSale>>  getAllModels(
@@ -71,6 +79,9 @@ public class fleetSaleController {
     public ResponseEntity<FleetSale> saveFleetSale(@RequestBody FleetSaleDTO fleetSaleDTO){
         FleetSale fleetSale = fleetSaleDTO.mappedFleetSale();
         fleetSaleReposity.save(fleetSale);
+
+        String modelName = modelRepository.findNameModel(fleetSale.getModelId());
+        gmailService.sendingGmailFleetSale(fleetSale,modelName);
 
         return ResponseEntity.ok().body(fleetSale);
     }
