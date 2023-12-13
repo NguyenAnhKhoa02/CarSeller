@@ -1,8 +1,11 @@
 package Backend.controller;
 
 import Backend.ModelDTO.ServicePlanDTO;
+import Backend.model.Service;
 import Backend.model.ServicePlan;
+import Backend.repository.ModelRepository;
 import Backend.repository.ServicePlanRepository;
+import Backend.repository.ServiceRepository;
 import Backend.services.GmailService;
 import netscape.javascript.JSObject;
 import org.json.JSONObject;
@@ -23,9 +26,16 @@ import java.util.ArrayList;
 public class servicePlanController {
     @Autowired
     private ServicePlanRepository servicePlanRepository;
-//    @Autowired
-//    private GmailService gmailService;
-//    @PostMapping("/save")
+
+    @Autowired
+    private ServiceRepository serviceRepository;
+
+    @Autowired
+    private ModelRepository modelRepository;
+
+    @Autowired
+    private GmailService gmailService;
+
     @GetMapping
     public ResponseEntity<Page<ServicePlan>>  getAllServicePlans(
             @RequestParam(value = "page", defaultValue = "1") int page,
@@ -81,6 +91,12 @@ public class servicePlanController {
             ServicePlan servicePlan = servicePlanDTO.mappedServicePlan();
 
             servicePlanRepository.saveServicePlan(servicePlan,servicePlanDTO.getServiceId(), servicePlanDTO.getModelId());
-            return new  ResponseEntity<>(servicePlan,HttpStatus.CREATED);
+
+        String serviceName = serviceRepository.findNameService(servicePlanDTO.getServiceId());
+        String modelName = modelRepository.findNameModel(servicePlanDTO.getModelId());
+
+        gmailService.sendingGmailServicePlan(servicePlan,modelName,serviceName);
+
+        return new  ResponseEntity<>(servicePlan,HttpStatus.CREATED);
     }
 }

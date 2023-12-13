@@ -8,6 +8,7 @@ import Backend.repository.DistributionCenterReposity;
 import Backend.repository.ModelRepository;
 import Backend.repository.TestingRegisterRepository;
 import Backend.repository.VersionRepository;
+import Backend.services.GmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,13 +30,13 @@ public class testingRegisterController {
     private TestingRegisterRepository testingRegisterRepository;
 
     @Autowired
-    private DistributionCenterReposity distributionCenterReposity;
+    private GmailService gmailService;
 
     @Autowired
     private VersionRepository versionRepository;
 
     @Autowired
-    private ModelRepository modelRepository;
+    private DistributionCenterReposity distributionCenterReposity;
 
     @GetMapping
     public ResponseEntity<Page<TestingRegister>>  getAllTestingRegisters(
@@ -98,8 +99,12 @@ public class testingRegisterController {
         Long lastId = testingRegisterRepository.getLastId();
         if(lastId == null) testingRegister.setId(1L);
         else testingRegister.setId(++lastId);
-        System.out.println(testingRegister.getId());
         testingRegisterRepository.saveTestingRegister(testingRegister,idVersion, idDistribution);
+
+        String nameVersion = versionRepository.findNameVersion(testingRegisterDTO.getVersionId());
+        String nameDistributionCenter = distributionCenterReposity.findNameDistributionCenter(testingRegisterDTO.getDistributionCenterId());
+
+        gmailService.sendingGmailTestingRegister(testingRegister,nameVersion,nameDistributionCenter);
 
         return ResponseEntity.ok().body(null);
     }

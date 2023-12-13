@@ -1,15 +1,15 @@
-import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField,FormDataConsumer, FunctionField, DateField } from "react-admin";
+import { List,Datagrid,TextField,EditButton,Edit,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout,ReferenceField,SelectInput,ChipField,FormDataConsumer, FunctionField, DateField, TimeInput } from "react-admin";
 import { Box,Typography } from "@mui/material";
 
 const status = [
-    { id:"waiting for contract", name:"Waiting For Contract"}, 
+    { id:"Waiting", name:"Waiting For Contract"}, 
     { id:"contracted", name:"Contracted"}, 
     { id:"completed", name:"Completed"}
-];
+]
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const ServicePlanTitle = () => {
-    const record = useRecordContext();
+    const record = useRecordContext()
     return <span>ID Service Plan {record ? `"${record.id}"` : ''}</span>;
   };
 
@@ -19,8 +19,8 @@ export const ServicePlanList = (props) => (
     <Datagrid rowClick="show">
         <TextField source="id" />
         <DateField source="date"></DateField>
-        <TextField source="time"></TextField>
         <TextField source="fullName"/>
+        <TextField source="time" />
         <ReferenceField label="Model" source="modelId" reference="models"/>
         <ReferenceField label="Service" source="serviceId" reference="services" />
         <ChipField source="status" />
@@ -52,7 +52,6 @@ export const ServicePlanEdit = (props) => (
 // Component cho trang hiển thị chi tiết
 export const ServicePlanShow = (props) => (
 <Show title={<ServicePlanTitle />} {...props}>
-    {console.log(props)},
     <SimpleShowLayout>
         <TextField source="id" />
         <TextField source="date" />

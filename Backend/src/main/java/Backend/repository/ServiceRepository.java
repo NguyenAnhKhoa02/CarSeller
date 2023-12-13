@@ -15,4 +15,12 @@ public interface ServiceRepository extends JpaRepository<Service,Long> {
             nativeQuery = true
     )
     int checkNameModel(@Param("nameService") String nameService);
+
+    @Query(
+            value = "SELECT service.name_service " +
+                    "FROM service " +
+                    "WHERE service.id_service = :idService",
+            nativeQuery = true
+    )
+    String findNameService(@Param("idService") Long idService);
 }

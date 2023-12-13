@@ -42,10 +42,10 @@ public class ServicePlanDTO {
         servicePlan.setNumberPhone(numberPhone);
         servicePlan.setLicensePlate(licensePlate);
         servicePlan.setDate(Date.valueOf(date));
-        servicePlan.setTime(timeService.TimeToTimestamp(time));
+        servicePlan.setTime(time);
         servicePlan.setStatus(status);
         servicePlan.setAddressDistributionCenter(distribution);
-        servicePlan.setStatus("watting");
+        servicePlan.setStatus("Waiting");
         return servicePlan;
     }
 }
