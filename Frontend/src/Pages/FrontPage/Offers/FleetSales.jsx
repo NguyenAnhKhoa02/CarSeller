@@ -7,21 +7,127 @@ import icon3 from "../../../Components/Assets/Page/fleetsalesicon3.png"
 import icon4 from "../../../Components/Assets/Page/fleetsalesicon4.png"
 import icon5 from "../../../Components/Assets/Page/fleetsalesicon5.png"
 import icon6 from "../../../Components/Assets/Page/fleetsalesicon6.png"
-import car1 from "../../../Components/Assets/ForDatabase/Cars/car1.png";
-import car2 from "../../../Components/Assets/car2.png";
-import car3 from "../../../Components/Assets/car3.png";
-import car4 from "../../../Components/Assets/car4.png";
+import React,{ useEffect, useRef, useState } from "react";
 
 function FleetSales() {
     const settings = {
         className: "center",
-        centerMode: true,
-        infinite: true,
-        centerPadding: "60px",
+        centerMode: false,
+        infinite: false  ,
+        centerPadding: "0px",
         slidesToShow: 3,
-        arrows: false,
-        speed: 500
-      };  
+        arrows: true,
+        speed: 500,
+      }; 
+      
+    // get all models
+    const [models,setModels] = useState([])
+    useEffect(() => {
+        const fetchData =  async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/models/all`);
+                const data = await response.json()
+
+                const modelDatas = data.map(async(item) => {
+                    const imageResponse = await fetch(`http://localhost:8080/image/${item.imageName}`)
+                    
+                    if(imageResponse.ok){
+                        const blob = await imageResponse.blob()
+                        const imageURL = await URL.createObjectURL(blob)
+                        return{
+                            ...item,
+                            imageURL
+                        };
+                    }else
+                        return{
+                            ...item,
+                            imageURL:null
+                        }
+                });
+                
+                setModels(await Promise.all(modelDatas))
+
+            } catch (error) {
+                console.log("Error:" + error)
+            }
+        };
+        fetchData()
+    },[])
+
+    // show lowest price    
+    const LowestPrice = ({id}) => {
+        let lowestPrice = 0
+        
+        const [versions,setVersions] = useState([])
+
+        useEffect(() => {
+            const fetchData = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8080/versions/modelId=${id}`);
+                    setVersions(await response.json());
+                } catch (error) {
+                    console.log("Error fetch data",error);
+                }
+            };
+            fetchData()
+        },[])
+
+        for (let index = 0; index < versions.length; index++) {
+            const element = versions[index].price;
+            if(lowestPrice == 0) lowestPrice = element
+            if(lowestPrice > element) lowestPrice = element
+        }
+
+        return <Card.Text>Giá từ {lowestPrice} vnđ</Card.Text>
+    }
+    
+    var lastId = null
+    var currentModelId = null
+    async function handleClick(idModel) {
+        if(lastId != null){
+            var headerLast = document.getElementById(lastId)
+            headerLast.innerHTML = "none"
+            headerLast.style.color = "white"
+            headerLast.style.backgroundColor = "white"
+        }
+        
+        var header = document.getElementById(idModel)
+        header.innerHTML = "Choosed"
+        header.style.color = "white"
+        header.style.backgroundColor = "green"
+
+        currentModelId = idModel
+        lastId = idModel
+    }  
+
+    const [fullName,setFullName] = useState([])
+    const [email,setEmail] = useState([])
+    const [phoneNumber,setPhoneNumber] = useState([])
+    const [companyAddress,setCompanyAddress] = useState([])
+    const [companyPhone, setCompanyPhone] = useState([])
+    const [contactName,setContactName] = useState([])
+    const [quantity, setQuantity] = useState([])
+    const handleSubmit = async(e) =>{
+        e.preventDefault();
+
+
+        if(currentModelId == null){
+            alert("Plaese choose model!")
+            return
+        }
+        
+        let modelId = currentModelId
+        const fleetSale = {modelId,fullName,email,phoneNumber,companyAddress,companyPhone,contactName,quantity}
+        console.log(fleetSale)
+        
+        fetch("http://localhost:8080/fleetSales/save",
+        {
+            method:"POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(fleetSale)
+        })
+    }
+
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="875"/>
@@ -67,88 +173,60 @@ function FleetSales() {
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
                 <h3 style={{fontWeight:"bold"}}>1. Chọn mẫu xe</h3>
             </div>
-            <Slider {...settings}>
-                <div>
-                    <Card className="MyCard">
-                    <Card.Img variant="top" src={car1} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>XPANDER CROSS 2023</Card.Title>
-                        <Card.Text>
-                        Giá từ 698.000.000 VNĐ
-                        </Card.Text>
-                    </Card.Body>
-                    </Card>
-                </div>
-                <div>
-                    <Card>
-                    <Card.Img variant="top" src={car2} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>NEW OUTLANDER</Card.Title>
-                        <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                    </Card>
-                </div>
-                <div>
-                    <Card>
-                    <Card.Img variant="top" src={car3} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>NEW XPANDER</Card.Title>
-                        <Button variant="secondary">Xem thêm</Button>
-                    </Card.Body>
-                    </Card>
-                </div>
-                <div>
-                    <Card>
-                    <Card.Img variant="top" src={car4} />
-                    <Card.Body style={{textAlign: "center", }}>
-                        <Card.Title>XPANDER CROSS</Card.Title>
-                        <Button variant="secondary">Xem thêm</Button>
-                    </Card.Body>
-                    </Card>
-                </div>
+            <Slider prevArrow={<Button/>} nextArrow={<Button/>} focusOnSelect {...settings}>
+                {models.map((item,index) => (
+                    <>
+                        <Card onClick={()=>handleClick(item.id)} className="MyCard" style={{height:"400px", width:"250px", paddingLeft:"10px"}}>
+                            <Card.Header id={item.id}  style={{color:"white",backgroundColor:"white", marginBottom:"100px", textAlign:"center"}}>None</Card.Header>
+                            <Card.Img variant="center" src={item.imageURL}/>
+                            <Card.Body  style={{textAlign: "center"}}>
+                                <Card.Title>{item.nameModel}</Card.Title>
+                                <LowestPrice id={item.id} />
+                            </Card.Body>
+                        </Card>
+                    </>
+
+                ))}
             </Slider>
             <div style={{textAlign:"center", paddingTop:"50px", paddingBottom:"50px"}}>
                 <h3 style={{fontWeight:"bold"}}>2. Nhập thông tin của bạn</h3>
             </div>
             <FloatingLabel controlId="name" label="HỌ VÀ TÊN *" className="mb-3">
-                <Form.Control type="text" placeholder="name" />
+                <Form.Control onChange={(e) => setFullName(e.target.value)} required type="text" placeholder="name" />
             </FloatingLabel>
             <Row className="g-2">
                 <Col md>
                     <FloatingLabel controlId="email" label="ĐỊA CHỈ EMAIL *" className="mb-3">
-                        <Form.Control type="email" placeholder="name@example.com" />
+                        <Form.Control onChange={(e) => setEmail(e.target.value)} required type="email" placeholder="name@example.com" />
                     </FloatingLabel>
                 </Col>
                 <Col md>
                     <FloatingLabel controlId="phonenumber" label="SỐ ĐIỆN THOẠI *" className="mb-3">
-                        <Form.Control type="tel" placeholder="00000" />
+                        <Form.Control onChange={(e) => setPhoneNumber(e.target.value)} required type="tel" placeholder="00000" />
                     </FloatingLabel>
                 </Col>
             </Row>
             <Row className="g-2">
                 <Col md>
                     <FloatingLabel controlId="address" label="ĐỊA CHỈ CÔNG TY *" className="mb-3">
-                        <Form.Control type="text" placeholder="tp.hcm" />
+                        <Form.Control onChange={(e) => setCompanyAddress(e.target.value)} required type="text" placeholder="tp.hcm" />
                     </FloatingLabel>
                 </Col>
                 <Col md>
                     <FloatingLabel controlId="phonenumber2" label="SỐ ĐIỆN THOẠI CÔNG TY *" className="mb-3">
-                        <Form.Control type="tel" placeholder="00000" />
+                        <Form.Control onChange={(e) => setCompanyPhone(e.target.value)} required type="tel" placeholder="00000" />
                     </FloatingLabel>
                 </Col>
             </Row>
             <Row className="g-2">
                 <Col md>
                     <FloatingLabel controlId="tradename" label="TÊN GIAO DỊCH *" className="mb-3">
-                        <Form.Control type="text" placeholder="new trade" />
+                        <Form.Control onChange={(e) => setContactName(e.target.value)} required type="text" placeholder="new trade" />
                     </FloatingLabel>
                 </Col>
                 <Col md>
                     <FloatingLabel controlId="quantity" label="SỐ LƯỢNG *" className="mb-3">
-                        <Form.Control type="number" placeholder="00000" />
+                        <Form.Control onChange={(e) => setQuantity(e.target.value)} required type="number" placeholder="00000" />
                     </FloatingLabel>
                 </Col>
             </Row>
@@ -158,9 +236,10 @@ function FleetSales() {
                     type="checkbox"
                     id="default-checkbox"
                     label="Tôi xác nhận đồng ý nhận thông tin liên quan đến dịch vụ chăm sóc khách hàng, khuyến mãi, hoặc các thông tin tiếp thị sản phẩm và dịch vụ được cung cấp bởi MMV, các nhà phân phối ủy quyền của MMV và các đối tác kinh doanh được chỉ định bởi MMV."
+                    required
                 />
             </div>
-            <Row><Button variant="outline-dark" type="submit" size="lg" className="MyBorder2">GỬI THÔNG TIN</Button></Row>
+            <Row><Button onClick={handleSubmit} variant="outline-dark" type="submit" size="lg" className="MyBorder2">GỬI THÔNG TIN</Button></Row>
         </Form>
     </Row>
     </>

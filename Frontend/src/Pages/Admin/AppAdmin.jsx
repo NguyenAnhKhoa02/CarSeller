@@ -23,6 +23,8 @@ import DistributionCenterIcon from '@mui/icons-material/EmojiTransportation';
 import ShowroomAndTesting from '@mui/icons-material/Grading';
 import TypeSparePartIcon from '@mui/icons-material/Construction';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import FleetSaleIcon from '@mui/icons-material/RequestQuote';
+import { FleetSaleEdit, FleetSaleList, FleetSaleShow } from "./Data/FleetSale";
 const lightTheme = defaultTheme;
 const darkTheme = { ...defaultTheme, palette: { mode: "dark" } };
 
@@ -40,6 +42,7 @@ function App () {
                     </>
                   : null, 
           ]}
+          <Resource name="fleetSales" icon={FleetSaleIcon} list={FleetSaleList} edit={FleetSaleEdit} show={FleetSaleShow}/>
           <Resource name="addressDistributionCenters" recordRepresentation="address"/>
           <Resource name="versions" icon={VersionIcon} list={VersionList} edit={VersionEdit} create={VersionCreate} recordRepresentation="nameVersion"/>
           <Resource name="testing_Registers" icon={TestingRegissterIcon} list={TestingRegisterList} show={TestingRegisterShow} edit={TestingRegisterEdit}/>
