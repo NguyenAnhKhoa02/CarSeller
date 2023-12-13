@@ -77,8 +77,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             if(params.data.imageName != null)
               formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
-        }
-        else if(resource == 'versions'){
+        } else if(resource == 'versions'){
           const formData = new FormData()
           formData.append('id',params.data.id)
           formData.append('airBag',params.data.airBag)
@@ -119,17 +118,40 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             if(params.data.imageName != null)
               formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
-        }else if(resource == 'distributionCenters'){
-
-          console.log(params.data)
+        } else if(resource == 'distributionCenters'){
           const formData = new FormData()
           formData.append('id',params.data.id)
           formData.append('nameDistributionCenter',params.data.nameDistributionCenter)
           formData.append('hotline',params.data.hotline)
           formData.append('addresses',JSON.stringify(params.data.addressDistributionCenters))
           options.body = formData
-        } 
-        else {
+        } else if(resource == 'type_Spare_Parts'){        
+          const formData = new FormData()
+          formData.append('nameTypeSparePart',params.data.nameTypeSparePart)
+          params.data.spareParts.forEach((sparePart,index) => {
+            const sparePartObject = new Object()
+            sparePartObject.nameSparePart = sparePart.nameSparePart
+            if(sparePart.imageFile != undefined)
+              sparePartObject.imageName = sparePart.imageFile.title
+            else
+              sparePartObject.imageName = sparePart.imageName
+            formData.append('spareParts',JSON.stringify(sparePartObject))
+            if(sparePart.imageFile != undefined)
+              formData.append('sparePartFiles',sparePart.imageFile.rawFile)
+          });
+          options.body=formData
+        } else if(resource == 'newspapers') {
+          const formData = new FormData()
+          formData.append('title',params.data.title)
+          formData.append('content',params.data.content)
+          if(typeof params.data.imageName == "string")
+            formData.append('imageName',params.data.imageName)
+          if(typeof params.data.imageName == "object")
+            if(params.data.imageName != null)
+              formData.append('imageFile',params.data.imageName.rawFile)
+          options.body=formData
+          console.log(formData)
+        } else {
           options.body = JSON.stringify(params.data);
         }
         options.method = "PUT";
@@ -188,8 +210,29 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('hotline',params.data.hotline)
           formData.append('addresses',JSON.stringify(params.data.addresses))
           options.body=formData
-        }
-        else {
+        } else if(resource == 'type_Spare_Parts'){        
+          const formData = new FormData()
+          formData.append('nameTypeSparePart',params.data.nameTypeSparePart)
+          params.data.spareParts.forEach((sparePart,index) => {
+            const sparePartObject = new Object()
+            sparePartObject.nameSparePart = sparePart.nameSparePart
+            if(sparePart.imageFile != null){
+              sparePartObject.imageName = sparePart.imageFile.title
+              formData.append('sparePartFiles',sparePart.imageFile.rawFile)
+            }
+            else
+            sparePartObject.imageName = 'empty'
+            formData.append('spareParts',JSON.stringify(sparePartObject))
+          });
+          options.body=formData
+        } else if(resource == 'newspapers') {
+          const formData = new FormData()
+          formData.append('title',params.data.title)
+          formData.append('content',params.data.content)
+          if(params.data.imageFile != undefined)
+            formData.append('imageFile',params.data.imageFile.rawFile)
+          options.body=formData
+        } else {
           options.body = JSON.stringify(params.data);
         }
         options.method = "POST";

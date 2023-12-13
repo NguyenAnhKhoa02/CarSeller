@@ -34,9 +34,7 @@ function AllModels () {
 
     const LowestPrice = ({id}) => {
         let lowestPrice = 0
-        
         const [versions,setVersions] = useState([])
-
         useEffect(() => {
             const fetchData = async () => {
                 try {
@@ -48,22 +46,18 @@ function AllModels () {
             };
             fetchData()
         },[])
-
         for (let index = 0; index < versions.length; index++) {
             const element = versions[index].price;
             if(lowestPrice == 0) lowestPrice = element
             if(lowestPrice > element) lowestPrice = element
         }
-
         return <h5>Giá từ {lowestPrice} vnđ</h5>
     }
 
     const FuelAndSeat = ({model}) => {
-        
         let nameFuel
         if(model.fuel == "gasoline") nameFuel = "Xăng"
         if(model.fuel == "dieselFuel") nameFuel = "Dầu Diesel"
-
         return(
         <>
             <div style={{display:"flex",alignContent:"center",marginTop:"10px",marginBottom:"10px"}}>
@@ -92,7 +86,6 @@ function AllModels () {
                 <div style={{textAlign:"justify"}}>
                     <h3 style={{fontWeight:"bold",marginBottom:"20px"}}>{item.nameModel}</h3>
                     <LowestPrice id={item.id}></LowestPrice>
-
                     <p>{item.info}</p>  
                     <FuelAndSeat model={item}></FuelAndSeat>
                     <Link to={`/SanPham/TatCaXe/${item.id}`} key={item.id}><Button variant="outline-dark" size="lg" className="MyBorder">KHÁM PHÁ</Button></Link>

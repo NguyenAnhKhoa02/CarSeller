@@ -53,7 +53,7 @@ function Versions({}) {
             fetchData()
         },[])
         
-        return imageUrl ? <img height={199.99}  src={imageUrl} alt="Image" id={id}/> : null;
+        return imageUrl ? <img height={200}  src={imageUrl} alt="Image" id={id}/> : null;
 
       };
 

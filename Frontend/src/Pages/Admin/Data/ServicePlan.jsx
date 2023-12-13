@@ -16,7 +16,6 @@ const ServicePlanTitle = () => {
 // Component cho trang danh sách
 export const ServicePlanList = (props) => (
 <List {...props}>
-    {console.log(props)}
     <Datagrid rowClick="show">
         <TextField source="id" />
         <DateField source="date"></DateField>

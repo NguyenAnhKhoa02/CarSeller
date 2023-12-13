@@ -3,13 +3,13 @@ import { Typography } from "@mui/material";
 import { useState,useEffect } from "react";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
-const PromotionTitle = () => {
+const NewspaperTitle = () => {
     const record = useRecordContext();
-    return <span>Promotion Title {record ? `"${record.title}"` : ''}</span>;
+    return <span>Newspaper Title {record ? `"${record.title}"` : ''}</span>;
   };
   
 // Component cho trang danh sách
-export const PromotionList = (props) => (
+export const NewspaperList = (props) => (
 <List {...props}>
     <Datagrid rowClick="edit">
         <TextField source="id" />
@@ -50,11 +50,11 @@ const ImageFieldCus = ({ url }) => {
   };
   
 // Component cho trang chỉnh sửa
-export const PromotionEdit = (props) => (
-<Edit title={<PromotionTitle />} {...props}>
+export const NewspaperEdit = (props) => (
+<Edit title={<NewspaperTitle />} {...props}>
     <SimpleForm sx={{ maxWidth: 800 }}>
         <Typography variant="h5" gutterBottom> 
-            Edit Promotion
+            Edit Newspaper
         </Typography>
         <TextInput disabled fullWidth source="id" />
         <TextInput fullWidth required source="title" />
@@ -71,11 +71,11 @@ export const PromotionEdit = (props) => (
 );
 
 // Component cho trang tạo mới
-export const PromotionCreate = (props) => (
+export const NewspaperCreate = (props) => (
 <Create {...props}>
     <SimpleForm sx={{ maxWidth: 800 }}>
         <Typography variant="h5" gutterBottom> 
-            Create Promotion
+            Create Newspaper
         </Typography>
         <TextInput fullWidth required source="title" />
         <TextInput fullWidth source="content" multiline rows={10}/>

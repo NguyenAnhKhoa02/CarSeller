@@ -17,6 +17,7 @@ import ExpressService from "./FrontPage/Services/ExpressService";
 import Maintenance from "./FrontPage/Services/Maintenance";
 import BookAService from "./FrontPage/Services/BookAService";
 import SpareParts from "./FrontPage/Services/SpareParts";
+import Newspaper from "./FrontPage/AboutUs/Newspaper";
 import CompanyProfile from "./FrontPage/AboutUs/CompanyProfile";
 import ContactUs from "./FrontPage/AboutUs/ContactUs";
 import AppAdmin from "./Admin/AppAdmin";
@@ -54,6 +55,7 @@ return (
                 <Route path="DichVu/CacHangMucBaoDuong" element={<Maintenance />} />
                 <Route path="DichVu/ThongTinPhuTung" element={<SpareParts />} />
                 <Route path="DichVu/DatLichDichVu" element={<BookAService />} />
+                <Route path="VeChungToi/TinTuc" element={<Newspaper />} />
                 <Route path="VeChungToi/GioiThieuCongTy" element={<CompanyProfile />} />
                 <Route path="VeChungToi/LienHe" element={<ContactUs />} />
             </Route>

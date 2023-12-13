@@ -54,6 +54,8 @@ function Header() {
             <Link className="dropdown-item" to="/DichVu/DatLichDichVu">Đặt lịch dịch vụ</Link>
           </NavDropdown>
           <NavDropdown title="VỀ CHÚNG TÔI" id="basic-nav-dropdown">
+            <Link className="dropdown-item" to="/VeChungToi/TinTuc">Tin tức</Link>
+            <NavDropdown.Divider />
             <Link className="dropdown-item" to="/VeChungToi/GioiThieuCongTy">Giới thiệu công ty</Link>
             <NavDropdown.Divider />
             <Link className="dropdown-item" to="/VeChungToi/LienHe">Liên hệ</Link>

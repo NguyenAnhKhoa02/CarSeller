@@ -8,11 +8,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Promotion {
+public class SparePart {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
     private Long id;
-    private String title;
-    private String content;
+    private String nameSparePart;
     private String imageName;
 }

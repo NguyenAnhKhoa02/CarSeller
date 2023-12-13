@@ -16,7 +16,7 @@ public interface PromotionRepository extends JpaRepository<Promotion,Long> {
                     "promotion.image_name=:#{#promotion.getImageName()}," +
                     "promotion.title=:#{#promotion.getTitle()}," +
                     "promotion.content=:#{#promotion.getContent()} " +
-                    "WHERE promotion.promotion_id = :#{#promotion.getId()}" ,
+                    "WHERE promotion.id = :#{#promotion.getId()}" ,
             nativeQuery = true
     )
     void updatePromotion(@Param("promotion") Promotion promotion);
