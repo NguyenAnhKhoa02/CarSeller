@@ -1,7 +1,7 @@
 import {Row, Col, Button, Form, FloatingLabel, Card} from "react-bootstrap"
 import Slider from "react-slick";
 import banner from "../../../Components/Assets/Page/bannerservice1.png"
-import { useEffect, useRef, useState } from "react";
+import React,{ useEffect, useRef, useState } from "react";
 
 function BookATestDrive () {
     const settings = {
