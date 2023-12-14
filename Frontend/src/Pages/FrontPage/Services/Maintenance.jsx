@@ -1,4 +1,4 @@
-import {Row, Col, Button} from "react-bootstrap"
+import {Row, Col, Button, Table} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import banner from "../../../Components/Assets/Page/bannerservice1.png"
 
