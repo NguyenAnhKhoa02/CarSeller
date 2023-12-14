@@ -1,4 +1,4 @@
-import { List,Datagrid,TextField,EditButton,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,Show,SimpleShowLayout } from "react-admin";
+import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton } from "react-admin";
 import { Box,Typography } from "@mui/material";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa

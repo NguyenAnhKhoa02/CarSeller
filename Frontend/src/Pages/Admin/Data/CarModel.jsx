@@ -1,4 +1,4 @@
-import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ImageInput,ImageField,FileInput,FormDataConsumer, NumberInput, SelectInput } from "react-admin";
+import { List,Datagrid,TextField,Edit,Create,SimpleForm,TextInput,useRecordContext,DeleteButton,ImageInput,ImageField,FormDataConsumer,NumberInput,SelectInput } from "react-admin";
 import { Box,Typography } from "@mui/material";
 import { useState,useEffect } from "react";
 

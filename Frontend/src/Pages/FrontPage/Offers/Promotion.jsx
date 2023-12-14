@@ -3,9 +3,8 @@ import {useEffect,useState} from "react";
 import banner from "../../../Components/Assets/Page/bannerservice1.png"
 
 function Promotion() {
-    const [show, setShow] = useState(false);
-    const handleShow = () => setShow(true);
     const [promotions, setPromotions] = useState([]);
+    const [modalStates, setModalStates] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,6 +30,18 @@ function Promotion() {
         fetchData()
     },[])
 
+    const handleShow = (index) => {
+        const newModalStates = [...modalStates];
+        newModalStates[index] = true;
+        setModalStates(newModalStates);
+    };
+
+    const handleClose = (index) => {
+        const newModalStates = [...modalStates];
+        newModalStates[index] = false;
+        setModalStates(newModalStates);
+    };
+
     return (<>
     <Row style={{position:"relative", textAlign:"center", color:"white"}}>
         <img src={banner} height="316"/>
@@ -47,14 +58,14 @@ function Promotion() {
                 </Col>
                 <Col style={{alignSelf:"center"}}>
                     <p style={{fontSize:"32px", fontWeight:"bold"}}>{item.title}</p>
-                    <Button className={"PromotionButton"} variant="link" size="lg" onClick={handleShow}>
+                    <Button className={"PromotionButton"} variant="link" size="lg" onClick={() => handleShow(index)}>
                         Chi tiết
                     </Button>
-                    <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
+                    <Modal show={modalStates[index]} fullscreen={true} onHide={() => handleClose(index)}>
                         <Modal.Header closeButton>
                         <Modal.Title>{item.title}</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body><h5>{item.content}</h5></Modal.Body>
+                        <Modal.Body><h5 style={{textAlign:"justify"}}>{item.content}</h5></Modal.Body>
                     </Modal>
                 </Col>
             </Row>

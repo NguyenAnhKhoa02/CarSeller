@@ -114,4 +114,11 @@ label.form-check-label{
     font-size: 16px;
 }
 /*===================================AboutUs==============================*/
+.NewspaperButton{
+    color: black;
+    font-weight: bold;
+}
+.NewspaperButton{
+    color: red;
+}
 /*===================================Admin==============================*/

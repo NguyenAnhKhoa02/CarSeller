@@ -1,6 +1,5 @@
-import { Typography,Box, Alert, Divider } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { List, Datagrid, TextField, Edit, SimpleForm, Create, TextInput, NumberInput, FormDataConsumer, ArrayInput, SimpleFormIterator, BooleanInput, useRecordContext, useDataProvider, useGetList, useGetOne, useInput, useStore, useStoreContext, useEditContext, SelectInput, DateInput, TimeInput, Toolbar, SaveButton, useNotify, useRedirect } from "react-admin";
+import { Typography,Box } from "@mui/material";
+import { List, Datagrid, TextField, Edit, SimpleForm, Create, TextInput, NumberInput, ArrayInput, SimpleFormIterator, useRecordContext, SelectInput, DateInput, TimeInput } from "react-admin";
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
 const DistributionCenter = () =>{
