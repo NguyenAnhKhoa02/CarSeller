@@ -1,7 +1,7 @@
 import {Row, Col, Button, Form, FloatingLabel, Card} from "react-bootstrap";
 import banner from "../../../Components/Assets/Page/contactUs.png";
-import icon from "../../../Components/Assets/Page/foot2.png"
-import email from "../../../Components/Assets/Page/foot3.png"
+import icon from "../../../Components/Assets/Page/foot2.png";
+import emailicon from "../../../Components/Assets/Page/foot3.png";
 import { useState } from "react";
 
 function ContactUs () {
@@ -60,7 +60,7 @@ function ContactUs () {
                 <Col>
                 <p style={{fontWeight:"bold", fontSize:"32px" ,color:"white", marginBottom:"2px"}}>Email</p>
                 <div style={{display:"flex"}}>
-                    <img src={email} style={{width:"30px",height:"30px",marginTop: "3px", color:"white"}}/>
+                    <img src={emailicon} style={{width:"30px",height:"30px",marginTop: "3px", color:"white"}}/>
                     <p style={{fontSize:"24px",marginLeft:"10px" ,color:"white", fontWeight:"bold"}}>cskh@mitsubishi-motors.com.vn</p>
                 </div>
                 </Col>
