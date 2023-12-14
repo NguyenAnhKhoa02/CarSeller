@@ -78,6 +78,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
               formData.append('imageFile',params.data.imageName.rawFile)
           options.body=formData
         } else if(resource == 'versions'){
+          console.log(params.data)
           const formData = new FormData()
           formData.append('id',params.data.id)
           formData.append('airBag',params.data.airBag)
@@ -95,7 +96,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           formData.append('rearBrakes',params.data.rearBrakes)
           formData.append('seatMaterial',params.data.seatMaterial)
           formData.append('wiperBlade',params.data.wiperBlade)
-          formData.append('wrappedSteeringWheelAndGearLever',params.data.wswandgl)
+          formData.append('wrappedSteeringWheelAndGearLever',params.data.wrappedSteeringWheelAndGearLever)
           params.data.colors.forEach((color,index) => {
             const colorObject = new Object()
             colorObject.color = color.color

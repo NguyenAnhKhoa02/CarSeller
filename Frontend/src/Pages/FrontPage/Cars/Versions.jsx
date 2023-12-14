@@ -1,4 +1,4 @@
-import {Row, Col, Accordion, Button} from "react-bootstrap"
+import {Row, Col, Accordion, Button, Container} from "react-bootstrap"
 import {Link,useParams} from "react-router-dom"
 import {useState, useEffect} from 'react';
 import banner from "../../../Components/Assets/Page/bannerservice1.png"
@@ -53,7 +53,7 @@ function Versions({}) {
             fetchData()
         },[])
         
-        return imageUrl ? <img height={200}  src={imageUrl} alt="Image" id={id}/> : null;
+        return imageUrl ? <img height={200} width={400}  src={imageUrl} alt="Image" id={id}/> : null;
 
       };
 
@@ -97,12 +97,12 @@ function Versions({}) {
     <Row>
         {versions.map((item,index) => (
             <Col>
-                <h4 style={{textAlign:"center"}}>{item.info}</h4>
+                <h5 style={{textAlign:"center"}}>{item.info}</h5>
             </Col>
         ))}
     </Row>
 
-    <Row style={{maxWidth:"80%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
+    <Row style={{maxWidth:"100%",margin:"0 auto", paddingBottom:"50px", paddingTop:"50px", textAlign:"justify"}}>
         <Row>
             <Accordion flush>
                 <Accordion.Item eventKey="0">

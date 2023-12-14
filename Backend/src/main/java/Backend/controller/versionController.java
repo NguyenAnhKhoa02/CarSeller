@@ -39,9 +39,8 @@ public class versionController {
 
     @PostMapping
     public ResponseEntity<Version> saveVersion(@ModelAttribute VersionDTO versionDTO) throws ParseException {
-//        Version savedVersion = versionRepository.save(version);
-        Version version = new Version();
-        version = versionDTO.mappedVersion();
+        Version version = versionDTO.mappedVersion();
+        System.out.println(version);
         if(versionDTO.getColorFiles() != null)
             for (MultipartFile multipartFile:
                  versionDTO.getColorFiles()) {
@@ -61,7 +60,6 @@ public class versionController {
         }
 
         versionRepository.save(version);
-
         return new ResponseEntity<>(version, HttpStatus.CREATED);
     }
 

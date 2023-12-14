@@ -116,7 +116,7 @@ export const VersionEdit = (props) => (
                 <TextInput fullWidth source="wiperBlade" />
             </Box>
             <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                <TextInput fullWidth source="wswandgl" />
+                <TextInput fullWidth source="wrappedSteeringWheelAndGearLever" />
             </Box>
         </Box>
         <br/>

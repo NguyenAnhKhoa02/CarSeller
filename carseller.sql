@@ -1,15 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 28, 2023 at 04:56 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th12 14, 2023 lúc 01:48 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- START TRANSACTION;
+-- SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,275 +18,207 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `carseller`
+-- Cơ sở dữ liệu: `carseller`
 --
+
+--
+-- Đang đổ dữ liệu cho bảng `distribution_center`
+--
+
+INSERT INTO `distribution_center` (`id_distribution_center`, `hotline`, `name_distribution_center`) VALUES
+(1, '886724247', 'CÔNG TY CỔ PHẦN MOVEO BÌNH DƯƠNG'),
+(2, '914706706', 'CÔNG TY CP Ô TÔ SÀI GÒN TÂY NINH'),
+(3, '913773881', 'CÔNG TY CỔ PHẦN Ô TÔ BÀ RỊA VŨNG TÀU'),
+(4, '992873642', 'CÔNG TY CỔ PHẦN ĐẦU TƯ VÀ THƯƠNG MẠI NAM AUTO'),
+(5, '888913355', 'CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ Ô TÔ PHƯƠNG NGUYÊN'),
+(6, '946801801', 'CÔNG TY CỔ PHẦN Ô TÔ SÀI GÒN LONG AN'),
+(7, '917091122', 'CÔNG TY TNHH TMDV Ô TÔ THỦ ĐỨC');
+
+-- --------------------------------------------------------
+--
+-- Đang đổ dữ liệu cho bảng `address_distribution_center`
+--
+
+
+INSERT INTO `address_distribution_center` (`id`, `address`, `is_replacement_parts`, `is_second_hand`, `is_seller`, `is_service`, `fk_distribution_int`) VALUES
+(1, '561A Đại lộ Bình Dương, khu phố 1, Phường Hiệp Thành, Thành phố Thủ Dầu Một, Tỉnh Bình Dương, Việt Nam', 'true', 'true', 'false', 'true', 1),
+(2, 'Số 96 Quốc lộ 22B, Khu phố Hiệp Hòa, Phường Hiệp Tân, Thị xã Hoà Thành, Tỉnh Tây Ninh, Việt Nam', 'false', 'false', 'true', 'true', 2),
+(3, '274 Quốc Lộ 51, Khu phố Hải Dinh, Phường Kim Dinh, TP.Bà Rịa, Tỉnh Bà Rịa - Vũng Tàu, Việt Nam', 'true', 'true', 'false', 'false', 3),
+(4, 'Bán hàng: 322 Nguyễn Văn Linh, Phường Bình Thuận, Quận 7, Thành phố Hồ Chí Minh, Việt Nam Dịch vụ: 619 Huỳnh Tấn Phát, Tân Thuận Đông, Quận 7, Thành phố Hồ Chí Minh', 'true', 'true', 'true', 'true', 4),
+(5, '63A Võ Văn Kiệt, Phường An Lạc, Quận Bình Tân, Thành phố Hồ Chí Minh, Việt Nam', 'false', 'true', 'true', 'true', 5),
+(6, '220 Đường Hùng Vương, Phường 6, Thành phố Tân An, Tỉnh Long An, Việt Nam', 'true', 'false', 'true', 'true', 6),
+(7, '53 Hoàng Hữu Nam, Phường Tân Phú, Thành phố Thủ Đức, Ho Chi Minh City, Viet Nam.', 'false', 'true', 'false', 'true', 7);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `car`
+-- Đang đổ dữ liệu cho bảng `model`
 --
 
-DROP TABLE IF EXISTS `car`;
-CREATE TABLE IF NOT EXISTS `car` (
-  `id` bigint(20) NOT NULL,
-  `air_bag` varchar(255) DEFAULT NULL,
-  `anti_theft` varchar(255) DEFAULT NULL,
-  `auto_lock` varchar(255) DEFAULT NULL,
-  `back_camera` varchar(255) DEFAULT NULL,
-  `door_handle` varchar(255) DEFAULT NULL,
-  `front_brakes` varchar(255) DEFAULT NULL,
-  `front_fog_light` varchar(255) DEFAULT NULL,
-  `gas_cap` varchar(255) DEFAULT NULL,
-  `info` varchar(255) DEFAULT NULL,
-  `num_car_seat` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `rear_brakes` varchar(255) DEFAULT NULL,
-  `seat_material` varchar(255) DEFAULT NULL,
-  `wiper_blade` varchar(255) DEFAULT NULL,
-  `wswandgl` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `model` (`id`, `fuel`, `image_name`, `info`, `name_model`, `num_car_seat`) VALUES
+(1, 'gasoline', 'new-X-Force.png', 'Kích thước tổng thể 4.390 x 1.810 x 1.660 mm\r\nChiều dài cơ sở 2.650 mm\r\nHộp số tự động vô cấp CVT hiệu suất cao\r\n04 chế độ lái: Đường trường, Đường ngập nước, Đường sỏi đá, Đường bùn lầy\r\nĐèn chiếu sáng LED T-Shape\r\nPhanh tay điện tử, Auto Hold\r\nĐiều hòa điều chỉnh kỹ thuật số\r\nCổng sạc USB-A và USB-C cho cả hai hàng ghế\r\nBán kính quay vòng tối thiểu 5,2 m\r\nMâm xe đa chấu 18-inch, hai tông màu\r\nMàn hình liền khối 12.3 inch kết nối Android Auto và Apple CarPlay\r\nHệ thống Kiểm soát vào cua chủ động (AYC)', 'New Xforce', 6),
+(2, 'gasoline', 'Attrage.png', 'Đèn chiếu sáng phía trước Bi-LED\r\nĐèn chiếu sáng phía sau LED\r\nMâm xe hợp kim 15-inch hai tông màu\r\nTrang bị kính tối màu cho 2 cửa sau\r\nKhởi động nút bấm\r\nĐiều hòa tự động\r\nHệ thống kiểm soát hành trình Cruise Control\r\nGương chiếu hậu chỉnh điện & gập điện\r\nGhế bọc da cao cấp\r\nBệ tựa tay cho người lái\r\nMàn hình cảm ứng 7-inch kết nối Android Auto và Apple\r\nCảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động\r\nCamera lùi\r\nHỗ trợ khởi hành ngang dốc (HSA)\r\nHỗ trợ lực phanh khẩn cấp (BA)\r\nHệ thống cân bằng điện tử (ASC)\r\nHệ thống phanh ABS - EBD', 'Attrage', 6),
+(3, 'dieselFuel', 'xpander.png', 'hiều dài tổng thể tăng 120 mm\r\nKhoảng sáng gầm 225 mm\r\nHệ thống treo trước sau nâng cấp\r\nMâm xe đa chấu 17-inch, thiết kế mới\r\nĐèn chiếu sáng LED T-Shape\r\nVô lăng thể thao thiết kế mới\r\nHệ thống điều khiển hành trình Cruise Control\r\nĐiều hòa điều chỉnh kỹ thuật số\r\nNội thất da cao cấp Đen & Nâu\r\nMàn hình cảm ứng 9-inch kết nối Android Auto, Apple CarPlay\r\nCổng sạc USB Type-C hàng ghế 2\r\nPhanh tay điện tử, Auto Hold\r\nHệ thống cân bằng điện tử (ASC)\r\nHệ thống hỗ trợ khởi hành ngang dốc (HSA)', 'Xpander', 5),
+(4, 'gasoline', 'XpanderCross.png', 'Chiều dài tổng thể tăng 95mm\r\nKhoảng sáng gầm 225 mm\r\nHệ thống treo nâng cấp\r\nMâm xe 17-inch thiết kế mới\r\nĐèn chiếu sáng phía trước Full-LED dạng T-Shape\r\nHệ thống kiểm soát vào cua chủ động (Active Yaw Control)\r\nHệ thống cân bằng điện tử (ASC)\r\nVô lăng 4 chấu thiết kế thể thao\r\nĐồng hồ kỹ thuật số 8-inch hiện đại\r\nPhanh tay điện tử và giữ phanh tự động\r\nĐiều hòa điều chỉnh kỹ thuật số\r\nNội thất da cao cấp Đen & Xanh Navy\r\nMàn hình cảm ứng 9-inch kết nối Android Auto, Apple CarPlay', 'Xpander Cross', 7),
+(5, 'dieselFuel', 'outlander.png', 'Khoảng sáng gầm 190 mm\r\nLẫy chuyển số trên vô lăng\r\nHệ thống đèn chiếu sáng phía trước LED, Thấu kính\r\nĐèn pha tự động (Auto High Beam)\r\nMâm xe đa chấu 18 inch, hai tông màu\r\nCửa sổ trời, cốp sau đóng/mở điện\r\nPhanh tay điện tử, Giữ phanh tự động\r\nMàn hình cảm ứng 8-inch kết nối Android Auto và Apple CarPlay\r\n7 chỗ ghế da họa tiết kim cương\r\n7 túi khí an toàn\r\nHệ thống cảnh báo chệch làn đường (LDW)\r\nHệ thống cảnh báo và giảm thiểu va chạm phía trước (FCM)\r\nHệ thống cảnh báo phương tiện cắt ngang khi lùi xe (RCTA)\r\nCân bằng điện từ (ASC), hỗ trợ khởi hành ngang đốc (HSA)', 'Outlander', 7),
+(6, 'gasoline', 'triton-athlete-thumbnail.png', 'Ngoại thất nổi bật với tem Athlete chính hãng\r\nKhoảng sáng gầm lên đến 220mm\r\nĐèn chiếu sáng phía trước Bi-Led hiện đại\r\nMâm xe 18 inch màu đen\r\nNội thất 5 chổ bọc da 2 tông màu\r\nĐiều hòa tự động 2 vùng độc lập\r\nTrang bị 7 túi khí\r\nTrang bị cửa gió trên trần\r\nHệ thống cảnh báo điểm mù và hỗ trợ chuyển làn (BSW & LCA)\r\nHệ thống cảnh báo và giảm thiểu va chạm phía trước (FCM)\r\nHệ thống cảnh báo phương tiện cắt ngang khi lùi xe (RCTA)\r\nHệ thống chống tăng tốc ngoài ý muốn (UMS)', 'Triton', 6),
+(7, 'dieselFuel', 'ps-2tone-1.png', 'Thiết kế Dynamic Shield thế hệ 2 hiện đại và mạnh mẽ hơn\r\nĐèn chiếu sáng phía trước Bi-Led, tự động thay đổi độ cao\r\nMâm xe 18 inch phủ đen\r\nNội thất 7 chỗ bọc da cao cấp\r\nĐiều hòa tự động 2 vùng độc lập\r\nTrang bị 7 túi khí\r\nHệ thống cảnh báo điểm mù và hỗ trợ chuyển làn (BSW & LCA)\r\nHệ thống cảnh báo và giảm thiểu va chạm phía trước (FCM)\r\nHệ thống cảnh báo phương tiện cắt ngang khi lùi xe (RCTA)\r\nHệ thống kiểm soát hành trình thích ứng (ACC)', 'Pajero ', 6);
 
---
--- Dumping data for table `car`
---
-
-INSERT INTO `car` (`id`, `air_bag`, `anti_theft`, `auto_lock`, `back_camera`, `door_handle`, `front_brakes`, `front_fog_light`, `gas_cap`, `info`, `num_car_seat`, `price`, `rear_brakes`, `seat_material`, `wiper_blade`, `wswandgl`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `color`
+-- Đang đổ dữ liệu cho bảng `version`
 --
 
-DROP TABLE IF EXISTS `color`;
-CREATE TABLE IF NOT EXISTS `color` (
-  `id` bigint(20) NOT NULL,
-  `color` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `car_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `version` (`id`, `air_bag`, `anti_theft`, `auto_lock`, `back_camera`, `door_handle`, `front_brakes`, `front_fog_light`, `gas_cap`, `info`, `model_id`, `name_version`, `price`, `rear_brakes`, `seat_material`, `wiper_blade`, `wswandgl`) VALUES
+(1, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', '70 Lit', 'Kích thước tổng thể 4.390 x 1.810 x 1.660 mm\r\nChiều dài cơ sở 2.650 mm\r\nHộp số tự động vô cấp CVT hiệu suất cao\r\n04 chế độ lái: Đường trường, Đường ngập nước, Đường sỏi đá, Đường bùn lầy\r\nĐèn chiếu sáng LED T-Shape\r\nPhanh tay điện tử, Auto Hold\r\nĐiều hòa điều chỉnh kỹ thuật số\r\nCổng sạc USB-A và USB-C cho cả hai hàng ghế\r\nBán kính quay vòng tối thiểu 5,2 m\r\nMâm xe đa chấu 18-inch, hai tông màu\r\nMàn hình liền khối 12.3 inch kết nối Android Auto và Apple CarPlay\r\nHệ thống Kiểm soát vào cua chủ động (AYC)', 1, 'Vesion 2023', 925000000, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(2, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', '75 Lit', 'Đèn chiếu sáng phía trước Bi-LED\r\nĐèn chiếu sáng phía sau LED\r\nMâm xe hợp kim 15-inch hai tông màu\r\nTrang bị kính tối màu cho 2 cửa sau\r\nKhởi động nút bấm\r\nĐiều hòa tự động\r\nHệ thống kiểm soát hành trình Cruise Control\r\nGương chiếu hậu chỉnh điện & gập điện\r\nGhế bọc da cao cấp\r\nBệ tựa tay cho người lái\r\nMàn hình cảm ứng 7-inch kết nối Android Auto và Apple\r\nCảm biến bật/tắt đèn chiếu sáng và gạt mưa tự động\r\nCamera lùi\r\nHỗ trợ khởi hành ngang dốc (HSA)\r\nHỗ trợ lực phanh khẩn cấp (BA)\r\nHệ thống cân bằng điện tử (ASC)\r\nHệ thống phanh ABS - EBD', 2, 'CVT Premium', 380000000, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(3, 'Yes', 'No', 'null', 'Yes', 'Yes', 'No', 'Yes', '90 Lit', 'Đèn chiếu sáng phía trước Bi-LED\r\nĐèn chiếu sáng phía sau LED\r\nMâm xe hợp kim 15-inch hai tông màu\r\nKhởi động nút bấm\r\nĐiều hòa tự động\r\nHệ thống kiểm soát hành trình Cruise Control\r\nGương chiếu hậu chỉnh điện & gập điện\r\nGhế bọc da cao cấp\r\nBệ tựa tay cho người lái\r\nMàn hình cảm ứng 7-inch kết nối Android Auto và Apple\r\nCamera lùi\r\nHệ thống chống bó cứng phanh (ABS)\r\nHệ thống phân bổ lực phanh điện tử (EBD)', 2, 'CVT', 465000899, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(4, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', '89 Lit', 'Mâm xe hợp kim 15-inch hai tông màu\r\nGương chiếu hậu chỉnh điện\r\nMàn hình cảm ứng 7-inch\r\nKhóa cửa từ xa\r\nChìa khóa chống trộm\r\nTay lái trợ lực điện\r\nGhế lái chỉnh tay 6 hướng\r\nCảnh báo thắt dây an toàn\r\nHệ thống chống bó cứng phanh (ABS)\r\nHệ thống phân bổ lực phanh điện tử (EBD)', 2, 'MT', 380000000, 'Yes', 'Silk', 'Yes', 'undefined'),
+(5, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', '83 Lit', 'Thiết kế Dynamic Shield thế hệ 2 hiện đại và mạnh mẽ hơn\r\nĐèn chiếu sáng phía trước Bi-Led, tự động thay đổi độ cao\r\nMâm xe 18 inch phủ đen\r\nNội thất 7 chỗ bọc da cao cấp\r\nĐiều hòa tự động 2 vùng độc lập\r\nTrang bị 7 túi khí\r\nHệ thống cảnh báo điểm mù và hỗ trợ chuyển làn (BSW & LCA)\r\nHệ thống cảnh báo và giảm thiểu va chạm phía trước (FCM)\r\nHệ thống cảnh báo phương tiện cắt ngang khi lùi xe (RCTA)\r\nHệ thống kiểm soát hành trình thích ứng (ACC)', 7, 'Diesel 4X4 AT', 1365000000, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(6, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', '92 Lit', 'Thiết kế Dynamic Shield thế hệ 2 hiện đại và mạnh mẽ hơn\r\nĐộng cơ phun xăng đa điểm 3.0L\r\nMâm xe 18 inch với hai tông màu\r\nNội thất 7 chỗ bọc da cao cấp\r\nĐiều hòa tự động 2 vùng độc lập\r\nTrang bị phanh tay điện tử và giữ phanh tự động\r\nTrang bị 2 túi khí\r\nHệ thống camera lùi\r\nHệ thống chống tăng tốc ngoài ý muốn (UMS)', 7, 'Gasoline 4×4 AT', 1230000000, 'Yes', 'Silk', 'Yes', 'undefined'),
+(7, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', '75 Lit', 'Ngoại thất nổi bật với tem Athlete chính hãng\r\nKhoảng sáng gầm lên đến 220mm\r\nĐèn chiếu sáng phía trước Bi-Led hiện đại\r\nMâm xe 18 inch màu đen\r\nNội thất 5 chổ bọc da 2 tông màu\r\nĐiều hòa tự động 2 vùng độc lập\r\nTrang bị 7 túi khí\r\nTrang bị cửa gió trên trần\r\nHệ thống cảnh báo điểm mù và hỗ trợ chuyển làn (BSW & LCA)\r\nHệ thống cảnh báo và giảm thiểu va chạm phía trước (FCM)\r\nHệ thống cảnh báo phương tiện cắt ngang khi lùi xe (RCTA)\r\nHệ thống chống tăng tốc ngoài ý muốn (UMS)', 6, '4X4 AT Athlete', 905000000, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(8, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', '77 Lit', 'Thiết kế Dynamic Shiled thế hệ 2 hiện đại và mạnh mẽ hơn\r\nĐèn chiếu sáng phía trước dạng Halogen\r\nMâm xe 17 inch hai tông màu\r\nNội thất 5 chổ với độ ngã lưng ghế lớn\r\nMàn hình giải trí 7 inch tích hợp Android/iOS Mirroring\r\nTrang bị 2 túi khí', 6, '4X2 AT MIVEC', 650000000, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(9, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', '90 Lit', 'Thiết kế Dynamic Shiled thế hệ 2 hiện đại và mạnh mẽ hơn\r\nĐèn chiếu sáng phía trước dạng Halogen\r\nMâm xe 17 inch hai tông màu\r\nNội thất 5 chổ với độ ngã lưng ghế lớn\r\nMàn hình giải trí 7 inch tích hợp Android/iOS Mirroring\r\nTrang bị 2 túi khí', 6, '4X2 AT MIVEC', 650000000, 'Yes', 'Silk', 'Yes', 'undefined'),
+(10, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', '75 Lit', 'Khoảng sáng gầm 190 mm\r\nLẫy chuyển số trên vô lăng\r\nHệ thống đèn chiếu sáng phía trước LED, Thấu kính\r\nĐèn pha tự động (Auto High Beam)\r\nMâm xe đa chấu 18 inch, hai tông màu\r\nCửa sổ trời, cốp sau đóng/mở điện\r\nPhanh tay điện tử, Giữ phanh tự động\r\nMàn hình cảm ứng 8-inch kết nối Android Auto và Apple CarPlay\r\n7 chỗ ghế da họa tiết kim cương\r\n7 túi khí an toàn\r\nHệ thống cảnh báo chệch làn đường (LDW)\r\nHệ thống cảnh báo và giảm thiểu va chạm phía trước (FCM)\r\nHệ thống cảnh báo phương tiện cắt ngang khi lùi xe (RCTA)\r\nCân bằng điện từ (ASC), hỗ trợ khởi hành ngang đốc (HSA)', 5, '2.0 CVT PREMIUM', 950000000, 'Yes', 'Silk', 'Yes', 'undefined'),
+(11, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'No', '70Lit', 'Khoảng sáng gầm 190 mm\r\nLẫy chuyển số trên vô lăng\r\nHệ thống đèn chiếu sáng phía trước Halogen, Thấu kính\r\nỐp vè trước cùng màu thân xe\r\nMâm xe đa chấu 18 inch, hai tông màu\r\nPhanh tay điện tử, Giữ phanh tự động\r\nMàn hình cảm ứng 8-inch kết nối Android Auto và Apple CarPlay\r\n7 chỗ ghế da cao cấp\r\n7 túi khí an toàn\r\nHệ thống cân bằng điện tử (ASC)\r\nHỗ trợ khởi hành ngang đốc (HSA)\r\nCamera lùi', 5, ' 2.0 CVT', 825000000, 'Yes', 'Silk', 'Yes', 'undefined'),
+(12, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No', '88 Lit', 'Chiều dài tổng thể tăng 95mm\r\nKhoảng sáng gầm 225 mm\r\nHệ thống treo nâng cấp\r\nMâm xe 17-inch thiết kế mới\r\nĐèn chiếu sáng phía trước Full-LED dạng T-Shape\r\nHệ thống kiểm soát vào cua chủ động (Active Yaw Control)\r\nHệ thống cân bằng điện tử (ASC)\r\nVô lăng 4 chấu thiết kế thể thao\r\nĐồng hồ kỹ thuật số 8-inch hiện đại\r\nPhanh tay điện tử và giữ phanh tự động\r\nĐiều hòa điều chỉnh kỹ thuật số\r\nNội thất da cao cấp Đen & Xanh Navy\r\nMàn hình cảm ứng 9-inch kết nối Android Auto, Apple CarPlay', 4, 'Version 2023', 698000000, 'Yes', 'Fabric', 'Yes', 'undefined'),
+(13, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No', '79 Lit', 'Chiều dài tổng thể tăng 120 mm\r\nKhoảng sáng gầm 225 mm\r\nMâm xe đa chấu 16-inch\r\nĐèn chiếu sáng T-Shape\r\nNội thất màu Đen\r\nMàn hình cảm ứng 7-inch kết nối Android Auto, Apple CarPlay\r\nCổng sạc tại 3 hàng ghế\r\nKhung xe RISE thép cường lực\r\nHệ thống cân bằng điện tử (ASC)\r\nHệ thống kiểm soát lực kéo (TCL)\r\nHệ thống hỗ trợ khởi hành ngang dốc (HSA)', 3, 'AT', 598000000, 'Yes', 'Silk', 'Yes', 'undefined'),
+(14, 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', '84 Lit', 'Khoảng sáng gầm 205 mm\r\nMâm xe đa chấu 16-inch\r\nĐèn chiếu sáng Halogen\r\nNội thất màu Đen\r\nMàn hình cảm ứng 7-inch, hỗ trợ kết nối iOS & Android Mirroring\r\nCổng sạc tại 3 hàng ghế\r\nKhung xe RISE thép cường lực\r\nHệ thống cân bằng điện tử (ASC)\r\nHệ thống kiểm soát lực kéo (TCL)\r\nHệ thống hỗ trợ khởi hành ngang dốc (HSA)', 3, 'MT', 620000000, 'Yes', 'Fabric', 'Yes', 'undefined');
+
+--
+-- Đang đổ dữ liệu cho bảng `color`
+--
+
+INSERT INTO `color` (`color_id`, `color`, `image_name`, `fk_version_color`) VALUES
+(55, '#f91f1f', 'attrage_side_do-min.png', 2),
+(56, '#827d7d', 'attrage_side_xam-min.png', 2),
+(57, '#e33131', 'attrage_side_do-min.png', 3),
+(58, '#d4d4d4', 'attrageMT_side_trang-min.png', 3),
+(59, '#a19b9b', 'attrage_side_xam-min.png', 4),
+(60, '#f8f7f7', 'attrageMT_side_trang-min.png', 4),
+(61, '#ffffff', 'ps-2tone-thumbnail-1.png', 5),
+(62, '#550202', 'Red.jpg', 5),
+(63, '#2f2828', 'Black.jpg', 5),
+(64, '#463f3f', 'Nâu_20MONTEROSport-07-side.png', 6),
+(65, '#eceaea', 'ps-2tone-thumbnail-1.png', 6),
+(66, '#0d0c0c', 'Den_Mini-icon.png', 7),
+(67, '#dedede', 'Trắng_Mini-icon.png', 7),
+(68, '#f93e3e', 'Cam_Mini-icon.png', 7),
+(69, '#100f0f', '4x2AT_Den_Mini-icon.png', 8),
+(70, '#b8b8b8', '4x2AT_Trắng_Mini-icon.png', 8),
+(71, '#c5c4c4', '4x2AT_Trắng_Mini-icon.png', 9),
+(72, '#ec7979', 'Cam_Mini-icon.png', 9),
+(73, '#0d0c0c', 'outlander_side_den-min.png', 10),
+(74, '#e02e2e', 'outlander_side_do-min1.png', 10),
+(75, '#726e6e', 'outlander_side_xam-min.png', 10),
+(76, '#ebebeb', 'outlander_side_trang-min.png', 10),
+(77, '#080808', 'outlander_side_den-min.png', 11),
+(78, '#e3d9d9', 'outlander_side_trang-min.png', 11),
+(79, '#5a5858', 'outlander_side_xam-min.png', 11),
+(80, '#f2eded', '23MY_XS_Exterior_side_LHD_W81-min.png', 12),
+(81, '#0d0d0d', '23MY_XS_Exterior_side_LHD_X37-min.png', 12),
+(82, '#7a3838', '23MY_XS_Exterior_side_LHD_X3M-Min.png', 12),
+(83, '#d9d9d9', 'xpander_side_white.png', 13),
+(84, '#080808', 'xpander_side_black.png', 13),
+(85, '#e62828', '23MY_XP_Exterior_side_LHD_P26.png', 13),
+(86, '#412a2a', 'xpander_mt_nau-min.png', 14),
+(87, '#181616', 'xpander_side_black.png', 14),
+(88, '#c1b9b9', 'xpander_side_white.png', 14),
+(93, '#f5d505', 'FP_X-Force_Exterior-a-1.jpg', 1),
+(94, '#121212', 'FP_X-Force_Safety-1.jpg', 1);
+
+-- --------------------------------------------------------
+
+
+-- --------------------------------------------------------
+
+-- Đang đổ dữ liệu cho bảng `newspaper`
+--
+
+INSERT INTO `newspaper` (`id`, `content`, `image_name`, `title`) VALUES
+(1, 'Sau 3 ngày thi đấu chính thức, những đội đua chiến thắng của giải PVOIL VOC 2023 đã chính thức lộ diện. Trong đó, các vận động viên đến từ Triton Vietnam Club cùng chiến mã Mitsubishi Triton đã có một mùa giải thành công với kết quả ấn tượng là Vô địch và Top 3 chung cuộc hạng Bán tải nâng cao. \r\n PVOIL VOC là giải đua ô tô địa hình lớn và lâu đời nhất Việt Nam, thu hút sự quan tâm của các tay đua và người yêu thích off-road trên cả nước. Giải đua năm nay diễn ra liên tục trong 3 ngày 27 – 29/10/2023, với sự tham gia của 87 đội đua và 174 vận động viên từ khắp các tỉnh thành. Ban tổ chức đă thiết kế 15 đường đua có tính phân loại cao với gần 700 bài thi, chia thành 4 phân hạng chính: Cơ bản, Bán tải nâng cao, SUV nâng cao và Mở rộng.  \r\n\r\nHồi hộp, gay cấn và đầy kịch tính là cảm xúc của hàng trăm vận động viên và khán giả có mặt tại PVOIL VOC 2023. Những “chiến binh” Triton của Mitsubishi đã cùng các tay đua chinh chiến vững vàng, giành được nhiều thành tích ấn tượng. Giải vô địch hạng Bán tải nâng cao đã thuộc về đội Trâu Kinh Bắc 01 – thành viên của Triton Vietnam Club. Bên cạnh đó, đội Trâu Kinh Bắc 04 đạt giải 3 hạng Bán tải nâng cao và đội Trâu Kinh Bắc 03 cũng nằm trong top 6 hạng Bán tải cơ bản. \r\nCác cung đường thi đấu đa dạng, mang tính thử thách cao như địa hình tốc độ, cầu gỗ và dốc nghiêng,… không chỉ đòi hỏi kỹ năng xử lý thông minh của người cầm lái mà còn yêu cầu khả năng vận hành linh hoạt của “chiến mã” đồng hành. Đặc biệt, đường đua số 9 yêu cầu kết hợp cả hai kỹ năng vượt cầu gỗ và đi dốc nghiêng lên xuống liên tục là thách thức với nhiều xe đua. Với động cơ mạnh mẽ và khung gầm chắc chắn, Mitsubishi Triton không gặp khó khăn khi vượt qua các chướng ngại vật trong bài, giành chiến thắng thuyết phục trước các đối thủ.   \r\n Thời tiết mưa lớn bất chợt trong những ngày cuối tháng 10 càng khiến bài thi thêm thử thách và gay cấn. Đường đất ngập nước và lầy lội làm nhiều xe bị mắc kẹt, các đội đua Triton cũng không tránh khỏi thử thách này. Tuy nhiên, các tay lái nhanh chóng xử lý vượt bùn, leo dốc trở lại đường đua trong sự cổ vũ nhiệt tình của khán giả tại trường đua. Chế độ dẫn động 2 cầu chậm toàn thời gian với khóa vi sai trung tâm, giúp Triton tăng khả năng bám đường và dễ dàng vượt bùn lầy. Sở hữu hệ thống dẫn động Super Select 4WD II và khóa vi sai trung tâm ở phiên bản 4×4, Mitsubishi Triton có độ ổn định cao để tự tin vượt qua các bài thi. \r\nPVOIL VOC 2023 không phải giải đua đầu tiên Mitsubishi Triton đạt được những thành tích ấn tượng. Mẫu xe đã nhiều lần đồng hành cùng các đội đua ghi dấu tại các giải đua trong nước và quốc tế như VOC, Asia Cross Country Rally… Với khả năng vận hành mạnh mẽ, linh hoạt và sự bền bỉ, Mitsubishi Triton là lựa chọn phù hợp để đồng hành với đam mê và cả trong cuộc sống hàng ngày. \r\n\r\n Về Mitsubishi Motors Việt Nam: \r\n\r\n Công ty TNHH Ô tô Mitsubishi Việt Nam được thành lập năm 1994, là nhà phân phối chính thức của Mitsubishi Motors Nhật Bản tại Việt Nam và là một trong những công ty liên doanh sản xuất và phân phối ô tô đầu tiên tại Việt Nam. \r\n Với kinh nghiệm gần 30 năm trên thị trường ô tô cùng thông điệp “Drive your Ambition” (Dẫn lối khát vọng), Mitsubishi Motors Việt Nam luôn cam kết với các giá trị và khát vọng của công ty trong tương lai đến Quý khách hàng. Chúng tôi sẽ đem đến những mẫu xe vận hành vượt trội với những trang bị an toàn tiên tiến. \r\n', 'NQH_4069-min.jpg', '“CHIẾN MÃ” TRITON XUẤT SẮC GIÀNH VÔ ĐỊCH HẠNG BÁN TẢI NÂNG CAO GIẢI ĐUA PVOIL VOC 2023'),
+(2, 'Tháng 12/2023, hệ thống Nhà Phân Phối ủy quyền của Mitsubishi Motors Việt Nam trên toàn quốc sẽ triển khai nhiều chương trình ưu đãi hấp dẫn cho khách hàng như hỗ trợ 100% lệ phí trước bạ, miễn phí bảo hiểm vật chất cùng nhiều quà tặng hấp dẫn khác (*).\r\n\r\nKhách hàng mua các mẫu xe Xpander, Xpander Cross (phiên bản 2 tông màu Cam – Đen) sẽ nhận được ưu đãi đến 100% lệ phí trước bạ,  01 năm bảo hiểm vật chất và được tặng thêm 01 Camera 360º toàn cảnh (trị giá 20 triệu đồng) cùng nhiều phần quà hấp dẫn.\r\n\r\nĐối với mẫu xe Outlander khách hàng sẽ được hỗ trợ 100% lệ phí trước bạ (**) cùng quà tặng 02 năm bảo hiểm vật chất và 01 Camera 360º toàn cảnh (trị giá 20 triệu đồng).\r\n\r\nKhi mua 2 mẫu xe Triton và Pajero Sport, khách hàng sẽ nhận được ưu đãi 100% lệ phí trước bạ, cùng 01 năm bảo hiểm vật chất. Đặc biệt, ở phiên bản Triton 4×2 AT Athlete, khách hàng sẽ được nhận thêm 01 Nắp thùng cuộn cơ (trị giá 21 triệu đồng). Quà tặng camera lùi (trị giá 2,5 triệu đồng) dành riêng cho phiên bản Triton 4×2 AT MIVEC.\r\n\r\nNgoài ra, chương trình ưu đãi 100% lệ phí trước bạ còn được áp dụng đối với dòng xe Attrage kèm theo nhiều quà tặng hấp dẫn như 01 Camera lùi (trị giá 2,5 triệu đồng) hoặc 01 Anten vây cá (trị giá 1,5 triệu đồng).\r\n\r\n(*) Chương trình ưu đãi từ hệ thống Nhà Phân Phối, để biết thêm chi tiết về điều kiện, điều khoản áp dụng quý khách hàng vui lòng liên hệ Nhà Phân Phối ủy quyền gần nhất.\r\n\r\n(**) Chương trình hỗ trợ 100% lệ phí trước bạ cho dòng xe Outlander bao gồm 50% thuộc chính sách ưu đãi từ hệ thống Nhà Phân Phối ủy quyền của Mitsubishi Motors Việt Nam, 50% còn lại thuộc chính sách hỗ trợ theo quy định hiện hành.', 'Thumbnail-1-1.jpg', 'ƯU ĐÃI 100% PHÍ TRƯỚC BẠ TOÀN BỘ CÁC DÒNG XE TRONG THÁNG 12'),
+(3, 'Ngày 12 tháng 10 năm 2023, Mitsubishi Xforce đã được trao tặng Giải Vàng Best Transportation Design – Thiết kế phương tiện, trong hơn 700 dự án đăng ký tham dự Giải thưởng thiết kế Việt Nam VMARK 2023.\r\nĐược giới thiệu chính thức trên toàn cầu vào tháng 8/2022, XFORCE gây ấn tượng mạnh với triết lý thiết kế Mượt mà & Rắn rỏi.\r\n\r\nThiết kế thanh lịch và mạnh mẽ đặc trưng của mẫu xe SUV, kết hợp sự thanh thoát và chắc chắn, tạo nên một hình ảnh vững chãi nổi bật khi di chuyển từ thành thị đến ngoại ô. XFORCE sở hữu nhiều trang bị tiện nghi vượt trội như khoang nội thất rộng rãi, không gian chứa đồ linh hoạt, nhiều vị trí để đồ tiện dụng, thân xe nhỏ gọn linh hoạt trong đô thị, cảm giác lái an toàn, tự tin trong nhiều điều kiện thời tiết, giao thông khác nhau; màn hình giải trí liền khối, kích thước lớn 12.3 inch kết hợp với màn hình thông tin kỹ thuật số tạo nên cảm giác hiện đại.\r\nChương trình ưu đãi đặt hàng sớm mẫu xe Xforce – Mẫu xe thương mại của XFC Concept tại Việt Nam:\r\nKể từ ngày 1/4/2023 đến ngày 31/8/2023, Mitsubishi Motors Việt Nam triển khai chương trình ưu đãi dành cho khách hàng đặt cọc sớm mẫu xe thương mại được phát triển từ phiên bản Xforce tại tất cả các Nhà phân phối ủy quyền của Mitsubishi Motors Việt Nam trên toàn quốc. Cụ thể:\r\n\r\nSố tiền đặt cọc: 10.000.000 VNĐ/xe\r\nƯu đãi cho khách hàng đặt hàng trước: Gói bảo dưỡng miễn phí trong 2 năm hoặc 40.000km(tùy điều kiện nào đến trước). Tặng thêm 1.000 điểm trên ứng dụng Mitsubishi Connect+ (Điểm thưởng sẽ được kích hoạt khi khách hàng hoàn tất thủ tục thanh toán và ký hợp hợp đồng mua xe bản thương mại)', 'vmark_img_01.jpg', 'MITSUBISHI XFORCE ĐẠT GIẢI VÀNG BEST TRANSPORTATION DESIGN – THIẾT KẾ PHƯƠNG TIỆN TẠI GIẢI THƯỞNG THIẾT KẾ VIỆT NAM VMARK 2023'),
+(4, 'Nhằm mang đến cho các Khách hàng (KH) hữu xe Mitsubishi có nhu cầu bán chiếc xe cũ để “lên đời” xe Mitsubishi mới sự yên tâm về chất lượng và tiết kiệm thời gian thực hiện, Mitsubishi Motors Việt Nam (MMV) đã và đang triển khai Chương trình Xe Qua Sử Dụng Chính Hãng (MMV UCAR) qua việc mở rộng mạng lưới các Nhà Phân Phối ủy quyền thực hiện Chương trình này (NPP UCAR) với đội ngũ nhân sự được đào tạo bài bản về kỹ năng thẩm định xe, đồng thời cung cấp dịch vụ THU CŨ – ĐỔI MỚI để hỗ trợ KH lên đời xe mới ngay tại cùng 1 cơ sở ủy quyền chính hãng.\r\n\r\nGiới thiệu về mạng lưới Nhà Phân Phối ủy quyền kinh doanh Xe Qua Sử Dụng Chính Hãng\r\nChương trình MMV UCAR đã bắt đầu từ tháng 04 năm 2022 và đang được mở rộng ra khắp mọi tỉnh thành trên cả nước, với mục tiêu chính là tạo sự an tâm và đảm bảo cho KH khi đến các NPP UCAR được ủy quyền của MMV để được hỗ trợ thủ tục mua bán minh bạch, rõ ràng cùng quy trình kiểm định chất lượng chính hãng.\r\n\r\nDanh sách các NPP UCAR được đề cập tại website MMV: Nhà phân phối – MITSUBISHI MOTORS (mitsubishi-motors.com.vn)\r\n\r\nGiới thiệu về dịch vụ ‘Thu cũ – đổi mới’\r\nBán xe cũ để lên đời xe mới là nhu cầu khá phổ biến của nhiều KH sở hữu ô tô nhằm sở hữu các mẫu xe mới ra mắt sau một thời gian sử dụng và trải nghiệm chiếc xe cũ. Nắm bắt được điều đó, MMV mang đến dịch vụ ‘Thu cũ – đổi mới’ hỗ trợ cho các KH thân thiết của Mitsubishi bán xe cũ và đổi xe mới tại các NPP UCAR với thủ tục nhanh gọn, qui trình rõ ràng và chi phí tiết kiệm nhất.\r\n\r\nĐến với dịch vụ Thu cũ – đổi mới của MMV UCAR, KH Mitsubishi hoàn toàn có thể yên tâm về qui trình và giá bán lại. Tại các NPP UCAR, Mitsubishi có đội ngũ nhân viên giàu kinh nghiệm sẵn sàng hỗ trợ KH với quy trình chuyên nghiệp.\r\n\r\nSau đây là các lợi ích của chương trình Thu cũ – đổi mới của MMV UCAR sẽ mang lại cho KH Mitsubishi:\r\n\r\nTiết kiệm thời gian và an tâm chất lượng:\r\nKhi muốn bán xe cũ để mua xe mới, các chủ sở hữu xe thường mất thời gian tìm kiếm các địa chỉ uy tín và có chuyên môn để thẩm định chất lượng và định giá xe, nhằm tránh việc bị ép giá bán lại. Khi đến với các NPP UCAR, KH khi có nhu cầu thanh lý xe cũ để mua xe mới không phải mất thời gian xác minh độ uy tín của cơ sở cung cấp dịch vụ thẩm định mà có thể yên tâm đăng ký online trên Webstite MMV hay qua ứng dụng Mitsubishi Connect +, hoặc đến trực tiếp tại các NPP ủy quyền chính hãng gần nhất.\r\nĐồng thời việc thẩm định xe sẽ được thực hiện bởi đội ngũ chuyên viên thu mua chuyên nghiệp của NPP, được MMV đào tạo bài bản theo quy trình tiêu chuẩn nhằm rút ngắn thời gian thẩm định xe cho KH. Thời gian cho việc thẩm định nhanh là 30 phút đối với xe không cần kiểm tra bằng thiết bị chuyên dụng và 60 phút với trường hợp kiểm tra bằng thiết bị chuyên dụng tại Xưởng Dịch vụ của NPP.\r\nThẩm định miễn phí và tận nơi KH yêu cầu:\r\nViệc thẩm định xe cũ sẽ được thực hiện trực tiếp tại các NPP UCAR hoặc sẽ được NPP hỗ trợ thực hiện tận nơi KH mong muốn, mang lại sự tiện nghi nhất cho KH và trên hết là hoàn toàn miễn phí.\r\nĐảm bảo giá bán lại:\r\nVới chương trình Thu cũ – đổi mới của MMV, KH có thể yên tâm chiếc xe của KH sẽ được thu mua lại theo đúng kết quả đánh giá chất lượng xe và phù hợp với giá của thị trường.\r\nQuá trình thẩm định giá và mua bán đều được thực hiện công khai, minh bạch, đảm bảo KH được tường minh từng giai đoạn.\r\nThủ tục Thu cũ – đổi mới nhanh chóng, dễ dàng:\r\nKH có nhu cầu đăng ký Thu cũ đổi mới có thể thực hiện online theo các bước đơn giản sau:\r\nB1: KH truy cập Website MMV tại link https://mitsubishi-motors.com.vn/thu-xe-cu-doi-xe-moi và để lại thông tin liên hệ, thông tin chiếc xe mới đang quan tâm và chiếc xe cần bán lại. Đăng ký của KH sẽ được MMV tiếp nhận và chuyển đến NPP UCAR gần khu vực KH nhất hoặc theo lựa chọn của KH. Đội ngũ nhân viên NPP sẽ liên hệ KH để tư vấn và đặt hẹn trong thời gian sớm nhất\r\n\r\nB2: KH mang chiếc xe cần thẩm định tới NPP để tiến hành kiểm tra, đánh giá xe theo tình trạng thực tế.\r\n\r\nB3: NPP thông báo kết quả đánh giá cho KH, giải thích rõ qui trình thu mua chiếc xe qua sử dụng, và các thủ tục để mua chiếc xe Mitsubishi mới.\r\n\r\nƯu đãi cho KH khi tham gia Thu cũ đổi mới tại NPP UCAR:\r\nƯu đãi cho trường hợp Thu cũ đổi mới thành công:\r\nBên cạnh các lợi ích nêu trên, từ ngày 19/10/2023 đến hết 31/03/2024, MMV triển khai Chương trình “Ưu đãi đổi xe tại cơ sở MMV ủy quyền xe qua sử dụng” nhằm đem đến ưu đãi cho các KH khi tham gia Thu cũ đổi mới tại NPP UCAR\r\nCụ thể, KH bán thành công chiếc xe cũ và hoàn tất các thủ tục mua chiếc xe mới tại cùng 1 NPP UCAR sẽ nhận được 5.000 điểm tiêu dùng trị giá tương đương 5.000.000VND trên ứng dụng Mitsubishi Connect +.\r\nƯu đãi khác: Bên cạnh các ưu đãi hấp dẫn khi Thu cũ đổi mới thành công, KH còn có cơ hội nhận được các quà tặng, ưu đãi sau từ MMV:\r\nPhiếu ưu đãi dịch vụ trị giá 3.000.000VND tương đương 3.000 điểm tiêu dùng trên ứng dụng Mitsubishi Connect + của Chương trình “Nâng cấp hành trình – Thăng hạng ưu đãi” (chi tiết Chương trình được đề cập tại https://mitsubishi-motors.com.vn/dich-vu/ung-dung-khach-hang/nang-cap-hanh-trinh-thang-hang-uu-dai )\r\nKhách hàng thỏa điều kiện Chương trình “Nâng cấp hành trình – Thăng hạng ưu đãi” (chi tiết Chương trình được đề cập tại https://mitsubishi-motors.com.vn/dich-vu/ung-dung-khach-hang/nang-cap-hanh-trinh-thang-hang-uu-dai ) sẽ được hưởng Lãi suất ưu đãi với gói vay kỳ hạn 96 tháng như sau:\r\nLãi suất 7,0%/năm cố định 6 tháng đầu; hoặc\r\nLãi suất 8,3%/năm cố định 12 tháng đầu\r\nNội dung chi tiết của chương trình Ưu đãi đổi xe tại cơ sở MMV ủy quyền xe qua sử dụng:\r\n\r\nTrong thời gian khuyến mãi, KH là cá nhân/ tổ chức đã từng mua xe Mitsubishi nay hoàn thành việc bán lại chiếc xe Mitsubishi cũ và hoàn thành việc tiếp tục mua xe ô tô Mitsubishi mới tại các nhà phân phối ủy quyền kinh doanh Xe Qua Sử Dụng của MMV sẽ nhận được 5.000 điểm tiêu dùng trị giá tương đương với 5.000.000 VND trên ứng dụng di động Mitsubishi Connect + .\r\n\r\nCách thức nhận quà tặng:\r\n\r\nKH thực hiện bán thành công chiếc xe cũ và hoàn tất các thủ tục mua chiếc xe mới tại cùng 1 nhà phân phối ủy quyền Xe Qua Sử Dụng\r\nCó tài khoản ứng dụng di động Mitsubishi Connect +.\r\nMMV sẽ xác thực điều kiện nhận quà của KH và sau khi đảm bảo các điều kiện về việc hoàn tất các thủ tục bán xe cũ và mua xe mới thành công, 5.000 điểm tiêu dùng sẽ được nạp vào tài khoản Mitsubishi Connect + của KH. KH được sử dụng điểm quà tặng này để qui đổi sang các Phiếu ưu đãi dịch vụ (Voucher dịch vụ) hoặc Phiếu quà tặng Got It có giá trị tương đương. Các phiếu dịch vụ sau khi đổi bằng điểm tặng có thể được KH sử dụng để giảm trừ trực tiếp vào các lần sửa chữa, bảo dưỡng tại các cơ sở dịch vụ NPP ủy quyền MMV.\r\nThông tin về Chương Trình được công bố đầy đủ chi tiết trên trang web của MMV.\r\n\r\nCác Điều Khoản và Điều Kiện của Chương Trình này có thể được điều chỉnh tại từng thời điểm theo quyết định của MMV và không gây ảnh hưởng đến quyền lợi của người tham gia chương trình.\r\n\r\nTrường hợp có thắc mắc, khiếu nại, khách hàng có thể liên hệ MMV tại Hotline 18001514 và email chăm sóc khách hàng: cskh@mitsubishi-motors.com.vn hoặc Nhà phân phối ủy quyền để được hỗ trợ.\r\n\r\nQuyền và miễn trừ trách nhiệm của MMV: \r\n\r\nMMV có quyền liên lạc với KH qua số điện thoại mà KH đã cung cấp khi tham gia Chương trình để xác minh thông tin.\r\nMMV được miễn trừ trách nhiệm nếu KH không đáp ứng hoặc đáp ứng không đầy đủ các điều kiện để tham gia chương trình nhận 5.000 điểm tiêu dùng;\r\nMMV được miễn trừ trách nhiệm nếu KH và NPP không đạt được thỏa thuận để đổi xe ô tô Mitsubishi cũ cho mục đích mua ô tô Mitsubishi mới;\r\nĐối với các tranh chấp phát sinh liên quan đến Chương trình, MMV sẽ giải quyết trên tinh thần hợp tác với KH. Trong trường hợp các bên không đạt được thỏa thuận, tranh chấp sẽ được giải quyết theo quy định của pháp luật Việt Nam tại Tòa án có thẩm quyền.\r\n\r\nĐiều Khoản và Điều Kiện của Chương trình này có thể được điều chỉnh tại từng thời điểm theo quyết định của MMV. Nội dung thay đổi (nếu có) sẽ được thông báo, đăng ký theo quy định pháp luật và cập nhật trên website của MMV (https://mitsubishi-motors.com.vn/) trước ngày áp dụng.\r\n\r\nĐiều Khoản và Điều Kiện của Chương Trình này được lập thành tiếng Anh và tiếng Việt. Trong trường hợp có sự mâu thuẫn giữa bản tiếng Anh và tiếng Việt, bản tiếng Việt sẽ được ưu tiên áp dụng.\r\n\r\nĐiều khoản chung\r\nKH xác nhận các thông tin được cung cấp cho NPP là hoàn toàn chính xác. Nếu có bất kỳ thông tin sai lệch nào, MMV sẽ không chịu trách nhiệm trong trường hợp thông tin đó làm ảnh hưởng hoặc hạn chế quyền lợi của KH.\r\n\r\nKH đồng ý rằng MMV có quyền sử dụng thông tin và liên hệ để giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của MMV cũng như chuyển giao Thông tin KH cho bên thứ ba để thực hiện các hoạt động này. Thông tin của KH sẽ được bảo vệ và được sử dụng theo quy định tại Chính sách bảo mật được công bố trên trang web của MMV và được cập nhật trong từng thời điểm. \r\n\r\nMMV được miễn trách nhiệm trong trường hợp: (i) Khi tài khoản KH bị lợi dụng do điện thoại bị hư hỏng, bị đánh cắp, hoặc các thay đổi liên quan đến thông tin cá nhân mà KH không kịp thời thông báo cho MMV; (ii) phần mềm bị lỗi, bị tấn công hoặc vì bất kỳ lý do khách quan nào khách nằm ngoài khả năng kiểm soát của MMV; (iii) trong trường hợp bất khả kháng theo quy định của pháp luật.\r\n\r\nThông tin về Chương trình được công bố đầy đủ chi tiết trên trang website và ứng dụng Mitsubishi Connect+.\r\n\r\nTrường hợp có thắc mắc, khiếu nại, KH có thể liên hệ Tổng đài CSKH của MMV thông qua Hotline 18001514 và email: cskh@mitsubishi-motors.com.vn.\r\n\r\nVề Mitsubishi Motors Việt Nam:\r\n\r\nCông ty TNHH Ô tô Mitsubishi Việt Nam được thành lập năm 1994, là nhà phân phối chính thức của Mitsubishi Motors Nhật Bản tại Việt Nam và là một trong những công ty liên doanh sản xuất và phân phối ô tô đầu tiên tại Việt Nam.\r\n\r\nVới kinh nghiệm gần 30 năm trên thị trường ô tô cùng thông điệp “Drive your Ambition” (Dẫn lối khát vọng), Mitsubishi Motors Việt Nam luôn cam kết với các giá trị và khát vọng của công ty trong tương lai đến Quý KH. Chúng tôi sẽ đem đến những mẫu xe vận hành vượt trội với những trang bị an toàn tiên tiến.\r\n\r\nHiện nay, Mitsubishi Motors Việt Nam đang phân phối 6 mẫu xe tại Việt Nam:\r\n\r\nXe 5 chỗ: Attrage\r\nXe 7 chỗ: Xpander, Xpander Cross, Outlander, Pajero Sport\r\nXe bán tải: Triton Athlete', 'Thumbnail.jpg', 'GIỚI THIỆU CHƯƠNG TRÌNH THU CŨ – ĐỔI MỚI'),
+(5, 'Nhằm mang đến cho các khách hàng đang sở hữu xe Mitsubishi cơ hội nâng cấp, lên đời xe với lãi suất ưu đãi, Mitsubishi Motors Việt Nam triển khai chương trình “ƯU ĐÃI ĐỔI XE CHO KHÁCH HÀNG THÂN THIẾT”. Đây là chương trình hỗ trợ tài chính được thực hiện bởi Công ty TNHH Ô tô Mitsubishi Việt Nam (“MMV”) dành cho Khách hàng Mitsubishi khi mua thêm/ thay thế chiếc xe của mình tại hệ thống Nhà phân phối ủy quyền của MMV (“NPP”).\r\n\r\n1. Tên chương trình: “ƯU ĐÃI ĐỔI XE CHO KHÁCH HÀNG THÂN THIẾT”\r\n\r\n2. Thời gian & phạm vi áp dụng chương trình\r\n\r\nThời gian áp dụng: Từ ngày 02/10/2023 cho đến ngày 31/03/2024\r\nPhạm vi áp dụng: Trên toàn lãnh thổ Việt Nam.\r\nDòng xe: áp dụng cho tất cả dòng xe đang được MMV phân phối và sản xuất, bao gồm: Pajero Sport, Triton, Xpander, Xpander Cross, Outlander, Attrage.\r\n3. Đối tượng tham gia\r\n\r\nKhách hàng đang là Chủ sở hữu xe Mitsubishi hoặc từng sở hữu xe Mitsubishi trong vòng 12 tháng khi mua thêm/ thay thế xe Mitsubishi thành công tại hệ thống NPP.\r\n\r\n4. Hướng dẫn tham gia chương trình\r\n\r\n4.1 Điều kiện: Khách hàng cần có Thông báo cho vay (Phê duyệt vay) từ VPbank từ ngày 11/10/2023 cho đến ngày 31/03/2024 và hoàn thành việc mua xe ô tô Mitsubishi tại NPP trong cùng khoảng thời gian, đồng thời Khách hàng cần đảm bảo có thể cung cấp được bản chính của các giấy tờ sau:\r\n\r\nGiấy đăng ký xe ô tô hiệu Mitsubishi đứng tên KH (tức cà vẹt xe bản chính) nếu là chủ sở hữu xe Mitsubishi; hoặc\r\nHợp đồng bán xe ô tô hiệu Mitsubishi có công chứng hoặc Hợp đồng công chứng ủy quyền sở hữu, quản lý, sử dụng xe ô tô Mitsubishi cho cá nhân/pháp nhân khác có thời gian không quá 12 tháng kể từ ngày công chứng đến ngày tham gia chương trình.\r\n4.2 Đổi xe qua dịch vụ Thu cũ – Đổi mới: Khách hàng có nhu cầu đổi xe Mitsubishi đang sử dụng để mua xe Mitsubishi mới có thể được hỗ trợ thu mua lại tại các NPP ủy quyền Xe Qua Sử Dụng Chính Hãng của MMV. Danh sách các NPP đang triển khai Xe Qua Sử Dụng được đề cập tại https://mitsubishi-motors.com.vn/nha-phan-phoi\r\n\r\n5. Ưu đãi của chương trình:\r\n\r\n5.1 Ưu đãi lãi suất:\r\n\r\nKhách hàng thỏa điều kiện khi mua xe ô tô Mitsubishi mới tại NPP sẽ được hưởng Lãi suất ưu đãi với gói vay kỳ hạn 96 tháng như sau:\r\n–        lãi suất 7.0%/năm cố định 6 tháng đầu; hoặc\r\n\r\n–        lãi suất 9.0%/năm cố định 12 tháng đầu\r\n\r\n5.2. Quà tặng khác: Đặc biệt, trong trường hợp Khách hàng đang có tài khoản ứng dụng Mitsubishi Connect + và đăng ký thành công Chương trình “NÂNG CẤP HÀNH TRÌNH, THĂNG HẠNG ƯU ĐÃI” sẽ có cơ hội được nhận Phiếu ưu đãi dịch vụ với tổng giá trị là 3.000.000 VNĐ (Ba triệu đồng). Chương trình “NÂNG CẤP HÀNH TRÌNH, THĂNG HẠNG ƯU ĐÃI” được đề cập cụ thể tại https://mitsubishi-motors.com.vn/dich-vu/ung-dung-khach-hang/nang-cap-hanh-trinh-thang-hang-uu-dai\r\n\r\n6. Quyền của MMV: \r\n\r\nMMV có quyền liên lạc với khách hàng qua số điện thoại mà khách hàng đã cung cấp khi tham gia Chương trình để xác minh thông tin và yêu cầu bổ sung giấy tờ (nếu cần).\r\nMMV có quyền kiểm tra tính chính xác và minh bạch của Giấy tờ khách hàng cung cấp và có quyền từ chối cho khách hàng tham gia chương trình nếu phát hiện bất kỳ sự gian lận nào trong việc cung cấp giấy tờ, kể cả khi hợp đồng đặt cọc và mua xe tại NPP của khách hàng đã được ký và khách hàng đã có Thông báo cho vay (Phê duyệt vay) từ VPbank.\r\nMMV được miễn trừ trách nhiệm nếu Khách hàng không đáp ứng hoặc đáp ứng không đầy đủ các điều kiện để tham gia chương trình MAF;\r\nMMV được miễn trừ trách nhiệm nếu Khách hàng và NPP không đạt được thỏa thuận để đổi xe ô tô Mitsubishi cũ cho mục đích mua ô tô Mitsubishi mới;\r\nMMV được miễn trừ trách nhiệm nếu Khách hàng không đáp ứng hoặc đáp ứng không đầy đủ các điều kiện vay tín dụng ô tô mà VPbank yêu cầu\r\nĐối với các tranh chấp phát sinh liên quan đến Chương trình, MMV sẽ giải quyết trên tinh thần hợp tác với khách hàng. Trong trường hợp các bên không đạt được thỏa thuận, tranh chấp sẽ được giải quyết theo quy định của pháp luật Việt Nam tại Tòa án có thẩm quyền.\r\n\r\nĐiều Khoản và Điều Kiện của Chương trình này có thể được điều chỉnh tại từng thời điểm theo quyết định của MMV. Nội dung thay đổi (nếu có) sẽ được thông báo, đăng ký theo quy định pháp luật và cập nhật trên website của MMV (https://mitsubishi-motors.com.vn/) trước ngày áp dụng.\r\n\r\nĐiều Khoản và Điều Kiện của Chương Trình này được lập thành tiếng Anh và tiếng Việt. Trong trường hợp có sự mâu thuẫn giữa bản tiếng Anh và tiếng Việt, bản tiếng Việt sẽ được ưu tiên áp dụng.\r\n\r\n7. Điều khoản chung\r\n\r\nKhách hàng xác nhận các thông tin được cung cấp cho NPP là hoàn toàn chính xác. Nếu có bất kỳ thông tin sai lệch nào, MMV sẽ không chịu trách nhiệm trong trường hợp thông tin đó làm ảnh hưởng hoặc hạn chế quyền lợi của Khách hàng.\r\n\r\nKhách hàng đồng ý rằng MMV có quyền sử dụng thông tin và liên hệ để giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của MMV cũng như chuyển giao Thông tin Khách hàng cho bên thứ ba để thực hiện các hoạt động này. Thông tin của khách hàng sẽ được bảo vệ và được sử dụng theo quy định tại Chính sách bảo mật được công bố trên trang web của MMV và được cập nhật trong từng thời điểm. \r\n\r\nMMV được miễn trách nhiệm trong trường hợp: (i) Khi tài khoản khách hàng bị lợi dụng do điện thoại bị hư hỏng, bị đánh cắp, hoặc các thay đổi liên quan đến thông tin cá nhân mà khách hàng không kịp thời thông báo cho MMV; (ii) phần mềm bị lỗi, bị tấn công hoặc vì bất kỳ lý do khách quan nào khách nằm ngoài khả năng kiểm soát của MMV; (iii) trong trường hợp bất khả kháng theo quy định của pháp luật.\r\n\r\nThông tin về Chương trình được công bố đầy đủ chi tiết trên trang website và ứng dụng Mitsubishi Connect+.\r\n\r\nTrường hợp có thắc mắc, khiếu nại, khách hàng có thể liên hệ Tổng đài CSKH của MMV thông qua Hotline 18001514 và email: cskh@mitsubishi-motors.com.vn.\r\n\r\nVề Mitsubishi Motors Việt Nam:\r\n\r\nCông ty TNHH Ô tô Mitsubishi Việt Nam được thành lập năm 1994, là nhà phân phối chính thức của Mitsubishi Motors Nhật Bản tại Việt Nam và là một trong những công ty liên doanh sản xuất và phân phối ô tô đầu tiên tại Việt Nam.\r\n\r\nVới kinh nghiệm gần 30 năm trên thị trường ô tô cùng thông điệp “Drive your Ambition” (Dẫn lối khát vọng), Mitsubishi Motors Việt Nam luôn cam kết với các giá trị và khát vọng của công ty trong tương lai đến Quý khách hàng. Chúng tôi sẽ đem đến những mẫu xe vận hành vượt trội với những trang bị an toàn tiên tiến.\r\n\r\nHiện nay, Mitsubishi Motors Việt Nam đang phân phối 6 mẫu xe tại Việt Nam:\r\n\r\nXe 5 chỗ: Attrage\r\nXe 7 chỗ: Xpander, Xpander Cross, Outlander, Pajero Sport\r\nXe bán tải: Triton Athlete\r\n', 'MAF_Digital_COVER_MOBILE-1.png', 'CHƯƠNG TRÌNH HỖ TRỢ TÀI CHÍNH CHO KHÁCH HÀNG THÂN THIẾT LÊN ĐỜI XE MỚI'),
+(6, 'Ngày 30/09 vừa qua chương trình kỷ niệm sinh nhật lần thứ 14 của câu lạc bộ Triton Việt Nam Club được tổ chức thành công tại Vĩnh Phúc. Sự kiện đã quy tụ hơn 80 thành viên tham dự  cùng nhiều hoạt động hấp dẫn mang lại cho cộng đồng yêu xe những trải nghiệm ấn tượng.\r\nĐiểm nhấn của sự kiện lần này chính là cuộc thi trình diễn kỹ năng lái xe vượt địa hình “The Best Triton 2023” trên địa hình bùn đất và ngập nước tương tự như các giải đua offroad rally chuyên nghiệp. Để chinh phục được bài thi này, các thí sinh không những cần sở hữu kỹ năng và kinh nghiệm, mà còn phải hiểu được khả năng vận hành của Triton với động cơ 2.4L MIVEC mạnh mẽ, hệ dẫn động 2 cầu cùng tính năng khóa vi sai trung tâm duy nhất phân khúc, để vượt qua nhiều khúc cua gắt và vũng lầy trải dài suốt chặng thi.\r\nKhi được phỏng vấn, một số thành viên trong nhóm chia sẻ: “Tôi thấy sự kiện lần này được đầu tư rất quy mô từ những chi tiết nhỏ nhất tới những thử thách, chướng ngại vật đều được chuẩn bị rất phù hợp để thể hiện được cả 4 chế độ địa hình của chiếc Mitsubishi Triton”. Anh Dũng phó chủ tịch TVC đánh giá rất cao chiếc xe ở sự bền bỉ và khả năng vượt địa hình tốt. Đó là lý do mà anh gắn bó với chiếc xe của mình trong suốt 14 năm qua. Anh chia sẻ thêm rằng đã có dự định mua một chiếc Triton Athlete bản cao cấp nhất trong thời gian tới bởi anh ấn tượng với trang bị của chiếc xe này.\r\nTriton Vietnam Club (TVC) được thành lập từ năm 2009, câu lạc bộ từ lâu đã trở thành nơi giao lưu, gắn kết giữa các thành viên có cùng niềm đam mê với Triton. Mitsubishi Motors Việt Nam vinh dự được đồng hành cùng câu lạc bộ TVC trong suốt thời gian vừa qua cũng như trong lần sinh nhật thứ 14. Mitsubishi Motors Việt Nam tiếp tục thực hiện cam kết xây dựng mối quan hệ gắn kết hơn với khách hàng, hình thành một cộng đồng những người yêu xe Mitsubishi Triton đông đảo và năng động.', 'NLH_5319.jpg', 'TRITON VIETNAM CLUB TỔ CHỨC KỶ NIỆM SINH NHẬT LẦN THỨ 14'),
+(7, 'Diễn ra từ ngày 14 - 15/10/2023 tại SÂN VẬN ĐỘNG LÂM ĐỒNG, sự kiện mang đến cho quý khách hàng không gian trải nghiệm thực tế và chuyên nghiệp các mẫu xe: TRITON, PAJERO SPORT, OUTLANDER, NEW XPANDER, NEW XPANDER CROSS, ATTRAGE và những thông tin mới nhất về mẫu xe XFORCE sắp ra mắt.\r\n ', 'MED_DL_Thumbnail.jpg', 'TRẢI NGHIỆM CHẤT MITSUBISHI TẠI SVĐ LÂM ĐỒNG TỪ 14 – 15 THÁNG 10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `model`
+-- Đang đổ dữ liệu cho bảng `promotion`
 --
 
-DROP TABLE IF EXISTS `model`;
-CREATE TABLE IF NOT EXISTS `model` (
-  `model_id` bigint(20) NOT NULL,
-  `name_model` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `model`
---
-
-INSERT INTO `model` (`model_id`, `name_model`) VALUES
-(1, 'model1');
+INSERT INTO `promotion` (`id`, `content`, `image_name`, `title`) VALUES
+(1, 'Trong tháng 10/2023, Mitsubishi Motors Việt Nam kết hợp cùng hệ thống Nhà Phân phối ủy quyền trên toàn quốc triển khai nhiều chương trình ưu đãi đặc biệt nhằm tạo điều kiện cho khách hàng có cơ hội tốt nhất để sở hữu các dòng xe Mitsubishi, áp dụng nhiều chương trình ưu đãi hấp dẫn như hỗ trợ 100% lệ phí trước bạ, hỗ trợ tài chính lên đến 220 triệu đồng, không chi phí bảo hiểm vật chất,… kèm theo nhiều quà tặng giá trị dành cho khách hàng.\r\n\r\nTheo đó, khách hàng đặt cọc 10 triệu đồng đối với mẫu xe XFORCE từ 01/09/2023 đến 30/11/2023 sẽ nhận được ưu đãi 2 năm bảo dưỡng hoặc 40.000 km (*) và tặng thêm 1.000 điểm tích lũy trên ứng dụng Mitsubishi Connect+ (**)\r\n\r\nKhi mua hai mẫu xe Mitsubishi Pajero Sport và Mitsubishi Triton, khách hàng sẽ nhận được ưu đãi 100% lệ phí trước bạ cùng 01 năm bảo hiểm vật chất. Đặc biệt, đối với Triton khách hàng còn được nhận thêm gói hỗ trợ tài chính có giá trị lên tới 135 triệu đồng.\r\n\r\nNgoài ra, chương trình ưu đãi 100% lệ phí trước bạ còn được áp dụng đối với dòng xe Attrage kèm theo nhiều quà tặng phụ kiện hấp dẫn.\r\n\r\nĐối với mẫu xe Outlander, khách hàng sẽ được hỗ trợ lên đến 100% lệ phí trước bạ cùng quà tặng 02 năm bảo hiểm vật chất và 01 Camera toàn cảnh 360º trị giá 20 triệu đồng.\r\n\r\nQuà tặng dành cho khách hàng khi mua các mẫu xe Xpander bao gồm 50% lệ phí trước bạ, 01 năm bảo hiểm vật chất và 01 Camera toàn cảnh 360º trị giá 20 triệu đồng.\r\n\r\nBên cạnh những ưu đãi hấp dẫn, khách hàng mua các mẫu xe của Mitsubishi trong tháng này còn được nhận thêm nhiều quà tặng giá trị khác như ăng ten vây cá, phiếu nhiên liệu hoặc camera toàn cảnh 360 lên tới 20 triệu đồng.', 'promotion1.png', '****Tháng 10***** ƯU ĐÃI ĐỘC QUYỀN THÁNG 10/2023 CHO TẤT CẢ CÁC MẪU XE TẠI HỆ THỐNG ĐẠI LÝ ỦY QUYỀN MITSUBISHI MOTORS VIỆT NAM'),
+(2, 'Tháng 11/2023, Mitsubishi Motors Việt Nam kết hợp cùng hệ thống nhà phân phối ủy quyền trên toàn quốc triển khai nhiều chương trình ưu đãi hấp dẫn tạo điều kiện giúp khách hàng có thêm nhiều cơ hội sở hữu các dòng xe của Mitsubishi Motors như hỗ trợ 100% lệ phí trước bạ và nhiều ưu đãi, quà tặng hấp dẫn.\r\n\r\nKhách hàng đặt cọc 10 triệu đồng đối với mẫu xe XForce từ 1/9/2023 đến 30/11/2023 sẽ nhận được ưu đãi 2 năm bảo dưỡng hoặc 40.000 km (Áp dụng tùy theo điều kiện nào đến trước) và tặng thêm 1.000 điểm tích lũy trên ứng dụng Mitsubishi Connect+ (Điểm cộng chỉ được sử dụng khi Khách hàng hoàn thành nhận bàn giao xe tại NPP).\r\n\r\nKhi mua hai mẫu xe Triton và Pajero Sport, khách hàng sẽ nhận  được ưu đãi 100% lệ phí trước bạ, cùng 1 năm bảo hiểm vật chất. Đặc biệt, ở phiên bản Triton 4x2 AT Athlete, khách hàng sẽ được nhận 1 Nắp thùng cuộn cơ (trị giá 21 triệu đồng). Quà tặng camera lùi (trị giá 2,5 triệu đồng) dành riêng cho phiên bản Triton 4x2 AT MIVEC.\r\n\r\nBên cạnh đó, các dòng xe Xpander và Xpander Cross sẽ có ưu đãi lên đến 100% lệ phí trước bạ, 1 năm bảo hiểm vật chất và quà tặng 1 Camera 360º toàn cảnh (trị giá 20 triệu đồng).\r\n\r\nNgoài ra, chương trình ưu đãi 100% lệ phí trước bạ còn được áp dụng đối với dòng xe Attrage kèm theo nhiều quà tặng hấp dẫn.\r\n\r\nĐối với mẫu xe Outlander, khách hàng sẽ được hỗ trợ 50% lệ phí trước bạ cùng quà tặng 02 năm bảo hiểm vật chất và 1 Camera 360º toàn cảnh (trị giá 20 triệu đồng).\r\n', 'promotion2.png', '*****Tháng 11***** GIẢM GIÁ 100% KHUYẾN MÃI PHÍ NHIỀU MẪU XE TẠI ĐẠI LÝ THÁNG 11/2023'),
+(3, ' Tháng 12/2023, hệ thống Nhà Phân Phối ủy quyền của Mitsubishi Motors Việt Nam trên toàn quốc sẽ triển khai nhiều chương trình ưu đãi hấp dẫn cho khách hàng như hỗ trợ 100% lệ phí trước bạ, miễn phí bảo hiểm vật chất cùng nhiều quà tặng hấp dẫn khác (*).\r\n\r\nKhách hàng mua các mẫu xe Xpander, Xpander Cross (phiên bản 2 tông màu Cam – Đen) sẽ nhận được ưu đãi đến 100% lệ phí trước bạ,  01 năm bảo hiểm vật chất và được tặng thêm 01 Camera 360º toàn cảnh (trị giá 20 triệu đồng) cùng nhiều phần quà hấp dẫn.\r\n\r\nĐối với mẫu xe Outlander khách hàng sẽ được hỗ trợ 100% lệ phí trước bạ (**) cùng quà tặng 02 năm bảo hiểm vật chất và 01 Camera 360º toàn cảnh (trị giá 20 triệu đồng).\r\n\r\nKhi mua 2 mẫu xe Triton và Pajero Sport, khách hàng sẽ nhận được ưu đãi 100% lệ phí trước bạ, cùng 01 năm bảo hiểm vật chất. Đặc biệt, ở phiên bản Triton 4×2 AT Athlete, khách hàng sẽ được nhận thêm 01 Nắp thùng cuộn cơ (trị giá 21 triệu đồng). Quà tặng camera lùi (trị giá 2,5 triệu đồng) dành riêng cho phiên bản Triton 4×2 AT MIVEC.\r\n\r\nNgoài ra, chương trình ưu đãi 100% lệ phí trước bạ còn được áp dụng đối với dòng xe Attrage kèm theo nhiều quà tặng hấp dẫn như 01 Camera lùi (trị giá 2,5 triệu đồng) hoặc 01 Anten vây cá (trị giá 1,5 triệu đồng).\r\n\r\n(*) Chương trình ưu đãi từ hệ thống Nhà Phân Phối, để biết thêm chi tiết về điều kiện, điều khoản áp dụng quý khách hàng vui lòng liên hệ Nhà Phân Phối ủy quyền gần nhất.\r\n\r\n(**) Chương trình hỗ trợ 100% lệ phí trước bạ cho dòng xe Outlander bao gồm 50% thuộc chính sách ưu đãi từ hệ thống Nhà Phân Phối ủy quyền của Mitsubishi Motors Việt Nam, 50% còn lại thuộc chính sách hỗ trợ theo quy định hiện hành.', 'Thumbnail-12.jpg', '*****Tháng 12***** ƯU ĐÃI 100% PHÍ TRƯỚC BẠ TOÀN BỘ CÁC DÒNG XE TRONG THÁNG 12');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service`
+-- Đang đổ dữ liệu cho bảng `service`
 --
 
-DROP TABLE IF EXISTS `service`;
-CREATE TABLE IF NOT EXISTS `service` (
-  `service_id` bigint(20) NOT NULL,
-  `name_service` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `service_plan`
---
-
-DROP TABLE IF EXISTS `service_plan`;
-CREATE TABLE IF NOT EXISTS `service_plan` (
-  `service_plan_id` bigint(20) NOT NULL,
-  `date` date DEFAULT NULL,
-  `distribution_center` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `full_name` varchar(255) DEFAULT NULL,
-  `license_plate` varchar(255) DEFAULT NULL,
-  `number_phone` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `time` time(6) DEFAULT NULL,
-  `model_id` bigint(20) DEFAULT NULL,
-  `service_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `service` (`id_service`, `name_service`) VALUES
+(1, 'Sữa Chữa Chung'),
+(2, 'Đồng Sơn'),
+(3, 'Bảo Hành'),
+(4, 'Chương Trình Re-Call'),
+(5, 'Dịch Vụ Khác');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testing_register`
+-- Đang đổ dữ liệu cho bảng `type_spare_part`
 --
 
-DROP TABLE IF EXISTS `testing_register`;
-CREATE TABLE IF NOT EXISTS `testing_register` (
-  `testing_register_id` bigint(20) NOT NULL,
-  `carpd` varchar(255) DEFAULT NULL,
-  `distribution_center` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `full_name` varchar(255) DEFAULT NULL,
-  `number_phone` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `version_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `type_spare_part` (`id`, `name_type_spare_part`) VALUES
+(1, 'Phụ Tùng'),
+(2, 'Phụ Gia'),
+(3, 'Dầu động cơ và các chất bôi trơn');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `version`
+-- Đang đổ dữ liệu cho bảng `spare_part`
 --
 
-DROP TABLE IF EXISTS `version`;
-CREATE TABLE IF NOT EXISTS `version` (
-  `version_id` bigint(20) NOT NULL,
-  `name_version` varchar(255) DEFAULT NULL,
-  `car_id` bigint(20) DEFAULT NULL,
-  `model_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `spare_part` (`id`, `image_name`, `name_spare_part`, `id_type_spare_part`) VALUES
+(8, 'spare-part-wiper-blades-luoi-gat-nuoc.jpg', 'Lưỡi Gạt Nước', 1),
+(9, 'spare-part-brake-pad.jpg', 'Má Phanh', 1),
+(10, 'spare-part-air-refresher-assy-loc-gio-djieu-hoa.jpg', 'Lọc Gió Điều Hòa', 1),
+(11, 'spare-part-6-fuel-filter-assy-loc-nhien-lieu.png', 'Lọc Nhiên Liệu', 1),
+(12, 'spare-part-5-spark-plug-bu-gi-min.png', 'Bu-Gi', 1),
+(13, 'spare-part-4-belt-alternator-others-cua-roa-may-phat.png', 'Cu Roa Máy Phát', 1),
+(14, 'spare-part-7-oil-filter-loc-nhot.jpg', 'Lọc Nhớt', 1),
+(15, 'nuoc_rua_kinh.jpg', 'Nước Rửa Kính', 2),
+(16, 'Fuel-system-cleaner-white-large.jpg', 'Dung Dịch Vệ Sinh Nhiên Liệu Xăng', 2),
+(17, 'Diesel-system-cleaner_white-large.jpg', 'Dung Dịch Vệ Sinh Nhiên Liệu Dầu Diesel', 2),
+(18, 'spare-part-1-mitsubishi-brake-parts-cleaner.png', 'Dung Dịch Vệ Sinh Phanh và Linh Kiện', 2),
+(19, 'Engine-fluid-large.jpg', 'Dung Dịch Súc Rửa Động Cơ', 2),
+(20, 'Engine-oil-treatment-large.jpg', 'Phụ Gia Nâng Cấp Nhớt Động Cơ', 2),
+(21, 'Antibacterial-air-freshener_white-large.jpg', 'Dung Dịch Khử Mùi và Kháng Khuẩn', 2),
+(22, 'engine-oil-others-lubricants-brake-fluid-dot3.png', 'Dầu Phanh DOT3', 3),
+(23, 'engine-oil-others-lubricants-new-multi-gear-oil-gl-4.png', 'Nhớt Hộp Số GL4', 3),
+(24, 'spare-part-8-super-longlife-coolant-nuoc-lam-mat.png', 'Nước Làm Mát Động Cơ', 3),
+(25, 'engine-oil-others-lubricants-mitsubishi-dq-power-steering-fluid.png', 'Nhớt Trợ Lực Lái', 3),
+(26, 'CVT-J4-FLUID.jpg', 'Dầu Truyền Động Hộp Số', 3),
+(27, 'engine-oil-others-lubricants-atf-ma1-nhot-hop-so-mitsubishi-atf-ma1.png', 'Nhớt Hộp Số', 3),
+(28, 'engine-oil-others-lubricants-atf-splll-nhot-hop-so-tu-dong.png', 'Nhớt Hộp Số Tự Động', 3);
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `version`
+-- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `version` (`version_id`, `name_version`, `car_id`, `model_id`) VALUES
-(1, 'version name', 1, 1);
+INSERT INTO `user` (`user_id`, `password`, `role`, `username`) VALUES
+(1, 'admin', 'admin', 'admin');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `car`
---
-ALTER TABLE `car`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `color`
---
-ALTER TABLE `color`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK8qrw1u2o1gvqbbykf2faudhtw` (`car_id`);
-
---
--- Indexes for table `model`
---
-ALTER TABLE `model`
-  ADD PRIMARY KEY (`model_id`);
-
---
--- Indexes for table `service`
---
-ALTER TABLE `service`
-  ADD PRIMARY KEY (`service_id`);
-
---
--- Indexes for table `service_plan`
---
-ALTER TABLE `service_plan`
-  ADD PRIMARY KEY (`service_plan_id`),
-  ADD UNIQUE KEY `UK_drsldya6kvhhjjsw2kdij6k3` (`model_id`),
-  ADD UNIQUE KEY `UK_7syjt1j7aibal9gr1c4vaahqe` (`service_id`);
-
---
--- Indexes for table `testing_register`
---
-ALTER TABLE `testing_register`
-  ADD PRIMARY KEY (`testing_register_id`),
-  ADD UNIQUE KEY `UK_a2ks3ngm0lg79rmv4ep6wbhvj` (`version_id`);
-
---
--- Indexes for table `version`
---
-ALTER TABLE `version`
-  ADD PRIMARY KEY (`version_id`),
-  ADD UNIQUE KEY `UK_rg7rjjb9i2oemnxvrrphwcq01` (`car_id`),
-  ADD KEY `FKwu0dfb5kwp3o83seid89ao0r` (`model_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `car`
---
-ALTER TABLE `car`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `color`
---
-ALTER TABLE `color`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `model`
---
-ALTER TABLE `model`
-  MODIFY `model_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `service`
---
-ALTER TABLE `service`
-  MODIFY `service_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `service_plan`
---
-ALTER TABLE `service_plan`
-  MODIFY `service_plan_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `testing_register`
---
-ALTER TABLE `testing_register`
-  MODIFY `testing_register_id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `version`
---
-ALTER TABLE `version`
-  MODIFY `version_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `color`
---
-ALTER TABLE `color`
-  ADD CONSTRAINT `FK8qrw1u2o1gvqbbykf2faudhtw` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
-
---
--- Constraints for table `service_plan`
---
-ALTER TABLE `service_plan`
-  ADD CONSTRAINT `FK20vmbecpvumi0kc93d6l2tq67` FOREIGN KEY (`service_id`) REFERENCES `service` (`service_id`),
-  ADD CONSTRAINT `FKpumui605n9v0n1dfs47jn6usb` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`);
-
---
--- Constraints for table `testing_register`
---
-ALTER TABLE `testing_register`
-  ADD CONSTRAINT `FK33gtm6ddv00sy6vr7wy93fa96` FOREIGN KEY (`version_id`) REFERENCES `version` (`version_id`);
-
---
--- Constraints for table `version`
---
-ALTER TABLE `version`
-  ADD CONSTRAINT `FKe4g1l9cqd5nmff1n6tlmsqfcc` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`),
-  ADD CONSTRAINT `FKwu0dfb5kwp3o83seid89ao0r` FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
