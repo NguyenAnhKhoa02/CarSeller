@@ -1,9 +1,10 @@
 import {Row, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
 import banner from "../../../Components/Assets/Page/bannerservice1.png"
-import car2 from "../../../Components/Assets/ForDatabase/Cars/car2.png"
-import car3 from "../../../Components/Assets/ForDatabase/Cars/car3.png"
-import car4 from "../../../Components/Assets/ForDatabase/Cars/car4.png"
+import car1 from "../../../Components/Assets/Page/car1.png"
+import car2 from "../../../Components/Assets/Page/car2.png"
+import car3 from "../../../Components/Assets/Page/car3.png"
+import car4 from "../../../Components/Assets/Page/car4.png"
 
 function Price () {
     return (<>
@@ -12,8 +13,44 @@ function Price () {
         <div className="centered">
             <h1 style={{fontWeight:"bold", fontSize:"5rem"}}>BẢNG GIÁ & KHUYẾN MÃI</h1>
         </div>
-    </Row>
+    </Row>   
     {/* car 1 */}
+    <Row style={{maxWidth:"60%", margin:"0 auto", paddingBottom:"60px", paddingTop:"60px"}}>
+        <img src={car1} height="auto"/>
+        <h2 style={{textAlign:"center", color:"black", fontWeight:"bold", marginBottom:"25px"}}>XPANDER CROSS</h2>
+        <table style={{width:"100%", color:"black", bordercollapse:"collapse"}}>
+            <tbody style={{border:"2px", width:"100%", color:"black"}}>
+                <tr style={{height:"50px", fontSize:"20px", backgroundColor:"#f3f3f4"}}>
+                    <th style={{width:"15%", textAlign:"center"}}>Phiến bản</th>
+                    <th style={{width:"15%", textAlign:"center"}}>Giá bán lẻ (VNĐ)</th>
+                    <th style={{width:"60%", textAlign:"center"}}>Ưu đãi tháng 12 năm 2023</th>
+                </tr>
+                <tr style={{height:"50px", fontSize:"20px", color:"#222222", backgroundColor:"white"}}>
+                    <td style={{width:"15%", textAlign:"center"}}>Xpander Cross MY23</td>
+                    <td style={{width:"15%", textAlign:"center"}}>698.000.000</td>
+                    <td style={{width:"60%", textAlign:"left", padding:"10px"}}>
+                        <p>– Camera toàn cảnh 360 (Trị giá 20.000.000 VNĐ)</p>
+                    </td>
+                </tr>   
+                <tr style={{height:"50px", fontSize:"20px", color:"#222222", backgroundColor:"#f3f3f4"}}>
+                    <td style={{width:"20%", textAlign:"center"}}>Xpander Cross MY23 <br/> Phiên bản 2 tông màu Cam-Đen</td>
+                    <td style={{width:"20%", textAlign:"center"}}>703.000.000</td>
+                    <td style={{width:"50%", textAlign:"left", padding:"10px"}}>
+                        <p>– Hỗ trợ 100% lệ phí trước bạ (Trị giá 70.300.000 VNĐ)</p>
+                        <p>– Camera toàn cảnh 360 (Trị giá 20.000.000 VNĐ)</p>
+                        <p>– 01 năm bảo hiểm vật chất (Trị giá 10.000.000 VNĐ)</p>
+                    </td>
+                </tr>   
+            </tbody>           
+        </table>
+        <div style={{fontSize:"20px", paddingTop:"10px", paddingBottom:"10px"}}>
+            <p>* Chương trinh ưu đãi từ NPP, để biết thêm chi tiết về điều kiện, điều khoản áp dụng, quý khách hàng vui lòng liên hệ Nhà Phân phối ủy quyền gần nhất</p>
+        </div>
+        <div style={{textAlign:"center", padding:"20px"}}>
+            <Link to="/SanPham/DangKyLaiThu"><Button variant="outline-dark" size="lg" className="MyBorder" style={{marginLeft:"40px",width:"300px", height:"55px"}}>ĐĂNG KÝ LÁI THỬ</Button></Link>
+        </div>
+    </Row>
+    {/* car 2 */}
     <Row style={{maxWidth:"60%", margin:"0 auto", paddingBottom:"60px", paddingTop:"60px"}}>
         <img src={car2} height="auto"/>
         <h2 style={{textAlign:"center", color:"black", fontWeight:"bold", marginBottom:"25px"}}>XFORCE</h2>
@@ -37,7 +74,7 @@ function Price () {
             <p>(**) Điểm cộng chỉ được ứng dụng khi bạn đăng ký đặt trước xe thành công tại đại lý.</p>
         </div>
     </Row>
-    {/* car 2 */}
+    {/* car 3 */}
     <Row style={{maxWidth:"60%", margin:"0 auto", paddingBottom:"60px", paddingTop:"60px"}}>
         <img src={car3} height="auto"/>
         <h2 style={{textAlign:"center", color:"black", fontWeight:"bold", marginBottom:"25px"}}>NEW TRITON ATHLETE</h2>
@@ -73,7 +110,7 @@ function Price () {
             <Link to="/SanPham/DangKyLaiThu"><Button variant="outline-dark" size="lg" className="MyBorder" style={{marginLeft:"40px",width:"300px", height:"55px"}}>ĐĂNG KÝ LÁI THỬ</Button></Link>
         </div>
     </Row>
-    {/* car 3 */}
+    {/* car 4 */}
     <Row style={{maxWidth:"60%", margin:"0 auto", paddingBottom:"60px", paddingTop:"60px"}}>
         <img src={car4} height="auto"/>
         <h2 style={{textAlign:"center", color:"black", fontWeight:"bold", marginBottom:"25px"}}>NEW XPANDER</h2>

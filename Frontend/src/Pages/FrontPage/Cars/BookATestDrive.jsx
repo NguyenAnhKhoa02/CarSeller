@@ -1,12 +1,7 @@
 import {Row, Col, Button, Form, FloatingLabel, Card} from "react-bootstrap"
 import Slider from "react-slick";
 import banner from "../../../Components/Assets/Page/bannerservice1.png"
-import car1 from "../../../Components/Assets/ForDatabase/Cars/car1.png";
-import car2 from "../../../Components/Assets/car2.png";
-import car3 from "../../../Components/Assets/car3.png";
-import car4 from "../../../Components/Assets/car4.png";
 import React,{ useEffect, useRef, useState } from "react";
-import { Alert } from "@mui/material";
 
 function BookATestDrive () {
     const settings = {

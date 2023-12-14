@@ -36,7 +36,7 @@ public class VersionDTO {
     private String antiTheft;
     private String autoLock;
     private String fuel;
-    private int price;
+    private Long price;
 
     public Version mappedVersion(){
         Backend.model.Version version = new Backend.model.Version();
