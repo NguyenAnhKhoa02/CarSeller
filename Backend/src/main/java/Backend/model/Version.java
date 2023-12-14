@@ -58,5 +58,5 @@ public class Version {
     private String antiTheft;
     private String autoLock;
     @Column(nullable = false)
-    private int price;
+    private Long price;
 }
