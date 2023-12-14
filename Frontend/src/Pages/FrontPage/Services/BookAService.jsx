@@ -75,11 +75,10 @@ function BookAService () {
         
 
         if(checked =="checked"){
-            alert("gửi gòi")
-                fetch("http://localhost:8080/service_Plans/save", {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(servicePlan)
+            fetch("http://localhost:8080/service_Plans/save", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(servicePlan)
             })
             } else {
             alert("tích checkbox")

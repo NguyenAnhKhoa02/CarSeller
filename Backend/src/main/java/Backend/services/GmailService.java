@@ -2,23 +2,11 @@ package Backend.services;
 import Backend.model.FleetSale;
 import Backend.model.ServicePlan;
 import Backend.model.TestingRegister;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.mail.MailMessage;
-import org.springframework.mail.MailParseException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-
-import java.util.Date;
-import java.util.Properties;
 
 
 @Service
@@ -64,7 +52,7 @@ public class GmailService{
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("gr5carseller@gmail.com");
         message.setTo(fleetSale.getEmail());
-        message.setSubject("Thông báo đặt lịch đăng ký lái thử");
+        message.setSubject("Thông báo bán hàng dự án");
         message.setText("Kinh gửi quý khách: " + fleetSale.getFullName() + "\n" +
                 "Cảm ơn quý công ty đã tin tưởng chọn hãng xe của chúng tôi! \n" +
                 "Chúng tôi hiện đã ghi nhận thông tin như sau: \n"+

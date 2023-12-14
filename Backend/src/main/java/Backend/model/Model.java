@@ -22,6 +22,9 @@ public class Model {
     private Long id;
     private String nameModel;
     private String imageName;
+    @Column(
+            columnDefinition = "TEXT"
+    )
     private String info;
     private String fuel;
     private int numCarSeat;

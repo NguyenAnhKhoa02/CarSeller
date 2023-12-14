@@ -2,9 +2,38 @@ import {Row, Col, Button, Form, FloatingLabel, Card} from "react-bootstrap";
 import banner from "../../../Components/Assets/Page/contactUs.png";
 import icon from "../../../Components/Assets/Page/foot2.png"
 import email from "../../../Components/Assets/Page/foot3.png"
+import { useState } from "react";
 
 function ContactUs () {
     
+    const [email, setEmail] = useState(undefined)
+    const [checkBox, setCheckBox] = useState(undefined)
+    const handleCheckBoxChange = (e)=> {
+        return setCheckBox(e.target.checked ? "checked":"unchecked")
+        
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(email == undefined){
+            alert("Please enter email!")
+            return
+        }
+
+        if(checkBox == undefined || checkBox == 'unchecked'){
+            alert("Please confirm privacy!")
+            return
+        }
+
+        const newspaperRegister = {email}
+        console.log(newspaperRegister)
+        fetch("http://localhost:8080/newspaperRegisters/save",{
+            method:"POST",
+            headers: {'Content-Type': 'application/json'},
+            body:JSON.stringify(newspaperRegister)
+        })
+    }
+
     return (<>
     <Row style={{position:"relative", textAlign:"left", color:"white"}}>
         <img src={banner} height="750"/>
@@ -79,7 +108,7 @@ function ContactUs () {
                 <h1 style={{fontWeight:"bold", color:"black", fontSize:"48px"}}>Đăng ký nhận thông tin</h1>
             </div>
             <FloatingLabel controlId="email" label="NHẬP ĐỊA CHỈ EMAIL CỦA BẠN*" className="mb-3">
-                <Form.Control type="email" placeholder="name@example.com" />
+                <Form.Control required type="email" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
             </FloatingLabel>
             <p style={{color:"gray"}}>CHÍNH SÁCH VÀ ĐIỀU KHOẢN*</p>
             <div key={`default-checkbox`} className="mb-3">
@@ -87,10 +116,12 @@ function ContactUs () {
                     type="checkbox"
                     id="default-checkbox"
                     label="Tôi xác nhận đồng ý nhận thông tin liên quan đến Chính sách & Điều khoản"
+                    required
+                    onClick={handleCheckBoxChange}
                 />
             </div>
             <p>Chọn đồng ý để chúng tôi biết bạn đã đọc và chấp thuận các Chính sách & Điều khoản</p>
-            <Row><Button variant="outline-dark" type="submit" size="lg" className="MyBorder2">Đăng ký</Button></Row>
+            <Row><Button onClick={(e) => handleSubmit(e)} variant="outline-dark" type="submit" size="lg" className="MyBorder2">Đăng ký</Button></Row>
         </Form>
     </Row>
     </>
