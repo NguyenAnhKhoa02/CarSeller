@@ -70,7 +70,7 @@ export const VersionEdit = (props) => (
                 </ReferenceInput>
             </Box>
         </Box>
-        <NumberInput fullWidth source="price" required/>
+        <NumberInput fullWidth min={0} source="price" required/>
         <br/>
         <Typography variant="h5" gutterBottom> 
             Detail

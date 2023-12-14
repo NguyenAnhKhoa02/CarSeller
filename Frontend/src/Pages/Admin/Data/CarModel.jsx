@@ -67,7 +67,7 @@ export const CarModelEdit = (props) => (
         </Box>
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <NumberInput fullWidth required source="numCarSeat"></NumberInput>
+                <NumberInput fullWidth required min={0} source="numCarSeat"></NumberInput>
             </Box>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                 <SelectInput fullWidth required source="fuel" choices={[
@@ -107,7 +107,7 @@ export const CarModelCreate = (props) => (
         <TextInput fullWidth required source="nameModel" />
         <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <NumberInput fullWidth required source="numCarSeat"></NumberInput>
+                <NumberInput fullWidth required min={0} source="numCarSeat"></NumberInput>
             </Box>
             <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                 <SelectInput fullWidth required source="fuel" choices={[

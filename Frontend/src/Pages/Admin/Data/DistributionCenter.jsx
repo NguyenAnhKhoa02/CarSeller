@@ -35,7 +35,7 @@ export const DistributionCenterCreate = (props) =>(
                 </Box>
 
                 <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                    <NumberInput fullWidth required source="hotline"></NumberInput>
+                    <NumberInput fullWidth required min={0} source="hotline"></NumberInput>
                 </Box>
             </Box>
 
@@ -84,7 +84,7 @@ export const DistributionCenterEdit = ({props,response,id}) =>(
                 </Box>
 
                 <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                    <NumberInput fullWidth required source="hotline"></NumberInput>
+                    <NumberInput fullWidth required min={0} source="hotline"></NumberInput>
                 </Box>
             </Box>
 
