@@ -24,7 +24,9 @@ import ShowroomAndTesting from '@mui/icons-material/Grading';
 import TypeSparePartIcon from '@mui/icons-material/Construction';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import FleetSaleIcon from '@mui/icons-material/RequestQuote';
+import NewspaperRegisterIcon from '@mui/icons-material/HowToReg';
 import { FleetSaleEdit, FleetSaleList, FleetSaleShow } from "./Data/FleetSale";
+import { NewspaperRegisterList } from "./Data/NewspaperRegister";
 const lightTheme = defaultTheme;
 const darkTheme = { ...defaultTheme, palette: { mode: "dark" } };
 
@@ -49,6 +51,7 @@ function App () {
           <Resource name="service_Plans" icon={ServicePlanIcon} list={ServicePlanList} show={ServicePlanShow} edit={ServicePlanEdit}/>
           <Resource name="type_Spare_Parts" icon={TypeSparePartIcon} list={TypeSparePartList} edit={TypeSparePartEdit} create={TypeSparePartCreate} recordRepresentation="nameTypeSparePart"/>
           <Resource name="newspapers" icon={NewspaperIcon} list={NewspaperList} edit={NewspaperEdit} create={NewspaperCreate}/>
+          <Resource name="newspaperRegisters" icon={NewspaperRegisterIcon} list={NewspaperRegisterList}/>
         </Admin>
       );
 } 

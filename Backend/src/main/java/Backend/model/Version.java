@@ -41,6 +41,9 @@ public class Version {
 
     @Column(nullable = false)
     private String nameVersion;
+    @Column(
+            columnDefinition = "TEXT"
+    )
     private String info;
     private String gasCap;
     private String frontBrakes;

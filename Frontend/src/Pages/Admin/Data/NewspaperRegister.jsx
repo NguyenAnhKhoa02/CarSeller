@@ -8,18 +8,17 @@ const status = [
 ]
 
 // Tạo một thành phần để hiển thị tiêu đề của trang chỉnh sửa
-const ServicePlanTitle = () => {
+const NewspaperRegister = () => {
     const record = useRecordContext()
     return <span>ID Service Plan {record ? `"${record.id}"` : ''}</span>;
   };
 
 // Component cho trang danh sách
-export const ServicePlanList = (props) => (
+export const NewspaperRegisterList = (props) => (
 <List {...props}>
     <Datagrid rowClick="show">
         <TextField source="id" />
         <EmailField source="email"/>
-        <EditButton />
         <DeleteButton />
     </Datagrid>
 </List>

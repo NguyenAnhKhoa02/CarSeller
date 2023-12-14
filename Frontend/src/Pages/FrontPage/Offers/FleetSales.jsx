@@ -126,6 +126,8 @@ function FleetSales() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(fleetSale)
         })
+        .then(alert("Successfully!"))
+        .then(window.location.reload())
     }
 
     return (<>

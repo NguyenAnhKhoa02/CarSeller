@@ -80,8 +80,10 @@ function BookAService () {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(servicePlan)
             })
+            .then(alert("Successful booking!"))
+            .then(window.location.reload())
             } else {
-            alert("tích checkbox")
+            alert("Please check privacy!")
              }
 
       }

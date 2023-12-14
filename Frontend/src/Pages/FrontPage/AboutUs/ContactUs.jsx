@@ -21,7 +21,7 @@ function ContactUs () {
         }
 
         if(checkBox == undefined || checkBox == 'unchecked'){
-            alert("Please confirm privacy!")
+            alert("Please confirm privacy!")    
             return
         }
 
@@ -32,6 +32,8 @@ function ContactUs () {
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(newspaperRegister)
         })
+        .then(alert("Register successfull"))
+        .then(window.location.reload())
     }
 
     return (<>

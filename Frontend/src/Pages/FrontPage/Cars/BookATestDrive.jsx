@@ -130,6 +130,8 @@ function BookATestDrive () {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(testingRegister)
         })
+        .then(alert("Successfully!"))
+        .then(window.location.reload())
     }
 
     return (<>
