@@ -2,8 +2,10 @@ package Backend.controller;
 
 import Backend.ModelDTO.NewspaperDTO;
 import Backend.model.Newspaper;
+import Backend.repository.NewspaperRegisterReposity;
 import Backend.repository.NewspaperRepository;
 import Backend.services.FileService;
+import Backend.services.GmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +28,13 @@ public class newspaperController {
     private NewspaperRepository newspaperRepository;
 
     @Autowired
+    private NewspaperRegisterReposity newspaperRegisterReposity;
+
+    @Autowired
     private FileService fileService;
+
+    @Autowired
+    private GmailService gmailService;
 
     @PostMapping
     public @ResponseBody ResponseEntity<Newspaper> saveNewspaper(@ModelAttribute NewspaperDTO newspaperDTO) throws IOException, SQLException {
@@ -39,6 +47,12 @@ public class newspaperController {
             newspaper.setImageName("empty");
         }
         newspaperRepository.save(newspaper);
+
+        List<String> emails = newspaperRegisterReposity.findAllEmail();
+        for (String email:
+             emails) {
+            gmailService.sendingGmailForNewspaper(email);
+        }
         return new ResponseEntity<>(newspaper, HttpStatus.CREATED);
     }
 

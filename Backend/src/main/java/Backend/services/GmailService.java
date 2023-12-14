@@ -1,5 +1,6 @@
 package Backend.services;
 import Backend.model.FleetSale;
+import Backend.model.Newspaper;
 import Backend.model.ServicePlan;
 import Backend.model.TestingRegister;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,15 @@ public class GmailService{
                 "Số lượng: " + fleetSale.getQuantity() + "\n" +
                 "\nChúng tôi sẽ sớm liên lạc với quý công ty để đưa ra bản hợp đồng cho cả đôi bên.\n" +
                 "Một lần nữa, cảm ơn quý công ty đã chọn hợp tác cùng chúng tôi!");
+        javaMailSender.send(message);
+    }
+
+    public void sendingGmailForNewspaper(String email){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("gr5carseller@gmail.com");
+        message.setTo(email);
+        message.setSubject("Thông báo tin tức mới");
+        message.setText("Bạn có tin tức mới từ chúng tôi hãy truy cập ngay trang http://localhost:3000/VeChungToi/TinTuc để cập nhật tin tức mới nhất");
         javaMailSender.send(message);
     }
 }
