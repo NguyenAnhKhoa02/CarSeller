@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 public interface NewspaperRepository extends JpaRepository<Newspaper,Long> {
 
     @Modifying
@@ -20,4 +23,12 @@ public interface NewspaperRepository extends JpaRepository<Newspaper,Long> {
             nativeQuery = true
     )
     void updateNewspaper(@Param("newspaper") Newspaper newspaper);
+
+    @Query(
+            value = "SELECT * " +
+                    "FROM newspaper " +
+                    "ORDER BY newspaper.id DESC",
+            nativeQuery = true
+    )
+    List<Newspaper> findAllReverse();
 }

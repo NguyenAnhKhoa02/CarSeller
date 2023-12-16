@@ -44,7 +44,10 @@ function TryDriveSchedule() {
     useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch(`http://localhost:8080/showroomAndTestings/nameAddress/${id}`);
+              const response = await fetch(`http://localhost:8080/showroomAndTestings/nameAddress/${id}`,
+              {
+                headers:{'Accept': 'application/json;charset=UTF-8'}
+              });
               setNameAddress(await response.text());
           } catch (error) {
               console.log("Error fetch data",error);
@@ -53,7 +56,7 @@ function TryDriveSchedule() {
       fetchData()
     },[])
     return(
-      <td>{nameAddress}</td>
+      <td><p>{nameAddress}</p></td>
     )
   }
 
@@ -62,7 +65,10 @@ function TryDriveSchedule() {
     useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch(`http://localhost:8080/showroomAndTestings/nameDistribution/${id}`);
+              const response = await fetch(`http://localhost:8080/showroomAndTestings/nameDistribution/${id}`,
+              {
+                headers:{'Accept': 'application/json;charset=UTF-8'}
+              });
               setnameDistribution(await response.text());
           } catch (error) {
               console.log("Error fetch data",error);
@@ -147,16 +153,17 @@ function TryDriveSchedule() {
             </thead>
             <tbody>
               {showroomAndTestings.map((item,index) => (
+                // console.log(item.id)
                 <tr>
                   <DisplayNameDistribution id={item.id}></DisplayNameDistribution>
-                  <DisplayDate timeStamp={item.date}></DisplayDate>
+                  <DisplayDate timeStamp={item.date}>
+                  </DisplayDate>
                   <DisplayTime timeStamp={item.begin}></DisplayTime>
                   <DisplayTime timeStamp={item.end}></DisplayTime>
                   <DisplayAddress id={item.id}></DisplayAddress>
                   <DisplayHotline id={item.id}></DisplayHotline>
                 </tr>
               ))}
-
             </tbody>
           </Table>
           <p style={{padding:"0"}}>

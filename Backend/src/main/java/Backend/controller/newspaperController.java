@@ -105,6 +105,6 @@ public class newspaperController {
     /*for fetch*/
     @GetMapping("/all")
     public List<Newspaper> getAll(){
-        return newspaperRepository.findAll();
+        return newspaperRepository.findAllReverse();
     }
 }

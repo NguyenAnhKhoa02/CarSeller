@@ -91,6 +91,6 @@ public class promotionController {
     /*for fetch*/
     @GetMapping("/all")
     public List<Promotion> getAll(){
-        return promotionRepository.findAll();
+        return promotionRepository.findAllReverse();
     }
 }
