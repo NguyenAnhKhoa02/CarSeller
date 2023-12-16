@@ -101,7 +101,7 @@ function ContactUs () {
             </Row>
         </Col>
         <Col style={{maxWidth:"50%", backgroundColor:"black"}}>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62714.71562941144!2d106.61016052167967!3d10.759917099999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1700978241315!5m2!1svi!2s" style={{width:"100%",height:"100%"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.147955999975!2d106.71591737596226!3d10.79997798935017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529d7845738f3%3A0x6fd8270abc8b4947!2sPearl%20Plaza!5e0!3m2!1svi!2s!4v1702695281017!5m2!1svi!2s" style={{width:"100%",height:"100%"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </Col>
     </Row>
     <Row style={{maxWidth:"50%",margin:"0 auto", paddingBottom:"50px"}}>
